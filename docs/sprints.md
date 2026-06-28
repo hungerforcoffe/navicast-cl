@@ -10,7 +10,7 @@ el resto del pipeline espera al cierre de esas decisiones.
 | 1 | Benchmark Big Data: pandas vs Polars vs DuckDB | out-of-core, lazy, medir RAM/tiempo | **completado** ✅ |
 | — | **Compuerta:** decisiones #1 (geografía) y #2 (plan limpieza, sprints, plan B) | — | **cerrada** ✅ |
 | 2 | Limpieza → Silver (DuckDB) | calidad AIS, clip, trayectorias | **completado** ✅ |
-| 3 | Features → Gold (geopandas + H3) | indexado hexagonal H3 | pendiente |
+| 3 | Features → Gold (geopandas + H3) | indexado hexagonal H3, target ETA | **completado** ✅ |
 | 4 | Modelo ETA (LSTM) | redes sobre secuencias (regresión) | pendiente |
 | 5 | Buques oscuros (gaps + IsolationForest) | detección de anomalías; validar con GFW | pendiente |
 | 6 | Visualización (Streamlit + mapa H3) | app offline para la demo | pendiente |
@@ -55,3 +55,13 @@ Conclusion: DuckDB = motor por defecto de Silver; Polars para la logica por buqu
 
 **Resultado:** 50.3 M nacional -> 1.58 M en LA/LB (3.14%); 966 buques; ~30 MB en S3.
 La interpolacion/resampling para el LSTM se hace en Gold (Sprint 3), no en Silver.
+
+## Sprint 3 — Definition of Done
+- [x] Poligono de puerto data-driven, congelado: `scripts/build_port_polygon.py` -> `config/port_laxlb.geojson`.
+- [x] `features.py` (`run()`): Silver -> Gold con geopandas (point-in-polygon) + H3 (res 7).
+- [x] Features: `dist_to_port_km`, `bearing_to_port`, `inside_port`, `h3_cell`, cinematica.
+- [x] Target `eta_min` (merge_asof a la proxima entrada a darsena) + `has_eta` (horizonte 12 h).
+- [x] Gold particionado por `h3_res`/`date` en local + S3; reporte + histograma del target.
+
+**Resultado:** 1.58 M pings; 3.025 llegadas; **111.727 muestras etiquetadas** (<12 h);
+ETA mediana ~107 min. Decisiones: llegada=darsena (poligono), H3 res7, sin remuestreo.

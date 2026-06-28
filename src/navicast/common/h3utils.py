@@ -1,9 +1,11 @@
-"""Utilidades H3 (Sprint 3): lat/lon -> celda, agregaciones por hexagono, etc.
-
-Se implementa cuando lleguemos a features.py. Aqui solo el placeholder para
-fijar el modulo en el layout.
-"""
+"""Utilidades H3 (Sprint 3)."""
 from __future__ import annotations
 
-# from typing import Any
-# import h3  # se instala con el extra 'geo' (pip install -e ".[geo]")
+from collections.abc import Iterable
+
+import h3
+
+
+def cells_for(lats: Iterable[float], lons: Iterable[float], res: int) -> list[str]:
+    """Asigna celda H3 (string) a cada par (lat, lon) en la resolucion dada."""
+    return [h3.latlng_to_cell(float(la), float(lo), res) for la, lo in zip(lats, lons)]
