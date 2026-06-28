@@ -229,7 +229,19 @@ def _report(snapshot_id, results, yte_min, pred_lstm_min, epochs) -> None:
           "| Modelo | MAE (min) | Mejora vs naive |", "|---|---:|---:|"]
     for name, mae in results.items():
         md.append(f"| {name} | {mae:.1f} | {base / mae:.2f}x |")
-    md += ["", "Scatter predicho vs real: `docs/eta_model_eval.png`."]
+    md += ["", "Scatter predicho vs real: `docs/eta_model_eval.png`.", "",
+           "## Limitaciones y mejoras", "",
+           "El scatter muestra **bandas horizontales**: el modelo predice casi una constante "
+           "para entradas casi identicas cuyo ETA real varia mucho. Causa principal: **buques "
+           "fondeados esperando turno** -- su cinematica (quieto, SOG~0) es identica ping tras "
+           "ping mientras el ETA real cuenta atras. Ese tiempo de cola NO esta en los datos AIS "
+           "de posicion, asi que cualquier modelo choca con ese techo (no es un bug).", "",
+           "Mejoras (features que distingan los casos hoy indistinguibles):",
+           "1. **Tiempo esperando**: minutos desde que el buque bajo de ~1 nudo (la ventana K=16 "
+           "solo ve ~16 min; barato y probablemente el de mayor impacto).",
+           "2. **Congestion del puerto**: nº de buques en darsena/cola en ese instante.",
+           "3. **Campo destino/ETA reportado en AIS** (mensajes estaticos; ruidoso pero util).",
+           "4. **Mas datos (1 mes)** y **distancia al borde** del poligono (no al centroide)."]
     (config.REPO_ROOT / "docs" / "eta_model_report.md").write_text("\n".join(md), encoding="utf-8")
 
 
