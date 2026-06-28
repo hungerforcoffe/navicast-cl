@@ -11,7 +11,7 @@ el resto del pipeline espera al cierre de esas decisiones.
 | — | **Compuerta:** decisiones #1 (geografía) y #2 (plan limpieza, sprints, plan B) | — | **cerrada** ✅ |
 | 2 | Limpieza → Silver (DuckDB) | calidad AIS, clip, trayectorias | **completado** ✅ |
 | 3 | Features → Gold (geopandas + H3) | indexado hexagonal H3, target ETA | **completado** ✅ |
-| 4 | Modelo ETA (LSTM) | redes sobre secuencias (regresión) | pendiente |
+| 4 | Modelo ETA (LSTM) | redes sobre secuencias (regresión) | **completado** ✅ |
 | 5 | Buques oscuros (gaps + IsolationForest) | detección de anomalías; validar con GFW | pendiente |
 | 6 | Visualización (Streamlit + mapa H3) | app offline para la demo | pendiente |
 | 7 | Orquestación (Airflow/Astro, LocalExecutor) | DAG que solo invoca run() | pendiente |
@@ -65,3 +65,13 @@ La interpolacion/resampling para el LSTM se hace en Gold (Sprint 3), no en Silve
 
 **Resultado:** 1.58 M pings; 3.025 llegadas; **111.727 muestras etiquetadas** (<12 h);
 ETA mediana ~107 min. Decisiones: llegada=darsena (poligono), H3 res7, sin remuestreo.
+
+## Sprint 4 — Definition of Done
+- [x] `model_eta.py` (`run()`): secuencias K=16 por buque, split por buque sin fuga (70/15/15).
+- [x] Baselines: fisico ingenuo (dist/SOG) + HistGradientBoosting.
+- [x] LSTM (PyTorch CPU): target log1p(eta) + Huber; mejor epoca por val; artefacto a S3.
+- [x] Evaluacion en test (buques nunca vistos) + scatter; reporte verificable.
+
+**Resultado (MAE test):** naive 136 min -> GBM 96 -> **LSTM 93.9** (1.45x vs naive).
+Limitacion diagnosticada: el tiempo de cola en fondeadero no esta en la cinematica.
+Mejoras: mas datos (1 mes), feature de distancia-al-borde del poligono, mas buques.
