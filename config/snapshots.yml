@@ -19,3 +19,15 @@ snapshots:
     bbox: null            # nacional, sin clip
     bronze_format: parquet
     schema_version: 1
+
+  # Snapshot SEMANA para forzar el limite de pandas (Sprint 1, escala mayor):
+  # 7 dias nacionales (~50 M filas). pandas concatena todo en RAM -> muchos GB / OOM,
+  # mientras DuckDB/Polars leen el directorio out-of-core y se mantienen planos.
+  snap_2024-01-w3_noaa_national_v1:
+    description: "1 semana nacional NOAA (estresar pandas hasta OOM)"
+    source: noaa
+    kind: benchmark
+    dates: ["2024-01-15", "2024-01-16", "2024-01-17", "2024-01-18", "2024-01-19", "2024-01-20", "2024-01-21"]
+    bbox: null
+    bronze_format: parquet
+    schema_version: 1

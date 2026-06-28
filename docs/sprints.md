@@ -7,7 +7,7 @@ el resto del pipeline espera al cierre de esas decisiones.
 | Sprint | Etapa | Qué aprendes | Estado |
 |---|---|---|---|
 | 0 | Cimientos: repo, S3 + Versioning, Boto3, NOAA → Bronze | S3 + Boto3, Parquet, capa Bronze | **completado** ✅ |
-| 1 | Benchmark Big Data: pandas vs Polars vs DuckDB | out-of-core, lazy, medir RAM/tiempo | pendiente |
+| 1 | Benchmark Big Data: pandas vs Polars vs DuckDB | out-of-core, lazy, medir RAM/tiempo | **completado** ✅ |
 | — | **Compuerta:** decisiones #1 (geografía) y #2 (plan limpieza, sprints, plan B) | — | pendiente |
 | 2 | Limpieza → Silver (DuckDB + Polars) | calidad AIS, identidad MMSI+IMO+CallSign | pendiente |
 | 3 | Features → Gold (geopandas + H3) | indexado hexagonal H3 | pendiente |
@@ -29,3 +29,20 @@ el resto del pipeline espera al cierre de esas decisiones.
 - [x] `ingest.py`: NOAA → Parquet (streaming) → Bronze + `manifest.json`.
 - [x] Bucket S3 `navicast-cl-pr2026` creado con Versioning (us-east-1).
 - [x] 1 archivo diario nacional de NOAA ingerido y verificado en Bronze (2024-01-15: 7,284,415 filas, 192 MB parquet).
+
+## Sprint 1 — Definition of Done
+- [x] `benchmark.py`: misma operacion (reconstruccion de trayectorias) en pandas vs Polars vs DuckDB.
+- [x] Medicion rigurosa: cada motor en subproceso aislado, pico de RSS via psutil, watchdog de presupuesto de RAM.
+- [x] Verificacion de correccion (los motores coinciden en buques/puntos/km).
+- [x] Resultados presentables: `docs/benchmark_results.md` + `docs/benchmark_bigdata.png`.
+
+**Resultado (1 semana NOAA, 50.3 M filas, presupuesto 6 GB):**
+
+| Motor | Wall-clock | Pico RAM |
+|---|---:|---:|
+| pandas | **OOM** (>6 GB) | reventó |
+| polars | 9.5 s | 4.2 GB |
+| duckdb | **7.5 s** | **2.3 GB** |
+
+A 1 dia (7.3 M filas, sin tope) pandas sí termina pero usa 3.5x mas RAM que DuckDB (1416 vs 408 MB).
+Conclusion: DuckDB = motor por defecto de Silver; Polars para la logica por buque (lazy groupby).
