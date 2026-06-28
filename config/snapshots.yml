@@ -1,0 +1,21 @@
+# Configuracion de snapshots congelados y destino S3.
+# TODO el pipeline y la demo leen un snapshot ID inmutable desde aqui.
+# Regla de oro del proyecto: reproducibilidad por snapshots; nunca API en vivo.
+
+aws:
+  bucket: navicast-cl-pr2026        # nombre global-unico de S3
+  region: us-east-1                  # <-- region del bucket
+  profile: null                     # null = cadena de credenciales por defecto de boto3
+
+snapshots:
+  # Snapshot para el BENCHMARK Big Data (Sprint 1):
+  # 1 archivo diario NACIONAL de NOAA, SIN recortar -> ~1.5-3 GB descomprimido.
+  # Es geografia-agnostico: no depende de la decision abierta #1.
+  snap_2024-01-15_noaa_national_v1:
+    description: "1 dia nacional NOAA (benchmark pandas vs Polars vs DuckDB)"
+    source: noaa
+    kind: benchmark
+    dates: ["2024-01-15"]
+    bbox: null            # nacional, sin clip
+    bronze_format: parquet
+    schema_version: 1

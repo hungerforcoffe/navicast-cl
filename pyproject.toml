@@ -1,0 +1,31 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "navicast-cl"
+version = "0.1.0"
+description = "Pipeline geoespacial AIS: limpieza, ETA (LSTM) y deteccion de buques oscuros sobre arquitectura medallion en S3."
+requires-python = ">=3.11"
+# Dependencias CORE (Sprint 0-1): ingesta a Bronze + I/O S3.
+# Las del resto del pipeline van en grupos opcionales para no instalar de mas
+# (y poder validar wheels por etapa, util en Python nuevo).
+dependencies = [
+    "boto3>=1.34",      # cliente S3 (Sprint 0)
+    "pyyaml>=6",        # leer config/snapshots.yml
+    "pyarrow>=15",      # CSV->Parquet en streaming (Bronze)
+]
+
+[project.optional-dependencies]
+bigdata = ["polars>=1.0", "duckdb>=1.0"]   # Sprint 1-2: benchmark + Silver
+geo     = ["geopandas>=1.0", "h3>=4.0"]    # Sprint 3: features -> Gold
+ml      = ["torch>=2.2", "numpy"]          # Sprint 4: LSTM de ETA
+detect  = ["scikit-learn>=1.4"]            # Sprint 5: IsolationForest
+app     = ["streamlit>=1.3", "folium", "streamlit-folium"]  # Sprint 6
+dev     = ["ruff", "pytest"]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.ruff]
+line-length = 100
