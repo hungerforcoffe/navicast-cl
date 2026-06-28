@@ -10,7 +10,7 @@ Proyecto final de un curso de Big Data. Pipeline geoespacial sobre datos AIS que
 3. Predice el ETA a puerto con una red neuronal (LSTM).
 4. Detecta anomalías de "apagón" de transpondedor (gaps sospechosos / buques oscuros).
 
-Enfoque geográfico: costa de Chile / Pacífico Sur (ver decisión abierta #1).
+Enfoque geográfico: NOAA LA/Long Beach (primario); Chile / Pacífico Sur como stretch (decisión #1 resuelta 2026-06-28).
 Una sola persona, laptop (sin clúster), entregable presentable.
 
 ## Perfil del autor (calibra el tono a esto)
@@ -102,8 +102,8 @@ navicast-cl/
 ```
 
 ## DECISIONES ABIERTAS (no asumir)
-1. **Geografía:** NOAA-primario + Chile-stretch  VS  Chile-puro vía aisstream. Pablo aún
-   no confirma. La elección cambia el recorte y la lista de problemas de calidad.
+1. **Geografía — RESUELTA (2026-06-28):** NOAA-primario + Chile-stretch. Modelado sobre
+   LA/Long Beach (bbox lon[-118.6, -117.8] × lat[33.4, 34.0]); Chile = nice to have.
 2. **Puntos 3–5 del plan aún sin definir** (NO empezar el pipeline completo sin ellos):
    (3) plan priorizado de limpieza AIS (gaps, saltos GPS, MMSI duplicados/spoofed, interpolación);
    (4) cronograma por sprints con entregables verificables y definition of done;

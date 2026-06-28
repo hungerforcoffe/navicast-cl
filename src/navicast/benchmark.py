@@ -37,7 +37,7 @@ SAFETY_GB = 8.0         # tope de RAM por motor; si lo supera -> kill + OOM
 
 DEFAULT_PARQUET = str(
     config.REPO_ROOT / "data" / "bronze"
-    / "snap_2024-01-15_noaa_national_v1" / "AIS_2024_01_15.parquet"
+    / "snap_2024-01-w3_noaa_national_v1" / "*.parquet"
 )
 ENGINES = ["pandas", "polars", "duckdb"]
 
@@ -298,7 +298,7 @@ def run(path: str | None = None, budget_gb: float = SAFETY_GB) -> list[dict]:
 def _cli() -> None:
     ap = argparse.ArgumentParser(description="Benchmark pandas vs Polars vs DuckDB.")
     ap.add_argument("--engine", choices=ENGINES, help="modo hijo: corre 1 motor e imprime JSON")
-    ap.add_argument("--path", default=None, help="archivo o glob de Parquet (def: Bronze 1 dia)")
+    ap.add_argument("--path", default=None, help="archivo o glob de Parquet (def: Bronze semana)")
     ap.add_argument("--budget-gb", type=float, default=SAFETY_GB,
                     help=f"presupuesto de RAM por motor en GB (def: {SAFETY_GB:.0f})")
     args = ap.parse_args()

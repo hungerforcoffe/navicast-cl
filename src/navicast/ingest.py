@@ -113,6 +113,7 @@ def run(
     config_path: str | Path | None = None,
     upload: bool = True,
     workdir: str | Path | None = None,
+    keep_intermediate: bool = False,
 ) -> dict[str, Any]:
     """Ejecuta la ingesta de un snapshot. Punto de entrada que invoca el DAG.
 
@@ -168,6 +169,10 @@ def run(
 
         files_manifest.append(entry)
 
+        if not keep_intermediate:  # Bronze = parquet; el zip/csv son regenerables
+            for tmp in (zip_path, csv_path):
+                tmp.unlink(missing_ok=True)
+
     manifest = {
         "snapshot_id": snapshot_id,
         "source": source,
@@ -200,8 +205,11 @@ def _cli() -> None:
     ap.add_argument("--config", default=None, help="ruta alternativa a snapshots.yml")
     ap.add_argument("--no-upload", action="store_true", help="solo local, sin subir a S3")
     ap.add_argument("--workdir", default=None, help="carpeta de staging (def: ./data)")
+    ap.add_argument("--keep-intermediate", action="store_true",
+                    help="no borrar el zip/csv tras convertir a Parquet")
     args = ap.parse_args()
-    run(args.snapshot, config_path=args.config, upload=not args.no_upload, workdir=args.workdir)
+    run(args.snapshot, config_path=args.config, upload=not args.no_upload,
+        workdir=args.workdir, keep_intermediate=args.keep_intermediate)
 
 
 if __name__ == "__main__":
