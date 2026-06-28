@@ -31,3 +31,15 @@ snapshots:
     bbox: null
     bronze_format: parquet
     schema_version: 1
+
+  # Snapshot SILVER (modelado): semana recortada a LA/Long Beach. Lee del Bronze
+  # nacional (from_bronze) y se congela limpio en S3. Decision #1: NOAA LA/LB.
+  snap_2024-01-w3_laxlb_v1:
+    description: "Silver LA/Long Beach, semana 3 ene 2024 (modelado ETA)"
+    source: noaa
+    kind: model
+    from_bronze: snap_2024-01-w3_noaa_national_v1
+    bbox: {lon_min: -118.6, lon_max: -117.8, lat_min: 33.4, lat_max: 34.0}
+    dates: ["2024-01-15", "2024-01-16", "2024-01-17", "2024-01-18", "2024-01-19", "2024-01-20", "2024-01-21"]
+    bronze_format: parquet
+    schema_version: 1

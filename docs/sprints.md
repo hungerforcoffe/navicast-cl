@@ -8,8 +8,8 @@ el resto del pipeline espera al cierre de esas decisiones.
 |---|---|---|---|
 | 0 | Cimientos: repo, S3 + Versioning, Boto3, NOAA → Bronze | S3 + Boto3, Parquet, capa Bronze | **completado** ✅ |
 | 1 | Benchmark Big Data: pandas vs Polars vs DuckDB | out-of-core, lazy, medir RAM/tiempo | **completado** ✅ |
-| — | **Compuerta:** decisiones #1 (geografía) y #2 (plan limpieza, sprints, plan B) | — | pendiente |
-| 2 | Limpieza → Silver (DuckDB + Polars) | calidad AIS, identidad MMSI+IMO+CallSign | pendiente |
+| — | **Compuerta:** decisiones #1 (geografía) y #2 (plan limpieza, sprints, plan B) | — | **cerrada** ✅ |
+| 2 | Limpieza → Silver (DuckDB) | calidad AIS, clip, trayectorias | **completado** ✅ |
 | 3 | Features → Gold (geopandas + H3) | indexado hexagonal H3 | pendiente |
 | 4 | Modelo ETA (LSTM) | redes sobre secuencias (regresión) | pendiente |
 | 5 | Buques oscuros (gaps + IsolationForest) | detección de anomalías; validar con GFW | pendiente |
@@ -46,3 +46,12 @@ el resto del pipeline espera al cierre de esas decisiones.
 
 A 1 dia (7.3 M filas, sin tope) pandas sí termina pero usa 3.5x mas RAM que DuckDB (1416 vs 408 MB).
 Conclusion: DuckDB = motor por defecto de Silver; Polars para la logica por buque (lazy groupby).
+
+## Sprint 2 — Definition of Done
+- [x] `clean.py` (`run()`): Bronze nacional -> Silver LA/Long Beach, plan P0-P2 en DuckDB.
+- [x] P0 centinelas->NULL + clip bbox; P1 identidad + de-dup; P2 saltos GPS + marcado de gaps.
+- [x] Silver particionado por fecha en local + S3 (`snap_2024-01-w3_laxlb_v1`).
+- [x] Reporte verificable: `docs/silver_cleaning_report.md` + manifest con conteos por etapa.
+
+**Resultado:** 50.3 M nacional -> 1.58 M en LA/LB (3.14%); 966 buques; ~30 MB en S3.
+La interpolacion/resampling para el LSTM se hace en Gold (Sprint 3), no en Silver.
