@@ -44,20 +44,36 @@ def _parse_time(s: str) -> dt.datetime | None:
         return None
 
 
-def _flush(rows: list[dict], out_dir: Path) -> int:
+def _flush(rows: list[dict], out_dir: Path) -> Path | None:
     if not rows:
-        return 0
+        return None
     df = pd.DataFrame(rows, columns=BRONZE_COLS)
     out_dir.mkdir(parents=True, exist_ok=True)
     stamp = dt.datetime.now(dt.timezone.utc).strftime("%Y%m%dT%H%M%S")
-    df.to_parquet(out_dir / f"AIS_chile_{stamp}.parquet", index=False)
-    return len(df)
+    path = out_dir / f"AIS_chile_{stamp}.parquet"
+    df.to_parquet(path, index=False)
+    return path
 
 
 async def record(api_key: str, bbox: list, out_dir: Path, minutes: float | None,
-                 flush_secs: int = 300) -> None:
+                 flush_secs: int = 300, upload_s3: bool = False) -> None:
     sub = {"APIKey": api_key, "BoundingBoxes": [bbox],
            "FilterMessageTypes": ["PositionReport", "ShipStaticData"]}
+
+    client = bucket = None
+    if upload_s3:
+        from navicast.common import config, io_s3
+        cfg = config.load()
+        bucket = cfg["aws"]["bucket"]
+        client = io_s3.get_client(cfg["aws"]["region"], cfg["aws"].get("profile"))
+
+    def save(buf: list[dict]) -> int:
+        path = _flush(buf, out_dir)
+        if path is not None and client is not None:
+            io_s3.upload_file(client, path, bucket,
+                              f"bronze/source=aisstream/snapshot={SNAP}/{path.name}")
+        return len(buf)
+
     static: dict[int, dict] = {}      # MMSI -> datos estaticos (nombre, IMO, etc.)
     rows: list[dict] = []
     n_msgs = total_saved = 0
@@ -107,11 +123,12 @@ async def record(api_key: str, bbox: list, out_dir: Path, minutes: float | None,
 
                     now = loop.time()
                     if now - last_flush >= flush_secs:
-                        saved = _flush(rows, out_dir)
+                        saved = save(rows)
                         total_saved += saved
                         rows = []
                         last_flush = now
-                        print(f"  +{saved} pings | total {total_saved} | buques {len(static)}", flush=True)
+                        print(f"  +{saved} pings | total {total_saved} | buques {len(static)}"
+                              + (" | -> S3" if client else ""), flush=True)
                     if deadline and now >= deadline:
                         raise KeyboardInterrupt
         except (KeyboardInterrupt, asyncio.CancelledError):
@@ -120,7 +137,7 @@ async def record(api_key: str, bbox: list, out_dir: Path, minutes: float | None,
             print(f"  desconexion ({type(exc).__name__}: {exc}); reintento en 5s", flush=True)
             await asyncio.sleep(5)
 
-    total_saved += _flush(rows, out_dir)
+    total_saved += save(rows)
     print(f"\nFIN: {total_saved} pings guardados, {len(static)} buques con datos estaticos.")
 
 
@@ -129,6 +146,7 @@ def main() -> None:
     ap.add_argument("--minutes", type=float, default=None, help="auto-parar tras N minutos (def: hasta Ctrl+C)")
     ap.add_argument("--flush-secs", type=int, default=300, help="cada cuanto vuelca a Parquet")
     ap.add_argument("--out", default=None, help="carpeta de salida (def: data/bronze/<snap>)")
+    ap.add_argument("--s3", action="store_true", help="subir cada Parquet a S3 (bronze/source=aisstream/...)")
     args = ap.parse_args()
 
     api_key = os.environ.get("AISSTREAM_API_KEY")
@@ -138,7 +156,7 @@ def main() -> None:
     from navicast.common import config
     out_dir = Path(args.out) if args.out else config.REPO_ROOT / "data" / "bronze" / SNAP
     try:
-        asyncio.run(record(api_key, CHILE_BBOX, out_dir, args.minutes, args.flush_secs))
+        asyncio.run(record(api_key, CHILE_BBOX, out_dir, args.minutes, args.flush_secs, args.s3))
     except KeyboardInterrupt:
         print("\ninterrumpido.")
 
