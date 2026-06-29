@@ -1,0 +1,16 @@
+[Unit]
+Description=NaviCast AIS recorder (aisstream.io -> S3)
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=ubuntu
+WorkingDirectory=/home/ubuntu/NaviCast-CL
+EnvironmentFile=/etc/navicast.env
+ExecStart=/home/ubuntu/NaviCast-CL/.venv/bin/python scripts/record_aisstream.py --s3
+Restart=always
+RestartSec=10
+
+[Install]
+WantedBy=multi-user.target

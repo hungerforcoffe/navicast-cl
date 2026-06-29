@@ -22,7 +22,7 @@ geo     = ["geopandas>=1.0", "h3>=4.0"]    # Sprint 3: features -> Gold
 ml      = ["torch>=2.2", "numpy"]          # Sprint 4: LSTM de ETA
 detect  = ["scikit-learn>=1.4"]            # Sprint 5: IsolationForest
 app     = ["pydeck>=0.9", "matplotlib"]    # Sprint 6: mapas deck.gl -> HTML
-chile   = ["websockets>=12"]               # stretch: grabar aisstream.io -> Bronze
+chile   = ["websockets>=12", "pandas>=2.0"]  # stretch: grabar aisstream.io -> Bronze
 dev     = ["ruff", "pytest"]
 
 [tool.setuptools.packages.find]
