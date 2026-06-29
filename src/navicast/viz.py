@@ -97,15 +97,26 @@ def _inject_caption(html_path: Path, text: str) -> None:
 
 
 def _chile_map(out_dir: Path) -> tuple[Path, int, int]:
-    """Mapa Chile: detecciones SAR (radar) + presencia AIS, de GFW satelital."""
+    """Mapa Chile (monitoreo): SAR coloreado por cruce con AIS (dark vs corroborado) + presencia AIS."""
     gdir = config.REPO_ROOT / "data" / "gfw_chile"
-    sar = pd.read_parquet(gdir / "sar_presence.parquet").dropna(subset=["lat", "lon"]).copy()
-    sar["ship_name"] = sar["ship_name"].fillna("?")
-    sar["flag"] = sar["flag"].fillna("?")
-    sar["vessel_type"] = sar["vessel_type"].fillna("?")
+    sar_path = gdir / "sar_classified.parquet"
+    sar_path = sar_path if sar_path.exists() else gdir / "sar_presence.parquet"
+    sar = pd.read_parquet(sar_path).dropna(subset=["lat", "lon"]).copy()
+    for c in ("ship_name", "flag", "vessel_type"):
+        if c in sar.columns:
+            sar[c] = sar[c].fillna("?")
+    if "dark" in sar.columns:  # salida del cruce SAR<->AIS
+        sar["fill"] = sar["dark"].map(lambda d: [255, 40, 40, 245] if d else [90, 170, 110, 150]).tolist()
+        sar["radius"] = sar["dark"].map(lambda d: 1800 if d else 650).tolist()
+        sar["estado"] = sar["dark"].map(lambda d: "DARK (radar sin AIS)" if d else "corroborado por AIS")
+    else:
+        sar["fill"] = [[255, 90, 60, 220]] * len(sar)
+        sar["radius"] = 900
+        sar["estado"] = "deteccion SAR"
+
     layers = []
-    ais_path = gdir / "ais_presence.parquet"
     n_ais = 0
+    ais_path = gdir / "ais_presence.parquet"
     if ais_path.exists():
         ais = pd.read_parquet(ais_path)[["lat", "lon"]].dropna()
         n_ais = len(ais)
@@ -113,14 +124,15 @@ def _chile_map(out_dir: Path) -> tuple[Path, int, int]:
         layers.append(pdk.Layer("ScatterplotLayer", ais_plot, get_position="[lon, lat]",
                                 get_fill_color="[80, 140, 255, 45]", get_radius=500))
     layers.append(pdk.Layer("ScatterplotLayer", sar, get_position="[lon, lat]",
-                            get_fill_color="[255, 90, 60, 220]", get_radius=900, pickable=True))
+                            get_fill_color="fill", get_radius="radius", pickable=True))
     view = pdk.ViewState(latitude=-33.3, longitude=-71.72, zoom=8.4, pitch=0)
     deck = pdk.Deck(layers=layers, initial_view_state=view, map_provider="carto", map_style="dark",
-                    tooltip={"text": "SAR: {ship_name}\nbandera: {flag}  tipo: {vessel_type}"})
+                    tooltip={"text": "SAR: {ship_name}\nbandera: {flag}  tipo: {vessel_type}\n{estado}"})
     p = out_dir / "chile_map.html"
     deck.to_html(str(p), notebook_display=False)
     _inject_caption(p, GFW_ATTR)
-    return p, len(sar), n_ais
+    n_dark = int(sar["dark"].sum()) if "dark" in sar.columns else 0
+    return p, len(sar), n_dark
 
 
 def run(**kwargs: Any) -> dict:
@@ -132,9 +144,9 @@ def run(**kwargs: Any) -> dict:
     print(f"dark_map.html  ({n2} buques oscuros)   -> {p2}")
     result = {"port_cells": n1, "dark_points": n2}
     if (config.REPO_ROOT / "data" / "gfw_chile" / "sar_presence.parquet").exists():
-        p3, n_sar, n_ais = _chile_map(out_dir)
-        print(f"chile_map.html ({n_sar} SAR + {n_ais} AIS)  -> {p3}")
-        result.update(chile_sar=n_sar, chile_ais=n_ais)
+        p3, n_sar, n_dark = _chile_map(out_dir)
+        print(f"chile_map.html ({n_sar} SAR, {n_dark} dark)  -> {p3}")
+        result.update(chile_sar=n_sar, chile_dark=n_dark)
     return result
 
 
