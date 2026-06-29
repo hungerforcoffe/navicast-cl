@@ -50,13 +50,13 @@ def _port_map(out_dir: Path) -> tuple[Path, int]:
 
     hexes = pdk.Layer(
         "H3HexagonLayer", df, get_hexagon="h3_cell", get_fill_color="fill_color",
-        get_elevation="traffic", elevation_scale=3000 / maxt, extruded=True,
-        pickable=True, opacity=0.55, coverage=0.9,
+        get_elevation="traffic", elevation_scale=1400 / maxt, extruded=True,
+        pickable=True, opacity=0.7, coverage=0.85,
     )
     gj = json.loads((config.REPO_ROOT / "config" / "port_laxlb.geojson").read_text(encoding="utf-8"))
     poly = pdk.Layer("GeoJsonLayer", gj, stroked=True, filled=False,
                      get_line_color=[255, 90, 90], line_width_min_pixels=2)
-    view = pdk.ViewState(latitude=33.74, longitude=-118.22, zoom=10, pitch=50, bearing=20)
+    view = pdk.ViewState(latitude=33.70, longitude=-118.20, zoom=9.3, pitch=40, bearing=10)
     deck = pdk.Deck(layers=[hexes, poly], initial_view_state=view,
                     map_provider="carto", map_style="dark",
                     tooltip={"text": "trafico: {traffic} pings\nETA medio: {avg_eta} min"})
