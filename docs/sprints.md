@@ -14,7 +14,7 @@ el resto del pipeline espera al cierre de esas decisiones.
 | 4 | Modelo ETA (LSTM) | redes sobre secuencias (regresión) | **completado** ✅ |
 | 5 | Buques oscuros (gaps + IsolationForest) | detección de anomalías; validación sintética | **completado** ✅ |
 | 6 | Visualización (pydeck/deck.gl HTML) | mapa H3 3D offline para la demo | **completado** ✅ |
-| 7 | Orquestación (Airflow/Astro, LocalExecutor) | DAG que solo invoca run() | pendiente |
+| 7 | Orquestación (Airflow/Astro, LocalExecutor) | DAG que solo invoca run() | **código listo** ✅ |
 
 ## Por qué este orden
 - **Sprints 0–1 van primero y no dependen de la geografía:** el benchmark usa el archivo
@@ -92,3 +92,23 @@ Mejoras: mas datos (1 mes), feature de distancia-al-borde del poligono, mas buqu
 - [x] `app/dark_map.html`: mapa nacional de apagones (tamano/color = duracion del silencio).
 
 **Nota:** kepler.gl descartado por wheels (build fija pyarrow viejo). pydeck = mismo motor deck.gl.
+
+## Sprint 7 — Definition of Done
+- [x] `dags/navicast_dag.py`: DAG de Airflow (TaskFlow) que SOLO invoca los `run()` de cada etapa.
+- [x] Dependencias: ingest -> clean -> features -> model_eta; ingest -> dark; [gold, dark] -> viz.
+- [x] Fallback sin Docker: `scripts/run_pipeline.py` (cross-platform) + `Makefile` (pipeline + etapas).
+- [ ] Levantar Airflow real con Astro (`astro dev start`) -- requiere Docker; pendiente de Pablo.
+
+Para Airflow real: instalar Docker Desktop + Astro CLI; `astro dev init`, copiar el DAG,
+anadir `navicast` a requirements, `astro dev start`.
+
+## Plan B y trabajo futuro (decision #2.5)
+- **Chile (stretch, aplazado):** no hay archivo historico; requiere grabar aisstream.io
+  (bbox Valparaiso+San Antonio `lon[-72.5,-71.0] x lat[-34.5,-32.5]`) dias/semanas y congelar
+  el snapshot. El pipeline es agnostico a geografia: bastaria un snapshot Chile + un poligono de
+  puerto chileno; `clean`/`features`/`viz` se reutilizan. Documentado como futuro.
+- **GFW:** validar el detector de buques oscuros con la Events API (bonus; ground truth ralo).
+- **ETA:** features de "tiempo esperando" y congestion para romper las bandas; mas datos (1 mes);
+  distancia al borde del poligono en vez de al centroide.
+- **Plan B de nota:** el entregable US (benchmark + Bronze->Gold + ETA + buques oscuros + mapas)
+  ya es completo y reproducible aunque Chile / Airflow-real no lleguen.
