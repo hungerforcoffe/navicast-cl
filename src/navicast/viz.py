@@ -84,6 +84,45 @@ def _dark_map(out_dir: Path) -> tuple[Path, int]:
     return p, len(d)
 
 
+GFW_ATTR = ("Datos satelitales: &copy; Global Fishing Watch (CC BY-NC 4.0). "
+            "Actividad pesquera 'apparent'. globalfishingwatch.org")
+
+
+def _inject_caption(html_path: Path, text: str) -> None:
+    """Inyecta un pie de atribucion en el HTML (requisito CC BY-NC de GFW)."""
+    html = html_path.read_text(encoding="utf-8")
+    footer = (f'<div style="position:fixed;bottom:0;left:0;right:0;background:rgba(0,0,0,.6);'
+              f'color:#ccc;font:12px sans-serif;padding:5px 10px;z-index:9999">{text}</div>')
+    html_path.write_text(html.replace("</body>", footer + "</body>"), encoding="utf-8")
+
+
+def _chile_map(out_dir: Path) -> tuple[Path, int, int]:
+    """Mapa Chile: detecciones SAR (radar) + presencia AIS, de GFW satelital."""
+    gdir = config.REPO_ROOT / "data" / "gfw_chile"
+    sar = pd.read_parquet(gdir / "sar_presence.parquet").dropna(subset=["lat", "lon"]).copy()
+    sar["ship_name"] = sar["ship_name"].fillna("?")
+    sar["flag"] = sar["flag"].fillna("?")
+    sar["vessel_type"] = sar["vessel_type"].fillna("?")
+    layers = []
+    ais_path = gdir / "ais_presence.parquet"
+    n_ais = 0
+    if ais_path.exists():
+        ais = pd.read_parquet(ais_path)[["lat", "lon"]].dropna()
+        n_ais = len(ais)
+        ais_plot = ais.sample(min(n_ais, 5000), random_state=42)  # muestra para no saturar el render
+        layers.append(pdk.Layer("ScatterplotLayer", ais_plot, get_position="[lon, lat]",
+                                get_fill_color="[80, 140, 255, 45]", get_radius=500))
+    layers.append(pdk.Layer("ScatterplotLayer", sar, get_position="[lon, lat]",
+                            get_fill_color="[255, 90, 60, 220]", get_radius=900, pickable=True))
+    view = pdk.ViewState(latitude=-33.3, longitude=-71.72, zoom=8.4, pitch=0)
+    deck = pdk.Deck(layers=layers, initial_view_state=view, map_provider="carto", map_style="dark",
+                    tooltip={"text": "SAR: {ship_name}\nbandera: {flag}  tipo: {vessel_type}"})
+    p = out_dir / "chile_map.html"
+    deck.to_html(str(p), notebook_display=False)
+    _inject_caption(p, GFW_ATTR)
+    return p, len(sar), n_ais
+
+
 def run(**kwargs: Any) -> dict:
     out_dir = config.REPO_ROOT / "app"
     out_dir.mkdir(exist_ok=True)
@@ -91,7 +130,12 @@ def run(**kwargs: Any) -> dict:
     print(f"port_map.html  ({n1} celdas H3)        -> {p1}")
     p2, n2 = _dark_map(out_dir)
     print(f"dark_map.html  ({n2} buques oscuros)   -> {p2}")
-    return {"port_cells": n1, "dark_points": n2}
+    result = {"port_cells": n1, "dark_points": n2}
+    if (config.REPO_ROOT / "data" / "gfw_chile" / "sar_presence.parquet").exists():
+        p3, n_sar, n_ais = _chile_map(out_dir)
+        print(f"chile_map.html ({n_sar} SAR + {n_ais} AIS)  -> {p3}")
+        result.update(chile_sar=n_sar, chile_ais=n_ais)
+    return result
 
 
 def _cli() -> None:

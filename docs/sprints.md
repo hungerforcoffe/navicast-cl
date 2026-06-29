@@ -103,12 +103,23 @@ Para Airflow real: instalar Docker Desktop + Astro CLI; `astro dev init`, copiar
 anadir `navicast` a requirements, `astro dev start`.
 
 ## Plan B y trabajo futuro (decision #2.5)
-- **Chile (stretch, aplazado):** no hay archivo historico; requiere grabar aisstream.io
-  (bbox Valparaiso+San Antonio `lon[-72.5,-71.0] x lat[-34.5,-32.5]`) dias/semanas y congelar
-  el snapshot. El pipeline es agnostico a geografia: bastaria un snapshot Chile + un poligono de
-  puerto chileno; `clean`/`features`/`viz` se reutilizan. Documentado como futuro.
+- **Chile (stretch) — HECHO via GFW satelital.** Ver seccion "Extension Chile" abajo.
 - **GFW:** validar el detector de buques oscuros con la Events API (bonus; ground truth ralo).
 - **ETA:** features de "tiempo esperando" y congestion para romper las bandas; mas datos (1 mes);
   distancia al borde del poligono en vez de al centroide.
 - **Plan B de nota:** el entregable US (benchmark + Bronze->Gold + ETA + buques oscuros + mapas)
   ya es completo y reproducible aunque Chile / Airflow-real no lleguen.
+
+## Extension Chile (via GFW satelital)
+aisstream.io (AIS terrestre) dio **0 pings** para Chile -> sin cobertura; el grabador
+`scripts/record_aisstream.py` queda archivado. Pivote a la API de **Global Fishing Watch**
+(datos satelitales, que SI cubren Chile):
+- `scripts/fetch_gfw_chile.py`: detecciones SAR (Sentinel-1), presencia AIS y eventos AIS-off
+  para el bbox Valparaiso+San Antonio. Una pasada -> S3 (`gold/source=gfw/snapshot=...`).
+- `viz.py` genera `app/chile_map.html` (detecciones SAR + presencia AIS) con atribucion GFW.
+
+**Resultado (ventana 2025-H1):** 512 detecciones SAR (con identidad: bandera/tipo/nombre),
+26.375 filas de presencia AIS, **0 eventos AIS-off** (GFW no marca apagones en esta zona/ventana).
+Conclusion: GFW satelital SI cubre Chile (a diferencia del AIS terrestre de aisstream).
+
+**Atribucion:** datos (c) Global Fishing Watch, CC BY-NC 4.0; actividad pesquera "apparent".

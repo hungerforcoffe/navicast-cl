@@ -61,6 +61,12 @@ Los mapas quedan en `app/port_map.html` y `app/dark_map.html` (abrir en el naveg
 Orquestación Airflow: `dags/navicast_dag.py` (vía Astro CLI `astro dev start` cuando tengas Docker).
 Benchmark Big Data: `navicast.benchmark`. Mapas y reportes en `docs/`.
 
+## Datos de terceros y atribución
+La extensión Chile usa datos de **Global Fishing Watch** vía su API: detecciones SAR
+(Sentinel-1), presencia AIS y eventos AIS-off. Datos © Global Fishing Watch, **CC BY-NC 4.0**
+(uso no comercial); la actividad pesquera es "apparent". <https://globalfishingwatch.org>.
+Los mapas derivados (`app/chile_map.html`) llevan esta atribución en el pie.
+
 ## Regla de oro
 Reproducibilidad por **snapshots congelados**: todo lee un snapshot ID inmutable desde
 `config/snapshots.yml`. Nunca se llama a una API en vivo dentro del pipeline ni en la demo.
