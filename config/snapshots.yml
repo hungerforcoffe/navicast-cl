@@ -43,3 +43,14 @@ snapshots:
     dates: ["2024-01-15", "2024-01-16", "2024-01-17", "2024-01-18", "2024-01-19", "2024-01-20", "2024-01-21"]
     bronze_format: parquet
     schema_version: 1
+
+  # Snapshot CHILE (stretch): grabado en vivo via aisstream.io (no hay archivo historico).
+  # Valparaiso + San Antonio. Se graba directo a Bronze; el clip = el propio bbox de grabacion.
+  snap_chile_valpo_v1:
+    description: "Chile costa central (Valparaiso+San Antonio), grabado aisstream"
+    source: aisstream
+    kind: model
+    from_bronze: snap_chile_valpo_v1
+    bbox: {lon_min: -72.5, lon_max: -71.0, lat_min: -34.5, lat_max: -32.5}
+    bronze_format: parquet
+    schema_version: 1
