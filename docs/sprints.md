@@ -12,7 +12,7 @@ el resto del pipeline espera al cierre de esas decisiones.
 | 2 | Limpieza → Silver (DuckDB) | calidad AIS, clip, trayectorias | **completado** ✅ |
 | 3 | Features → Gold (geopandas + H3) | indexado hexagonal H3, target ETA | **completado** ✅ |
 | 4 | Modelo ETA (LSTM) | redes sobre secuencias (regresión) | **completado** ✅ |
-| 5 | Buques oscuros (gaps + IsolationForest) | detección de anomalías; validar con GFW | pendiente |
+| 5 | Buques oscuros (gaps + IsolationForest) | detección de anomalías; validación sintética | **completado** ✅ |
 | 6 | Visualización (Streamlit + mapa H3) | app offline para la demo | pendiente |
 | 7 | Orquestación (Airflow/Astro, LocalExecutor) | DAG que solo invoca run() | pendiente |
 
@@ -75,3 +75,12 @@ ETA mediana ~107 min. Decisiones: llegada=darsena (poligono), H3 res7, sin remue
 **Resultado (MAE test):** naive 136 min -> GBM 96 -> **LSTM 93.9** (1.45x vs naive).
 Limitacion diagnosticada: el tiempo de cola en fondeadero no esta en la cinematica.
 Mejoras: mas datos (1 mes), feature de distancia-al-borde del poligono, mas buques.
+
+## Sprint 5 — Definition of Done
+- [x] `detect_dark.py` (`run()`): extraccion de gaps (DuckDB) sobre la semana NACIONAL.
+- [x] Detector: reglas (silencio>=2h + movimiento + dist>=5km) + IsolationForest.
+- [x] Validacion por inyeccion sintetica de apagones (recall). NO usa LSTM.
+- [x] Capa de salida local + S3 (`dark/snapshot=.../dark_events.parquet`) + mapa nacional.
+
+**Resultado:** 169.897 gaps candidatos -> 5.971 buques oscuros (regla|iso); recall sintetico **74%**.
+**Pendiente (bonus):** validacion con GFW (token + congelar en S3; ground truth puede salir ralo).
