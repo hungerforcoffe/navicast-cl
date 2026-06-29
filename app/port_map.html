@@ -1,0 +1,7004 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <title>pydeck</title>
+        <script src="https://api.tiles.mapbox.com/mapbox-gl-js/v1.13.0/mapbox-gl.js"></script>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@5.14.0/dist/maplibre-gl.css" />
+    <script src='https://cdn.jsdelivr.net/npm/@deck.gl/jupyter-widget@~9.2.*/dist/index.js'></script>
+    <link rel="stylesheet" href=https://cdn.jsdelivr.net/npm/@deck.gl/widgets@~9.2.*/dist/stylesheet.css />
+    <style>
+    body {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+#deck-container {
+  width: 100vw;
+  height: 100vh;
+}
+
+#deck-container canvas {
+  z-index: 1;
+  background: none;
+}
+
+#deck-container .error_text {
+  color: red;
+  background: none;
+  position: absolute;
+  z-index: 100;
+}
+    </style>
+  </head>
+  <body>
+    <div id="deck-container">
+    </div>
+  </body>
+  <script>
+    const container = document.getElementById('deck-container');
+    const jsonInput = {
+  "initialViewState": {
+    "bearing": 20,
+    "latitude": 33.74,
+    "longitude": -118.22,
+    "pitch": 50,
+    "zoom": 10
+  },
+  "layers": [
+    {
+      "@@type": "H3HexagonLayer",
+      "coverage": 0.9,
+      "data": [
+        {
+          "avg_eta": 190.0,
+          "fill_color": [
+            35,
+            135,
+            141,
+            180
+          ],
+          "h3_cell": "8729a57a3ffffff",
+          "traffic": 2178
+        },
+        {
+          "avg_eta": NaN,
+          "fill_color": [
+            68,
+            1,
+            84,
+            180
+          ],
+          "h3_cell": "8729a5646ffffff",
+          "traffic": 17873
+        },
+        {
+          "avg_eta": 98.0,
+          "fill_color": [
+            70,
+            45,
+            124,
+            180
+          ],
+          "h3_cell": "8729a5631ffffff",
+          "traffic": 16621
+        },
+        {
+          "avg_eta": 193.0,
+          "fill_color": [
+            34,
+            137,
+            141,
+            180
+          ],
+          "h3_cell": "8729a5724ffffff",
+          "traffic": 162
+        },
+        {
+          "avg_eta": 67.0,
+          "fill_color": [
+            69,
+            6,
+            90,
+            180
+          ],
+          "h3_cell": "8729a5636ffffff",
+          "traffic": 8993
+        },
+        {
+          "avg_eta": 71.0,
+          "fill_color": [
+            70,
+            12,
+            95,
+            180
+          ],
+          "h3_cell": "8729a57a9ffffff",
+          "traffic": 2068
+        },
+        {
+          "avg_eta": 368.0,
+          "fill_color": [
+            253,
+            231,
+            36,
+            180
+          ],
+          "h3_cell": "8729a5286ffffff",
+          "traffic": 305
+        },
+        {
+          "avg_eta": NaN,
+          "fill_color": [
+            68,
+            1,
+            84,
+            180
+          ],
+          "h3_cell": "8729a558bffffff",
+          "traffic": 10
+        },
+        {
+          "avg_eta": 284.0,
+          "fill_color": [
+            126,
+            210,
+            78,
+            180
+          ],
+          "h3_cell": "8729a5446ffffff",
+          "traffic": 80
+        },
+        {
+          "avg_eta": 163.0,
+          "fill_color": [
+            45,
+            111,
+            142,
+            180
+          ],
+          "h3_cell": "8729a54a5ffffff",
+          "traffic": 37
+        },
+        {
+          "avg_eta": NaN,
+          "fill_color": [
+            68,
+            1,
+            84,
+            180
+          ],
+          "h3_cell": "8729a5280ffffff",
+          "traffic": 93
+        },
+        {
+          "avg_eta": 117.0,
+          "fill_color": [
+            64,
+            67,
+            135,
+            180
+          ],
+          "h3_cell": "8729a5440ffffff",
+          "traffic": 45
+        },
+        {
+          "avg_eta": 81.0,
+          "fill_color": [
+            72,
+            25,
+            107,
+            180
+          ],
+          "h3_cell": "8729a509bffffff",
+          "traffic": 113
+        },
+        {
+          "avg_eta": 184.0,
+          "fill_color": [
+            37,
+            130,
+            142,
+            180
+          ],
+          "h3_cell": "8729a54a9ffffff",
+          "traffic": 49
+        },
+        {
+          "avg_eta": 221.0,
+          "fill_color": [
+            31,
+            162,
+            134,
+            180
+          ],
+          "h3_cell": "8729a564bffffff",
+          "traffic": 104
+        },
+        {
+          "avg_eta": 150.0,
+          "fill_color": [
+            50,
+            99,
+            141,
+            180
+          ],
+          "h3_cell": "8729a578cffffff",
+          "traffic": 2502
+        },
+        {
+          "avg_eta": 54.0,
+          "fill_color": [
+            68,
+            1,
+            84,
+            180
+          ],
+          "h3_cell": "8729a5709ffffff",
+          "traffic": 113
+        },
+        {
+          "avg_eta": NaN,
+          "fill_color": [
+            68,
+            1,
+            84,
+            180
+          ],
+          "h3_cell": "8729a5643ffffff",
+          "traffic": 276
+        },
+        {
+          "avg_eta": NaN,
+          "fill_color": [
+            68,
+            1,
+            84,
+            180
+          ],
+          "h3_cell": "8729a1912ffffff",
+          "traffic": 154
+        },
+        {
+          "avg_eta": 109.0,
+          "fill_color": [
+            67,
+            58,
+            131,
+            180
+          ],
+          "h3_cell": "8729a5750ffffff",
+          "traffic": 255
+        },
+        {
+          "avg_eta": 77.0,
+          "fill_color": [
+            71,
+            21,
+            103,
+            180
+          ],
+          "h3_cell": "8729a5702ffffff",
+          "traffic": 449
+        },
+        {
+          "avg_eta": 83.0,
+          "fill_color": [
+            72,
+            28,
+            110,
+            180
+          ],
+          "h3_cell": "8729a5754ffffff",
+          "traffic": 58
+        },
+        {
+          "avg_eta": 73.0,
+          "fill_color": [
+            71,
+            15,
+            98,
+            180
+          ],
+          "h3_cell": "8729a5624ffffff",
+          "traffic": 354
+        },
+        {
+          "avg_eta": NaN,
+          "fill_color": [
+            68,
+            1,
+            84,
+            180
+          ],
+          "h3_cell": "8729a5673ffffff",
+          "traffic": 58
+        },
+        {
+          "avg_eta": 160.0,
+          "fill_color": [
+            46,
+            109,
+            142,
+            180
+          ],
+          "h3_cell": "8729a575dffffff",
+          "traffic": 154
+        },
+        {
+          "avg_eta": 167.0,
+          "fill_color": [
+            43,
+            115,
+            142,
+            180
+          ],
+          "h3_cell": "8729a5605ffffff",
+          "traffic": 1584
+        },
+        {
+          "avg_eta": 141.0,
+          "fill_color": [
+            54,
+            91,
+            140,
+            180
+          ],
+          "h3_cell": "8729a19a4ffffff",
+          "traffic": 452
+        },
+        {
+          "avg_eta": NaN,
+          "fill_color": [
+            68,
+            1,
+            84,
+            180
+          ],
+          "h3_cell": "8729a19aeffffff",
+          "traffic": 261
+        },
+        {
+          "avg_eta": 267.0,
+          "fill_color": [
+            89,
+            199,
+            100,
+            180
+          ],
+          "h3_cell": "8729a5046ffffff",
+          "traffic": 173
+        },
+        {
+          "avg_eta": NaN,
+          "fill_color": [
+            68,
+            1,
+            84,
+            180
+          ],
+          "h3_cell": "8729a5741ffffff",
+          "traffic": 266
+        },
+        {
+          "avg_eta": NaN,
+          "fill_color": [
+            68,
+            1,
+            84,
+            180
+          ],
+          "h3_cell": "8729a540dffffff",
+          "traffic": 13
+        },
+        {
+          "avg_eta": 173.0,
+          "fill_color": [
+            41,
+            121,
+            142,
+            180
+          ],
+          "h3_cell": "8729a50c8ffffff",
+          "traffic": 156
+        },
+        {
+          "avg_eta": 163.0,
+          "fill_color": [
+            45,
+            111,
+            142,
+            180
+          ],
+          "h3_cell": "8729a542affffff",
+          "traffic": 14
+        },
+        {
+          "avg_eta": NaN,
+          "fill_color": [
+            68,
+            1,
+            84,
+            180
+          ],
+          "h3_cell": "8729a5093ffffff",
+          "traffic": 254
+        },
+        {
+          "avg_eta": 211.0,
+          "fill_color": [
+            30,
+            153,
+            138,
+            180
+          ],
+          "h3_cell": "8729a5386ffffff",
+          "traffic": 80
+        },
+        {
+          "avg_eta": 159.0,
+          "fill_color": [
+            46,
+            108,
+            142,
+            180
+          ],
+          "h3_cell": "8729a50aeffffff",
+          "traffic": 163
+        },
+        {
+          "avg_eta": 253.0,
+          "fill_color": [
+            64,
+            189,
+            114,
+            180
+          ],
+          "h3_cell": "8729a5663ffffff",
+          "traffic": 116
+        },
+        {
+          "avg_eta": 205.0,
+          "fill_color": [
+            31,
+            148,
+            139,
+            180
+          ],
+          "h3_cell": "8729a5420ffffff",
+          "traffic": 103
+        },
+        {
+          "avg_eta": 214.0,
+          "fill_color": [
+            30,
+            156,
+            137,
+            180
+          ],
+          "h3_cell": "8729a50e0ffffff",
+          "traffic": 49
+        },
+        {
+          "avg_eta": 189.0,
+          "fill_color": [
+            35,
+            135,
+            141,
+            180
+          ],
+          "h3_cell": "8729a50c4ffffff",
+          "traffic": 126
+        },
+        {
+          "avg_eta": 379.0,
+          "fill_color": [
+            253,
+            231,
+            36,
+            180
+          ],
+          "h3_cell": "8729a564cffffff",
+          "traffic": 203
+        },
+        {
+          "avg_eta": 408.0,
+          "fill_color": [
+            253,
+            231,
+            36,
+            180
+          ],
+          "h3_cell": "8729a566bffffff",
+          "traffic": 174
+        },
+        {
+          "avg_eta": 224.0,
+          "fill_color": [
+            32,
+            165,
+            133,
+            180
+          ],
+          "h3_cell": "8729a5019ffffff",
+          "traffic": 299
+        },
+        {
+          "avg_eta": NaN,
+          "fill_color": [
+            68,
+            1,
+            84,
+            180
+          ],
+          "h3_cell": "8729a1910ffffff",
+          "traffic": 37
+        },
+        {
+          "avg_eta": 184.0,
+          "fill_color": [
+            37,
+            130,
+            142,
+            180
+          ],
+          "h3_cell": "8729a5749ffffff",
+          "traffic": 90
+        },
+        {
+          "avg_eta": 206.0,
+          "fill_color": [
+            31,
+            149,
+            139,
+            180
+          ],
+          "h3_cell": "8729a5423ffffff",
+          "traffic": 39
+        },
+        {
+          "avg_eta": 125.0,
+          "fill_color": [
+            61,
+            75,
+            137,
+            180
+          ],
+          "h3_cell": "8729a5742ffffff",
+          "traffic": 116
+        },
+        {
+          "avg_eta": 126.0,
+          "fill_color": [
+            61,
+            76,
+            137,
+            180
+          ],
+          "h3_cell": "8729a54e6ffffff",
+          "traffic": 201
+        },
+        {
+          "avg_eta": NaN,
+          "fill_color": [
+            68,
+            1,
+            84,
+            180
+          ],
+          "h3_cell": "8729a5042ffffff",
+          "traffic": 16
+        },
+        {
+          "avg_eta": 180.0,
+          "fill_color": [
+            39,
+            126,
+            142,
+            180
+          ],
+          "h3_cell": "8729a5088ffffff",
+          "traffic": 77
+        },
+        {
+          "avg_eta": 234.0,
+          "fill_color": [
+            39,
+            173,
+            128,
+            180
+          ],
+          "h3_cell": "8729a5390ffffff",
+          "traffic": 77
+        },
+        {
+          "avg_eta": 208.0,
+          "fill_color": [
+            30,
+            151,
+            138,
+            180
+          ],
+          "h3_cell": "8729a50c6ffffff",
+          "traffic": 38
+        },
+        {
+          "avg_eta": 62.0,
+          "fill_color": [
+            68,
+            1,
+            84,
+            180
+          ],
+          "h3_cell": "8729a5459ffffff",
+          "traffic": 40
+        },
+        {
+          "avg_eta": NaN,
+          "fill_color": [
+            68,
+            1,
+            84,
+            180
+          ],
+          "h3_cell": "8729a0b6effffff",
+          "traffic": 15
+        },
+        {
+          "avg_eta": NaN,
+          "fill_color": [
+            68,
+            1,
+            84,
+            180
+          ],
+          "h3_cell": "8729a56b6ffffff",
+          "traffic": 2
+        },
+        {
+          "avg_eta": 113.0,
+          "fill_color": [
+            66,
+            62,
+            133,
+            180
+          ],
+          "h3_cell": "8729a574bffffff",
+          "traffic": 45
+        },
+        {
+          "avg_eta": 316.0,
+          "fill_color": [
+            202,
+            224,
+            30,
+            180
+          ],
+          "h3_cell": "8729a529effffff",
+          "traffic": 30
+        },
+        {
+          "avg_eta": 68.0,
+          "fill_color": [
+            69,
+            8,
+            91,
+            180
+          ],
+          "h3_cell": "8729a50c3ffffff",
+          "traffic": 24
+        },
+        {
+          "avg_eta": 132.0,
+          "fill_color": [
+            58,
+            83,
+            139,
+            180
+          ],
+          "h3_cell": "8729a54adffffff",
+          "traffic": 18
+        },
+        {
+          "avg_eta": NaN,
+          "fill_color": [
+            68,
+            1,
+            84,
+            180
+          ],
+          "h3_cell": "8729a5454ffffff",
+          "traffic": 24
+        },
+        {
+          "avg_eta": NaN,
+          "fill_color": [
+            68,
+            1,
+            84,
+            180
+          ],
+          "h3_cell": "8729a5465ffffff",
+          "traffic": 2
+        },
+        {
+          "avg_eta": NaN,
+          "fill_color": [
+            68,
+            1,
+            84,
+            180
+          ],
+          "h3_cell": "8729a1916ffffff",
+          "traffic": 60
+        },
+        {
+          "avg_eta": 292.0,
+          "fill_color": [
+            144,
+            214,
+            67,
+            180
+          ],
+          "h3_cell": "8729a564dffffff",
+          "traffic": 44
+        },
+        {
+          "avg_eta": NaN,
+          "fill_color": [
+            68,
+            1,
+            84,
+            180
+          ],
+          "h3_cell": "8729a5461ffffff",
+          "traffic": 19
+        },
+        {
+          "avg_eta": 139.0,
+          "fill_color": [
+            55,
+            89,
+            140,
+            180
+          ],
+          "h3_cell": "8729a5401ffffff",
+          "traffic": 23
+        },
+        {
+          "avg_eta": 137.0,
+          "fill_color": [
+            56,
+            87,
+            140,
+            180
+          ],
+          "h3_cell": "8729a539affffff",
+          "traffic": 21
+        },
+        {
+          "avg_eta": NaN,
+          "fill_color": [
+            68,
+            1,
+            84,
+            180
+          ],
+          "h3_cell": "8729a54dcffffff",
+          "traffic": 10
+        },
+        {
+          "avg_eta": NaN,
+          "fill_color": [
+            68,
+            1,
+            84,
+            180
+          ],
+          "h3_cell": "8729a5436ffffff",
+          "traffic": 1
+        },
+        {
+          "avg_eta": 138.0,
+          "fill_color": [
+            55,
+            88,
+            140,
+            180
+          ],
+          "h3_cell": "8729a50a8ffffff",
+          "traffic": 18
+        },
+        {
+          "avg_eta": NaN,
+          "fill_color": [
+            68,
+            1,
+            84,
+            180
+          ],
+          "h3_cell": "8729a1918ffffff",
+          "traffic": 4
+        },
+        {
+          "avg_eta": NaN,
+          "fill_color": [
+            68,
+            1,
+            84,
+            180
+          ],
+          "h3_cell": "8729a5406ffffff",
+          "traffic": 1
+        },
+        {
+          "avg_eta": NaN,
+          "fill_color": [
+            68,
+            1,
+            84,
+            180
+          ],
+          "h3_cell": "8729a1934ffffff",
+          "traffic": 10
+        },
+        {
+          "avg_eta": NaN,
+          "fill_color": [
+            68,
+            1,
+            84,
+            180
+          ],
+          "h3_cell": "8729a529bffffff",
+          "traffic": 2
+        },
+        {
+          "avg_eta": NaN,
+          "fill_color": [
+            68,
+            1,
+            84,
+            180
+          ],
+          "h3_cell": "8729a5795ffffff",
+          "traffic": 1
+        },
+        {
+          "avg_eta": 361.0,
+          "fill_color": [
+            253,
+            231,
+            36,
+            180
+          ],
+          "h3_cell": "8729a19a2ffffff",
+          "traffic": 49804
+        },
+        {
+          "avg_eta": 190.0,
+          "fill_color": [
+            35,
+            135,
+            141,
+            180
+          ],
+          "h3_cell": "8729a5788ffffff",
+          "traffic": 4329
+        },
+        {
+          "avg_eta": 82.0,
+          "fill_color": [
+            72,
+            26,
+            108,
+            180
+          ],
+          "h3_cell": "8729a5622ffffff",
+          "traffic": 108454
+        },
+        {
+          "avg_eta": 23.0,
+          "fill_color": [
+            68,
+            1,
+            84,
+            180
+          ],
+          "h3_cell": "8729a5620ffffff",
+          "traffic": 176999
+        },
+        {
+          "avg_eta": 166.0,
+          "fill_color": [
+            44,
+            114,
+            142,
+            180
+          ],
+          "h3_cell": "8729a54c0ffffff",
+          "traffic": 69761
+        },
+        {
+          "avg_eta": 218.0,
+          "fill_color": [
+            30,
+            159,
+            136,
+            180
+          ],
+          "h3_cell": "8729a5056ffffff",
+          "traffic": 2241
+        },
+        {
+          "avg_eta": 81.0,
+          "fill_color": [
+            72,
+            25,
+            107,
+            180
+          ],
+          "h3_cell": "8729a5713ffffff",
+          "traffic": 1183
+        },
+        {
+          "avg_eta": 89.0,
+          "fill_color": [
+            72,
+            35,
+            116,
+            180
+          ],
+          "h3_cell": "8729a54f3ffffff",
+          "traffic": 11056
+        },
+        {
+          "avg_eta": 135.0,
+          "fill_color": [
+            57,
+            85,
+            139,
+            180
+          ],
+          "h3_cell": "8729a5752ffffff",
+          "traffic": 78
+        },
+        {
+          "avg_eta": 100.0,
+          "fill_color": [
+            70,
+            48,
+            125,
+            180
+          ],
+          "h3_cell": "8729a571bffffff",
+          "traffic": 2114
+        },
+        {
+          "avg_eta": 122.0,
+          "fill_color": [
+            62,
+            72,
+            136,
+            180
+          ],
+          "h3_cell": "8729a5753ffffff",
+          "traffic": 41
+        },
+        {
+          "avg_eta": 87.0,
+          "fill_color": [
+            72,
+            33,
+            114,
+            180
+          ],
+          "h3_cell": "8729a5780ffffff",
+          "traffic": 526
+        },
+        {
+          "avg_eta": 144.0,
+          "fill_color": [
+            52,
+            94,
+            141,
+            180
+          ],
+          "h3_cell": "8729a576dffffff",
+          "traffic": 26
+        },
+        {
+          "avg_eta": 97.0,
+          "fill_color": [
+            71,
+            44,
+            123,
+            180
+          ],
+          "h3_cell": "8729a54eaffffff",
+          "traffic": 66
+        },
+        {
+          "avg_eta": 44.0,
+          "fill_color": [
+            68,
+            1,
+            84,
+            180
+          ],
+          "h3_cell": "8729a57a4ffffff",
+          "traffic": 56
+        },
+        {
+          "avg_eta": 138.0,
+          "fill_color": [
+            55,
+            88,
+            140,
+            180
+          ],
+          "h3_cell": "8729a5448ffffff",
+          "traffic": 2347
+        },
+        {
+          "avg_eta": 79.0,
+          "fill_color": [
+            71,
+            24,
+            106,
+            180
+          ],
+          "h3_cell": "8729a5730ffffff",
+          "traffic": 363
+        },
+        {
+          "avg_eta": 137.0,
+          "fill_color": [
+            56,
+            87,
+            140,
+            180
+          ],
+          "h3_cell": "8729a50dbffffff",
+          "traffic": 283
+        },
+        {
+          "avg_eta": 166.0,
+          "fill_color": [
+            44,
+            114,
+            142,
+            180
+          ],
+          "h3_cell": "8729a5704ffffff",
+          "traffic": 328
+        },
+        {
+          "avg_eta": 131.0,
+          "fill_color": [
+            58,
+            82,
+            139,
+            180
+          ],
+          "h3_cell": "8729a5662ffffff",
+          "traffic": 73
+        },
+        {
+          "avg_eta": NaN,
+          "fill_color": [
+            68,
+            1,
+            84,
+            180
+          ],
+          "h3_cell": "8729a19a8ffffff",
+          "traffic": 254
+        },
+        {
+          "avg_eta": 123.0,
+          "fill_color": [
+            62,
+            73,
+            137,
+            180
+          ],
+          "h3_cell": "8729a575cffffff",
+          "traffic": 199
+        },
+        {
+          "avg_eta": 124.0,
+          "fill_color": [
+            61,
+            74,
+            137,
+            180
+          ],
+          "h3_cell": "8729a50ddffffff",
+          "traffic": 47
+        },
+        {
+          "avg_eta": 397.0,
+          "fill_color": [
+            253,
+            231,
+            36,
+            180
+          ],
+          "h3_cell": "8729a5009ffffff",
+          "traffic": 121
+        },
+        {
+          "avg_eta": 116.0,
+          "fill_color": [
+            65,
+            66,
+            134,
+            180
+          ],
+          "h3_cell": "8729a546affffff",
+          "traffic": 380
+        },
+        {
+          "avg_eta": 60.0,
+          "fill_color": [
+            68,
+            1,
+            84,
+            180
+          ],
+          "h3_cell": "8729a5770ffffff",
+          "traffic": 207
+        },
+        {
+          "avg_eta": NaN,
+          "fill_color": [
+            68,
+            1,
+            84,
+            180
+          ],
+          "h3_cell": "8729a191effffff",
+          "traffic": 142
+        },
+        {
+          "avg_eta": 104.0,
+          "fill_color": [
+            69,
+            53,
+            128,
+            180
+          ],
+          "h3_cell": "8729a5731ffffff",
+          "traffic": 245
+        },
+        {
+          "avg_eta": 63.0,
+          "fill_color": [
+            68,
+            2,
+            85,
+            180
+          ],
+          "h3_cell": "8729a5746ffffff",
+          "traffic": 227
+        },
+        {
+          "avg_eta": 243.0,
+          "fill_color": [
+            50,
+            181,
+            122,
+            180
+          ],
+          "h3_cell": "8729a5442ffffff",
+          "traffic": 85
+        },
+        {
+          "avg_eta": 113.0,
+          "fill_color": [
+            66,
+            62,
+            133,
+            180
+          ],
+          "h3_cell": "8729a5053ffffff",
+          "traffic": 135
+        },
+        {
+          "avg_eta": NaN,
+          "fill_color": [
+            68,
+            1,
+            84,
+            180
+          ],
+          "h3_cell": "8729a5549ffffff",
+          "traffic": 315
+        },
+        {
+          "avg_eta": 156.0,
+          "fill_color": [
+            47,
+            105,
+            141,
+            180
+          ],
+          "h3_cell": "8729a50a1ffffff",
+          "traffic": 180
+        },
+        {
+          "avg_eta": 195.0,
+          "fill_color": [
+            34,
+            139,
+            141,
+            180
+          ],
+          "h3_cell": "8729a5395ffffff",
+          "traffic": 64
+        },
+        {
+          "avg_eta": 194.0,
+          "fill_color": [
+            34,
+            138,
+            141,
+            180
+          ],
+          "h3_cell": "8729a5394ffffff",
+          "traffic": 78
+        },
+        {
+          "avg_eta": 181.0,
+          "fill_color": [
+            38,
+            127,
+            142,
+            180
+          ],
+          "h3_cell": "8729a5720ffffff",
+          "traffic": 141
+        },
+        {
+          "avg_eta": 176.0,
+          "fill_color": [
+            40,
+            122,
+            142,
+            180
+          ],
+          "h3_cell": "8729a576cffffff",
+          "traffic": 38
+        },
+        {
+          "avg_eta": 199.0,
+          "fill_color": [
+            32,
+            143,
+            140,
+            180
+          ],
+          "h3_cell": "8729a5294ffffff",
+          "traffic": 97
+        },
+        {
+          "avg_eta": 134.0,
+          "fill_color": [
+            57,
+            85,
+            139,
+            180
+          ],
+          "h3_cell": "8729a5293ffffff",
+          "traffic": 27
+        },
+        {
+          "avg_eta": 190.0,
+          "fill_color": [
+            35,
+            135,
+            141,
+            180
+          ],
+          "h3_cell": "8729a542effffff",
+          "traffic": 71
+        },
+        {
+          "avg_eta": 195.0,
+          "fill_color": [
+            34,
+            139,
+            141,
+            180
+          ],
+          "h3_cell": "8729a5668ffffff",
+          "traffic": 60
+        },
+        {
+          "avg_eta": 171.0,
+          "fill_color": [
+            42,
+            119,
+            142,
+            180
+          ],
+          "h3_cell": "8729a50c0ffffff",
+          "traffic": 85
+        },
+        {
+          "avg_eta": 116.0,
+          "fill_color": [
+            65,
+            66,
+            134,
+            180
+          ],
+          "h3_cell": "8729a501effffff",
+          "traffic": 112
+        },
+        {
+          "avg_eta": 192.0,
+          "fill_color": [
+            35,
+            137,
+            141,
+            180
+          ],
+          "h3_cell": "8729a53b6ffffff",
+          "traffic": 125
+        },
+        {
+          "avg_eta": NaN,
+          "fill_color": [
+            68,
+            1,
+            84,
+            180
+          ],
+          "h3_cell": "8729a5432ffffff",
+          "traffic": 60
+        },
+        {
+          "avg_eta": NaN,
+          "fill_color": [
+            68,
+            1,
+            84,
+            180
+          ],
+          "h3_cell": "8729a5430ffffff",
+          "traffic": 57
+        },
+        {
+          "avg_eta": NaN,
+          "fill_color": [
+            68,
+            1,
+            84,
+            180
+          ],
+          "h3_cell": "8729a5553ffffff",
+          "traffic": 34
+        },
+        {
+          "avg_eta": NaN,
+          "fill_color": [
+            68,
+            1,
+            84,
+            180
+          ],
+          "h3_cell": "8729a5550ffffff",
+          "traffic": 1
+        },
+        {
+          "avg_eta": 255.0,
+          "fill_color": [
+            68,
+            190,
+            112,
+            180
+          ],
+          "h3_cell": "8729a5283ffffff",
+          "traffic": 44
+        },
+        {
+          "avg_eta": 89.0,
+          "fill_color": [
+            72,
+            35,
+            116,
+            180
+          ],
+          "h3_cell": "8729a54e8ffffff",
+          "traffic": 25
+        },
+        {
+          "avg_eta": 99.0,
+          "fill_color": [
+            70,
+            47,
+            124,
+            180
+          ],
+          "h3_cell": "8729a5084ffffff",
+          "traffic": 12
+        },
+        {
+          "avg_eta": NaN,
+          "fill_color": [
+            68,
+            1,
+            84,
+            180
+          ],
+          "h3_cell": "8729a5055ffffff",
+          "traffic": 5
+        },
+        {
+          "avg_eta": 172.0,
+          "fill_color": [
+            41,
+            120,
+            142,
+            180
+          ],
+          "h3_cell": "8729a555cffffff",
+          "traffic": 65
+        },
+        {
+          "avg_eta": NaN,
+          "fill_color": [
+            68,
+            1,
+            84,
+            180
+          ],
+          "h3_cell": "8729a5558ffffff",
+          "traffic": 20
+        },
+        {
+          "avg_eta": 490.0,
+          "fill_color": [
+            253,
+            231,
+            36,
+            180
+          ],
+          "h3_cell": "8729a5458ffffff",
+          "traffic": 203
+        },
+        {
+          "avg_eta": 163.0,
+          "fill_color": [
+            45,
+            111,
+            142,
+            180
+          ],
+          "h3_cell": "8729a5764ffffff",
+          "traffic": 76
+        },
+        {
+          "avg_eta": NaN,
+          "fill_color": [
+            68,
+            1,
+            84,
+            180
+          ],
+          "h3_cell": "8729a50edffffff",
+          "traffic": 18
+        },
+        {
+          "avg_eta": NaN,
+          "fill_color": [
+            68,
+            1,
+            84,
+            180
+          ],
+          "h3_cell": "8729a50e8ffffff",
+          "traffic": 14
+        },
+        {
+          "avg_eta": 105.0,
+          "fill_color": [
+            69,
+            54,
+            129,
+            180
+          ],
+          "h3_cell": "8729a5701ffffff",
+          "traffic": 128
+        },
+        {
+          "avg_eta": NaN,
+          "fill_color": [
+            68,
+            1,
+            84,
+            180
+          ],
+          "h3_cell": "8729a5453ffffff",
+          "traffic": 110
+        },
+        {
+          "avg_eta": NaN,
+          "fill_color": [
+            68,
+            1,
+            84,
+            180
+          ],
+          "h3_cell": "8729a54e5ffffff",
+          "traffic": 42
+        },
+        {
+          "avg_eta": NaN,
+          "fill_color": [
+            68,
+            1,
+            84,
+            180
+          ],
+          "h3_cell": "8729a0b69ffffff",
+          "traffic": 11
+        },
+        {
+          "avg_eta": 278.0,
+          "fill_color": [
+            112,
+            206,
+            86,
+            180
+          ],
+          "h3_cell": "8729a5669ffffff",
+          "traffic": 43
+        },
+        {
+          "avg_eta": 97.0,
+          "fill_color": [
+            71,
+            44,
+            123,
+            180
+          ],
+          "h3_cell": "8729a5450ffffff",
+          "traffic": 41
+        },
+        {
+          "avg_eta": 181.0,
+          "fill_color": [
+            38,
+            127,
+            142,
+            180
+          ],
+          "h3_cell": "8729a508bffffff",
+          "traffic": 43
+        },
+        {
+          "avg_eta": NaN,
+          "fill_color": [
+            68,
+            1,
+            84,
+            180
+          ],
+          "h3_cell": "8729a54a1ffffff",
+          "traffic": 5
+        },
+        {
+          "avg_eta": 67.0,
+          "fill_color": [
+            69,
+            6,
+            90,
+            180
+          ],
+          "h3_cell": "8729a546bffffff",
+          "traffic": 3
+        },
+        {
+          "avg_eta": 158.0,
+          "fill_color": [
+            46,
+            107,
+            142,
+            180
+          ],
+          "h3_cell": "8729a50adffffff",
+          "traffic": 20
+        },
+        {
+          "avg_eta": 186.0,
+          "fill_color": [
+            36,
+            132,
+            141,
+            180
+          ],
+          "h3_cell": "8729a5089ffffff",
+          "traffic": 20
+        },
+        {
+          "avg_eta": 145.0,
+          "fill_color": [
+            52,
+            95,
+            141,
+            180
+          ],
+          "h3_cell": "8729a539bffffff",
+          "traffic": 9
+        },
+        {
+          "avg_eta": 376.0,
+          "fill_color": [
+            253,
+            231,
+            36,
+            180
+          ],
+          "h3_cell": "8729a50d5ffffff",
+          "traffic": 28
+        },
+        {
+          "avg_eta": NaN,
+          "fill_color": [
+            68,
+            1,
+            84,
+            180
+          ],
+          "h3_cell": "8729a50a9ffffff",
+          "traffic": 17
+        },
+        {
+          "avg_eta": NaN,
+          "fill_color": [
+            68,
+            1,
+            84,
+            180
+          ],
+          "h3_cell": "8729a52b0ffffff",
+          "traffic": 15
+        },
+        {
+          "avg_eta": 101.0,
+          "fill_color": [
+            70,
+            49,
+            126,
+            180
+          ],
+          "h3_cell": "8729a50eeffffff",
+          "traffic": 14
+        },
+        {
+          "avg_eta": NaN,
+          "fill_color": [
+            68,
+            1,
+            84,
+            180
+          ],
+          "h3_cell": "8729a5489ffffff",
+          "traffic": 15
+        },
+        {
+          "avg_eta": NaN,
+          "fill_color": [
+            68,
+            1,
+            84,
+            180
+          ],
+          "h3_cell": "8729a5623ffffff",
+          "traffic": 39035
+        },
+        {
+          "avg_eta": 203.0,
+          "fill_color": [
+            31,
+            147,
+            139,
+            180
+          ],
+          "h3_cell": "8729a5606ffffff",
+          "traffic": 29232
+        },
+        {
+          "avg_eta": 62.0,
+          "fill_color": [
+            68,
+            1,
+            84,
+            180
+          ],
+          "h3_cell": "8729a5633ffffff",
+          "traffic": 67107
+        },
+        {
+          "avg_eta": NaN,
+          "fill_color": [
+            68,
+            1,
+            84,
+            180
+          ],
+          "h3_cell": "8729a5655ffffff",
+          "traffic": 31757
+        },
+        {
+          "avg_eta": 67.0,
+          "fill_color": [
+            69,
+            6,
+            90,
+            180
+          ],
+          "h3_cell": "8729a57a1ffffff",
+          "traffic": 2120
+        },
+        {
+          "avg_eta": 76.0,
+          "fill_color": [
+            71,
+            20,
+            102,
+            180
+          ],
+          "h3_cell": "8729a57aaffffff",
+          "traffic": 5772
+        },
+        {
+          "avg_eta": 424.0,
+          "fill_color": [
+            253,
+            231,
+            36,
+            180
+          ],
+          "h3_cell": "8729a5050ffffff",
+          "traffic": 2526
+        },
+        {
+          "avg_eta": 242.0,
+          "fill_color": [
+            48,
+            180,
+            122,
+            180
+          ],
+          "h3_cell": "8729a5785ffffff",
+          "traffic": 5179
+        },
+        {
+          "avg_eta": 198.0,
+          "fill_color": [
+            33,
+            142,
+            140,
+            180
+          ],
+          "h3_cell": "8729a5768ffffff",
+          "traffic": 318
+        },
+        {
+          "avg_eta": 84.0,
+          "fill_color": [
+            72,
+            29,
+            111,
+            180
+          ],
+          "h3_cell": "8729a5474ffffff",
+          "traffic": 17
+        },
+        {
+          "avg_eta": 64.0,
+          "fill_color": [
+            68,
+            3,
+            87,
+            180
+          ],
+          "h3_cell": "8729a57a8ffffff",
+          "traffic": 756
+        },
+        {
+          "avg_eta": 70.0,
+          "fill_color": [
+            70,
+            11,
+            94,
+            180
+          ],
+          "h3_cell": "8729a57adffffff",
+          "traffic": 1531
+        },
+        {
+          "avg_eta": 94.0,
+          "fill_color": [
+            71,
+            40,
+            120,
+            180
+          ],
+          "h3_cell": "8729a5735ffffff",
+          "traffic": 160
+        },
+        {
+          "avg_eta": 111.0,
+          "fill_color": [
+            67,
+            60,
+            132,
+            180
+          ],
+          "h3_cell": "8729a5443ffffff",
+          "traffic": 68
+        },
+        {
+          "avg_eta": 150.0,
+          "fill_color": [
+            50,
+            99,
+            141,
+            180
+          ],
+          "h3_cell": "8729a5085ffffff",
+          "traffic": 263
+        },
+        {
+          "avg_eta": 71.0,
+          "fill_color": [
+            70,
+            12,
+            95,
+            180
+          ],
+          "h3_cell": "8729a5758ffffff",
+          "traffic": 46
+        },
+        {
+          "avg_eta": 125.0,
+          "fill_color": [
+            61,
+            75,
+            137,
+            180
+          ],
+          "h3_cell": "8729a572effffff",
+          "traffic": 189
+        },
+        {
+          "avg_eta": NaN,
+          "fill_color": [
+            68,
+            1,
+            84,
+            180
+          ],
+          "h3_cell": "8729a19acffffff",
+          "traffic": 317
+        },
+        {
+          "avg_eta": 98.0,
+          "fill_color": [
+            70,
+            45,
+            124,
+            180
+          ],
+          "h3_cell": "8729a544effffff",
+          "traffic": 1072
+        },
+        {
+          "avg_eta": 129.0,
+          "fill_color": [
+            59,
+            80,
+            138,
+            180
+          ],
+          "h3_cell": "8729a5463ffffff",
+          "traffic": 309
+        },
+        {
+          "avg_eta": 95.0,
+          "fill_color": [
+            71,
+            42,
+            121,
+            180
+          ],
+          "h3_cell": "8729a50ceffffff",
+          "traffic": 43
+        },
+        {
+          "avg_eta": 95.0,
+          "fill_color": [
+            71,
+            42,
+            121,
+            180
+          ],
+          "h3_cell": "8729a575effffff",
+          "traffic": 11
+        },
+        {
+          "avg_eta": 104.0,
+          "fill_color": [
+            69,
+            53,
+            128,
+            180
+          ],
+          "h3_cell": "8729a544cffffff",
+          "traffic": 589
+        },
+        {
+          "avg_eta": 106.0,
+          "fill_color": [
+            68,
+            55,
+            129,
+            180
+          ],
+          "h3_cell": "8729a544dffffff",
+          "traffic": 248
+        },
+        {
+          "avg_eta": 57.0,
+          "fill_color": [
+            68,
+            1,
+            84,
+            180
+          ],
+          "h3_cell": "8729a5744ffffff",
+          "traffic": 109
+        },
+        {
+          "avg_eta": 119.0,
+          "fill_color": [
+            63,
+            69,
+            135,
+            180
+          ],
+          "h3_cell": "8729a5449ffffff",
+          "traffic": 491
+        },
+        {
+          "avg_eta": NaN,
+          "fill_color": [
+            68,
+            1,
+            84,
+            180
+          ],
+          "h3_cell": "8729a576affffff",
+          "traffic": 54
+        },
+        {
+          "avg_eta": 256.0,
+          "fill_color": [
+            69,
+            191,
+            111,
+            180
+          ],
+          "h3_cell": "8729a5058ffffff",
+          "traffic": 123
+        },
+        {
+          "avg_eta": 290.0,
+          "fill_color": [
+            139,
+            213,
+            70,
+            180
+          ],
+          "h3_cell": "8729a505dffffff",
+          "traffic": 74
+        },
+        {
+          "avg_eta": 199.0,
+          "fill_color": [
+            32,
+            143,
+            140,
+            180
+          ],
+          "h3_cell": "8729a54a8ffffff",
+          "traffic": 56
+        },
+        {
+          "avg_eta": 163.0,
+          "fill_color": [
+            45,
+            111,
+            142,
+            180
+          ],
+          "h3_cell": "8729a5476ffffff",
+          "traffic": 72
+        },
+        {
+          "avg_eta": NaN,
+          "fill_color": [
+            68,
+            1,
+            84,
+            180
+          ],
+          "h3_cell": "8729a5548ffffff",
+          "traffic": 184
+        },
+        {
+          "avg_eta": 208.0,
+          "fill_color": [
+            30,
+            151,
+            138,
+            180
+          ],
+          "h3_cell": "8729a5380ffffff",
+          "traffic": 44
+        },
+        {
+          "avg_eta": 170.0,
+          "fill_color": [
+            42,
+            118,
+            142,
+            180
+          ],
+          "h3_cell": "8729a50cbffffff",
+          "traffic": 101
+        },
+        {
+          "avg_eta": 131.0,
+          "fill_color": [
+            58,
+            82,
+            139,
+            180
+          ],
+          "h3_cell": "8729a50daffffff",
+          "traffic": 113
+        },
+        {
+          "avg_eta": 152.0,
+          "fill_color": [
+            49,
+            101,
+            141,
+            180
+          ],
+          "h3_cell": "8729a5761ffffff",
+          "traffic": 100
+        },
+        {
+          "avg_eta": 265.0,
+          "fill_color": [
+            85,
+            198,
+            102,
+            180
+          ],
+          "h3_cell": "8729a5072ffffff",
+          "traffic": 62
+        },
+        {
+          "avg_eta": 218.0,
+          "fill_color": [
+            30,
+            159,
+            136,
+            180
+          ],
+          "h3_cell": "8729a5645ffffff",
+          "traffic": 136
+        },
+        {
+          "avg_eta": 224.0,
+          "fill_color": [
+            32,
+            165,
+            133,
+            180
+          ],
+          "h3_cell": "8729a50e5ffffff",
+          "traffic": 249
+        },
+        {
+          "avg_eta": 187.0,
+          "fill_color": [
+            36,
+            133,
+            141,
+            180
+          ],
+          "h3_cell": "8729a50c2ffffff",
+          "traffic": 181
+        },
+        {
+          "avg_eta": 161.0,
+          "fill_color": [
+            45,
+            110,
+            142,
+            180
+          ],
+          "h3_cell": "8729a50e4ffffff",
+          "traffic": 109
+        },
+        {
+          "avg_eta": 262.0,
+          "fill_color": [
+            79,
+            195,
+            105,
+            180
+          ],
+          "h3_cell": "8729a1902ffffff",
+          "traffic": 32
+        },
+        {
+          "avg_eta": 231.0,
+          "fill_color": [
+            37,
+            171,
+            129,
+            180
+          ],
+          "h3_cell": "8729a529cffffff",
+          "traffic": 88
+        },
+        {
+          "avg_eta": 240.0,
+          "fill_color": [
+            46,
+            178,
+            124,
+            180
+          ],
+          "h3_cell": "8729a54aeffffff",
+          "traffic": 16
+        },
+        {
+          "avg_eta": 139.0,
+          "fill_color": [
+            55,
+            89,
+            140,
+            180
+          ],
+          "h3_cell": "8729a5466ffffff",
+          "traffic": 130
+        },
+        {
+          "avg_eta": 114.0,
+          "fill_color": [
+            66,
+            64,
+            133,
+            180
+          ],
+          "h3_cell": "8729a5409ffffff",
+          "traffic": 94
+        },
+        {
+          "avg_eta": 84.0,
+          "fill_color": [
+            72,
+            29,
+            111,
+            180
+          ],
+          "h3_cell": "8729a509cffffff",
+          "traffic": 10
+        },
+        {
+          "avg_eta": 83.0,
+          "fill_color": [
+            72,
+            28,
+            110,
+            180
+          ],
+          "h3_cell": "8729a5098ffffff",
+          "traffic": 61
+        },
+        {
+          "avg_eta": 147.0,
+          "fill_color": [
+            51,
+            97,
+            141,
+            180
+          ],
+          "h3_cell": "8729a539effffff",
+          "traffic": 98
+        },
+        {
+          "avg_eta": NaN,
+          "fill_color": [
+            68,
+            1,
+            84,
+            180
+          ],
+          "h3_cell": "8729a555bffffff",
+          "traffic": 30
+        },
+        {
+          "avg_eta": NaN,
+          "fill_color": [
+            68,
+            1,
+            84,
+            180
+          ],
+          "h3_cell": "8729a5686ffffff",
+          "traffic": 1
+        },
+        {
+          "avg_eta": 159.0,
+          "fill_color": [
+            46,
+            108,
+            142,
+            180
+          ],
+          "h3_cell": "8729a554affffff",
+          "traffic": 7
+        },
+        {
+          "avg_eta": NaN,
+          "fill_color": [
+            68,
+            1,
+            84,
+            180
+          ],
+          "h3_cell": "8729a5441ffffff",
+          "traffic": 15
+        },
+        {
+          "avg_eta": 28.0,
+          "fill_color": [
+            68,
+            1,
+            84,
+            180
+          ],
+          "h3_cell": "8729a50d4ffffff",
+          "traffic": 12
+        },
+        {
+          "avg_eta": 302.0,
+          "fill_color": [
+            167,
+            219,
+            51,
+            180
+          ],
+          "h3_cell": "8729a5298ffffff",
+          "traffic": 25
+        },
+        {
+          "avg_eta": NaN,
+          "fill_color": [
+            68,
+            1,
+            84,
+            180
+          ],
+          "h3_cell": "8729a5082ffffff",
+          "traffic": 16
+        },
+        {
+          "avg_eta": 175.0,
+          "fill_color": [
+            40,
+            122,
+            142,
+            180
+          ],
+          "h3_cell": "8729a50d3ffffff",
+          "traffic": 76
+        },
+        {
+          "avg_eta": 265.0,
+          "fill_color": [
+            85,
+            198,
+            102,
+            180
+          ],
+          "h3_cell": "8729a5383ffffff",
+          "traffic": 18
+        },
+        {
+          "avg_eta": 140.0,
+          "fill_color": [
+            54,
+            90,
+            140,
+            180
+          ],
+          "h3_cell": "8729a574affffff",
+          "traffic": 99
+        },
+        {
+          "avg_eta": 603.0,
+          "fill_color": [
+            253,
+            231,
+            36,
+            180
+          ],
+          "h3_cell": "8729a50d0ffffff",
+          "traffic": 15
+        },
+        {
+          "avg_eta": 144.0,
+          "fill_color": [
+            52,
+            94,
+            141,
+            180
+          ],
+          "h3_cell": "8729a54edffffff",
+          "traffic": 41
+        },
+        {
+          "avg_eta": 90.0,
+          "fill_color": [
+            71,
+            37,
+            117,
+            180
+          ],
+          "h3_cell": "8729a5732ffffff",
+          "traffic": 31
+        },
+        {
+          "avg_eta": 251.0,
+          "fill_color": [
+            61,
+            187,
+            116,
+            180
+          ],
+          "h3_cell": "8729a1906ffffff",
+          "traffic": 12
+        },
+        {
+          "avg_eta": 240.0,
+          "fill_color": [
+            46,
+            178,
+            124,
+            180
+          ],
+          "h3_cell": "8729a1933ffffff",
+          "traffic": 17
+        },
+        {
+          "avg_eta": 229.0,
+          "fill_color": [
+            35,
+            169,
+            130,
+            180
+          ],
+          "h3_cell": "8729a1930ffffff",
+          "traffic": 18
+        },
+        {
+          "avg_eta": NaN,
+          "fill_color": [
+            68,
+            1,
+            84,
+            180
+          ],
+          "h3_cell": "8729a52a6ffffff",
+          "traffic": 4
+        },
+        {
+          "avg_eta": NaN,
+          "fill_color": [
+            68,
+            1,
+            84,
+            180
+          ],
+          "h3_cell": "8729a540affffff",
+          "traffic": 15
+        },
+        {
+          "avg_eta": 118.0,
+          "fill_color": [
+            64,
+            68,
+            135,
+            180
+          ],
+          "h3_cell": "8729a50acffffff",
+          "traffic": 24
+        },
+        {
+          "avg_eta": NaN,
+          "fill_color": [
+            68,
+            1,
+            84,
+            180
+          ],
+          "h3_cell": "8729a5658ffffff",
+          "traffic": 26
+        },
+        {
+          "avg_eta": NaN,
+          "fill_color": [
+            68,
+            1,
+            84,
+            180
+          ],
+          "h3_cell": "8729a1900ffffff",
+          "traffic": 2
+        },
+        {
+          "avg_eta": 337.0,
+          "fill_color": [
+            253,
+            231,
+            36,
+            180
+          ],
+          "h3_cell": "8729a579cffffff",
+          "traffic": 29210
+        },
+        {
+          "avg_eta": 120.0,
+          "fill_color": [
+            63,
+            71,
+            136,
+            180
+          ],
+          "h3_cell": "8729a54c4ffffff",
+          "traffic": 69443
+        },
+        {
+          "avg_eta": NaN,
+          "fill_color": [
+            68,
+            1,
+            84,
+            180
+          ],
+          "h3_cell": "8729a5615ffffff",
+          "traffic": 70826
+        },
+        {
+          "avg_eta": 256.0,
+          "fill_color": [
+            69,
+            191,
+            111,
+            180
+          ],
+          "h3_cell": "8729a5604ffffff",
+          "traffic": 50056
+        },
+        {
+          "avg_eta": 53.0,
+          "fill_color": [
+            68,
+            1,
+            84,
+            180
+          ],
+          "h3_cell": "8729a57acffffff",
+          "traffic": 710
+        },
+        {
+          "avg_eta": 95.0,
+          "fill_color": [
+            71,
+            42,
+            121,
+            180
+          ],
+          "h3_cell": "8729a555effffff",
+          "traffic": 13
+        },
+        {
+          "avg_eta": 236.0,
+          "fill_color": [
+            41,
+            175,
+            127,
+            180
+          ],
+          "h3_cell": "8729a52a2ffffff",
+          "traffic": 152
+        },
+        {
+          "avg_eta": 97.0,
+          "fill_color": [
+            71,
+            44,
+            123,
+            180
+          ],
+          "h3_cell": "8729a5789ffffff",
+          "traffic": 3020
+        },
+        {
+          "avg_eta": 178.0,
+          "fill_color": [
+            39,
+            124,
+            142,
+            180
+          ],
+          "h3_cell": "8729a57abffffff",
+          "traffic": 3425
+        },
+        {
+          "avg_eta": 84.0,
+          "fill_color": [
+            72,
+            29,
+            111,
+            180
+          ],
+          "h3_cell": "8729a54f0ffffff",
+          "traffic": 780
+        },
+        {
+          "avg_eta": 80.0,
+          "fill_color": [
+            71,
+            24,
+            106,
+            180
+          ],
+          "h3_cell": "8729a5475ffffff",
+          "traffic": 105
+        },
+        {
+          "avg_eta": 158.0,
+          "fill_color": [
+            46,
+            107,
+            142,
+            180
+          ],
+          "h3_cell": "8729a5412ffffff",
+          "traffic": 49
+        },
+        {
+          "avg_eta": NaN,
+          "fill_color": [
+            68,
+            1,
+            84,
+            180
+          ],
+          "h3_cell": "8729a54f5ffffff",
+          "traffic": 296
+        },
+        {
+          "avg_eta": 147.0,
+          "fill_color": [
+            51,
+            97,
+            141,
+            180
+          ],
+          "h3_cell": "8729a5774ffffff",
+          "traffic": 472
+        },
+        {
+          "avg_eta": 98.0,
+          "fill_color": [
+            70,
+            45,
+            124,
+            180
+          ],
+          "h3_cell": "8729a5718ffffff",
+          "traffic": 905
+        },
+        {
+          "avg_eta": 109.0,
+          "fill_color": [
+            67,
+            58,
+            131,
+            180
+          ],
+          "h3_cell": "8729a5705ffffff",
+          "traffic": 587
+        },
+        {
+          "avg_eta": 107.0,
+          "fill_color": [
+            68,
+            57,
+            130,
+            180
+          ],
+          "h3_cell": "8729a5776ffffff",
+          "traffic": 339
+        },
+        {
+          "avg_eta": 151.0,
+          "fill_color": [
+            49,
+            100,
+            141,
+            180
+          ],
+          "h3_cell": "8729a54f6ffffff",
+          "traffic": 120
+        },
+        {
+          "avg_eta": 116.0,
+          "fill_color": [
+            65,
+            66,
+            134,
+            180
+          ],
+          "h3_cell": "8729a5751ffffff",
+          "traffic": 219
+        },
+        {
+          "avg_eta": NaN,
+          "fill_color": [
+            68,
+            1,
+            84,
+            180
+          ],
+          "h3_cell": "8729a191cffffff",
+          "traffic": 789
+        },
+        {
+          "avg_eta": 156.0,
+          "fill_color": [
+            47,
+            105,
+            141,
+            180
+          ],
+          "h3_cell": "8729a50caffffff",
+          "traffic": 210
+        },
+        {
+          "avg_eta": 77.0,
+          "fill_color": [
+            71,
+            21,
+            103,
+            180
+          ],
+          "h3_cell": "8729a5733ffffff",
+          "traffic": 370
+        },
+        {
+          "avg_eta": 101.0,
+          "fill_color": [
+            70,
+            49,
+            126,
+            180
+          ],
+          "h3_cell": "8729a545dffffff",
+          "traffic": 46
+        },
+        {
+          "avg_eta": 685.0,
+          "fill_color": [
+            253,
+            231,
+            36,
+            180
+          ],
+          "h3_cell": "8729a545cffffff",
+          "traffic": 27
+        },
+        {
+          "avg_eta": 81.0,
+          "fill_color": [
+            72,
+            25,
+            107,
+            180
+          ],
+          "h3_cell": "8729a54abffffff",
+          "traffic": 25
+        },
+        {
+          "avg_eta": 173.0,
+          "fill_color": [
+            41,
+            121,
+            142,
+            180
+          ],
+          "h3_cell": "8729a542bffffff",
+          "traffic": 51
+        },
+        {
+          "avg_eta": NaN,
+          "fill_color": [
+            68,
+            1,
+            84,
+            180
+          ],
+          "h3_cell": "8729a5469ffffff",
+          "traffic": 218
+        },
+        {
+          "avg_eta": NaN,
+          "fill_color": [
+            68,
+            1,
+            84,
+            180
+          ],
+          "h3_cell": "8729a5096ffffff",
+          "traffic": 306
+        },
+        {
+          "avg_eta": NaN,
+          "fill_color": [
+            68,
+            1,
+            84,
+            180
+          ],
+          "h3_cell": "8729a554dffffff",
+          "traffic": 61
+        },
+        {
+          "avg_eta": 156.0,
+          "fill_color": [
+            47,
+            105,
+            141,
+            180
+          ],
+          "h3_cell": "8729a50d8ffffff",
+          "traffic": 56
+        },
+        {
+          "avg_eta": 149.0,
+          "fill_color": [
+            50,
+            98,
+            141,
+            180
+          ],
+          "h3_cell": "8729a5470ffffff",
+          "traffic": 110
+        },
+        {
+          "avg_eta": 248.0,
+          "fill_color": [
+            56,
+            185,
+            118,
+            180
+          ],
+          "h3_cell": "8729a5660ffffff",
+          "traffic": 85
+        },
+        {
+          "avg_eta": 110.0,
+          "fill_color": [
+            67,
+            59,
+            131,
+            180
+          ],
+          "h3_cell": "8729a57a2ffffff",
+          "traffic": 165
+        },
+        {
+          "avg_eta": 184.0,
+          "fill_color": [
+            37,
+            130,
+            142,
+            180
+          ],
+          "h3_cell": "8729a5421ffffff",
+          "traffic": 72
+        },
+        {
+          "avg_eta": 202.0,
+          "fill_color": [
+            31,
+            146,
+            140,
+            180
+          ],
+          "h3_cell": "8729a50d1ffffff",
+          "traffic": 231
+        },
+        {
+          "avg_eta": 116.0,
+          "fill_color": [
+            65,
+            66,
+            134,
+            180
+          ],
+          "h3_cell": "8729a5018ffffff",
+          "traffic": 142
+        },
+        {
+          "avg_eta": 120.0,
+          "fill_color": [
+            63,
+            71,
+            136,
+            180
+          ],
+          "h3_cell": "8729a5296ffffff",
+          "traffic": 67
+        },
+        {
+          "avg_eta": 77.0,
+          "fill_color": [
+            71,
+            21,
+            103,
+            180
+          ],
+          "h3_cell": "8729a50b2ffffff",
+          "traffic": 97
+        },
+        {
+          "avg_eta": 173.0,
+          "fill_color": [
+            41,
+            121,
+            142,
+            180
+          ],
+          "h3_cell": "8729a5435ffffff",
+          "traffic": 28
+        },
+        {
+          "avg_eta": NaN,
+          "fill_color": [
+            68,
+            1,
+            84,
+            180
+          ],
+          "h3_cell": "8729a558dffffff",
+          "traffic": 25
+        },
+        {
+          "avg_eta": NaN,
+          "fill_color": [
+            68,
+            1,
+            84,
+            180
+          ],
+          "h3_cell": "8729a5462ffffff",
+          "traffic": 10
+        },
+        {
+          "avg_eta": NaN,
+          "fill_color": [
+            68,
+            1,
+            84,
+            180
+          ],
+          "h3_cell": "8729a5452ffffff",
+          "traffic": 67
+        },
+        {
+          "avg_eta": NaN,
+          "fill_color": [
+            68,
+            1,
+            84,
+            180
+          ],
+          "h3_cell": "8729a5403ffffff",
+          "traffic": 18
+        },
+        {
+          "avg_eta": NaN,
+          "fill_color": [
+            68,
+            1,
+            84,
+            180
+          ],
+          "h3_cell": "8729a541cffffff",
+          "traffic": 47
+        },
+        {
+          "avg_eta": 60.0,
+          "fill_color": [
+            68,
+            1,
+            84,
+            180
+          ],
+          "h3_cell": "8729a57b5ffffff",
+          "traffic": 53
+        },
+        {
+          "avg_eta": 186.0,
+          "fill_color": [
+            36,
+            132,
+            141,
+            180
+          ],
+          "h3_cell": "8729a53b2ffffff",
+          "traffic": 21
+        },
+        {
+          "avg_eta": NaN,
+          "fill_color": [
+            68,
+            1,
+            84,
+            180
+          ],
+          "h3_cell": "8729a5649ffffff",
+          "traffic": 18
+        },
+        {
+          "avg_eta": 36.0,
+          "fill_color": [
+            68,
+            1,
+            84,
+            180
+          ],
+          "h3_cell": "8729a501bffffff",
+          "traffic": 25
+        },
+        {
+          "avg_eta": 306.0,
+          "fill_color": [
+            178,
+            221,
+            44,
+            180
+          ],
+          "h3_cell": "8729a500affffff",
+          "traffic": 11
+        },
+        {
+          "avg_eta": NaN,
+          "fill_color": [
+            68,
+            1,
+            84,
+            180
+          ],
+          "h3_cell": "8729a50b1ffffff",
+          "traffic": 4
+        },
+        {
+          "avg_eta": 141.0,
+          "fill_color": [
+            54,
+            91,
+            140,
+            180
+          ],
+          "h3_cell": "8729a541effffff",
+          "traffic": 62
+        },
+        {
+          "avg_eta": 26.0,
+          "fill_color": [
+            68,
+            1,
+            84,
+            180
+          ],
+          "h3_cell": "8729a50d6ffffff",
+          "traffic": 8
+        },
+        {
+          "avg_eta": 161.0,
+          "fill_color": [
+            45,
+            110,
+            142,
+            180
+          ],
+          "h3_cell": "8729a5399ffffff",
+          "traffic": 9
+        },
+        {
+          "avg_eta": NaN,
+          "fill_color": [
+            68,
+            1,
+            84,
+            180
+          ],
+          "h3_cell": "8729a53a2ffffff",
+          "traffic": 9
+        },
+        {
+          "avg_eta": 120.0,
+          "fill_color": [
+            63,
+            71,
+            136,
+            180
+          ],
+          "h3_cell": "8729a5675ffffff",
+          "traffic": 12
+        },
+        {
+          "avg_eta": NaN,
+          "fill_color": [
+            68,
+            1,
+            84,
+            180
+          ],
+          "h3_cell": "8729a50eaffffff",
+          "traffic": 3
+        },
+        {
+          "avg_eta": NaN,
+          "fill_color": [
+            68,
+            1,
+            84,
+            180
+          ],
+          "h3_cell": "8729a5411ffffff",
+          "traffic": 18
+        },
+        {
+          "avg_eta": NaN,
+          "fill_color": [
+            68,
+            1,
+            84,
+            180
+          ],
+          "h3_cell": "8729a50f6ffffff",
+          "traffic": 5
+        },
+        {
+          "avg_eta": NaN,
+          "fill_color": [
+            68,
+            1,
+            84,
+            180
+          ],
+          "h3_cell": "8729a5414ffffff",
+          "traffic": 15
+        },
+        {
+          "avg_eta": NaN,
+          "fill_color": [
+            68,
+            1,
+            84,
+            180
+          ],
+          "h3_cell": "8729a53b1ffffff",
+          "traffic": 9
+        },
+        {
+          "avg_eta": 171.0,
+          "fill_color": [
+            42,
+            119,
+            142,
+            180
+          ],
+          "h3_cell": "8729a50abffffff",
+          "traffic": 17
+        },
+        {
+          "avg_eta": NaN,
+          "fill_color": [
+            68,
+            1,
+            84,
+            180
+          ],
+          "h3_cell": "8729a50f2ffffff",
+          "traffic": 4
+        },
+        {
+          "avg_eta": 148.0,
+          "fill_color": [
+            50,
+            98,
+            141,
+            180
+          ],
+          "h3_cell": "8729a5400ffffff",
+          "traffic": 6
+        },
+        {
+          "avg_eta": NaN,
+          "fill_color": [
+            68,
+            1,
+            84,
+            180
+          ],
+          "h3_cell": "8729a54f2ffffff",
+          "traffic": 1
+        },
+        {
+          "avg_eta": 13.0,
+          "fill_color": [
+            68,
+            1,
+            84,
+            180
+          ],
+          "h3_cell": "8729a578affffff",
+          "traffic": 77145
+        },
+        {
+          "avg_eta": 350.0,
+          "fill_color": [
+            253,
+            231,
+            36,
+            180
+          ],
+          "h3_cell": "8729a564affffff",
+          "traffic": 13525
+        },
+        {
+          "avg_eta": NaN,
+          "fill_color": [
+            68,
+            1,
+            84,
+            180
+          ],
+          "h3_cell": "8729a52b2ffffff",
+          "traffic": 318
+        },
+        {
+          "avg_eta": NaN,
+          "fill_color": [
+            68,
+            1,
+            84,
+            180
+          ],
+          "h3_cell": "8729a52b3ffffff",
+          "traffic": 303
+        },
+        {
+          "avg_eta": 164.0,
+          "fill_color": [
+            44,
+            112,
+            142,
+            180
+          ],
+          "h3_cell": "8729a5726ffffff",
+          "traffic": 182
+        },
+        {
+          "avg_eta": 178.0,
+          "fill_color": [
+            39,
+            124,
+            142,
+            180
+          ],
+          "h3_cell": "8729a5763ffffff",
+          "traffic": 316
+        },
+        {
+          "avg_eta": 166.0,
+          "fill_color": [
+            44,
+            114,
+            142,
+            180
+          ],
+          "h3_cell": "8729a5081ffffff",
+          "traffic": 261
+        },
+        {
+          "avg_eta": 176.0,
+          "fill_color": [
+            40,
+            122,
+            142,
+            180
+          ],
+          "h3_cell": "8729a5786ffffff",
+          "traffic": 356
+        },
+        {
+          "avg_eta": 167.0,
+          "fill_color": [
+            43,
+            115,
+            142,
+            180
+          ],
+          "h3_cell": "8729a5762ffffff",
+          "traffic": 369
+        },
+        {
+          "avg_eta": 118.0,
+          "fill_color": [
+            64,
+            68,
+            135,
+            180
+          ],
+          "h3_cell": "8729a541bffffff",
+          "traffic": 73
+        },
+        {
+          "avg_eta": 224.0,
+          "fill_color": [
+            32,
+            165,
+            133,
+            180
+          ],
+          "h3_cell": "8729a19a5ffffff",
+          "traffic": 158
+        },
+        {
+          "avg_eta": 108.0,
+          "fill_color": [
+            68,
+            57,
+            130,
+            180
+          ],
+          "h3_cell": "8729a572affffff",
+          "traffic": 268
+        },
+        {
+          "avg_eta": 101.0,
+          "fill_color": [
+            70,
+            49,
+            126,
+            180
+          ],
+          "h3_cell": "8729a5711ffffff",
+          "traffic": 891
+        },
+        {
+          "avg_eta": 129.0,
+          "fill_color": [
+            59,
+            80,
+            138,
+            180
+          ],
+          "h3_cell": "8729a5666ffffff",
+          "traffic": 106
+        },
+        {
+          "avg_eta": 93.0,
+          "fill_color": [
+            71,
+            40,
+            120,
+            180
+          ],
+          "h3_cell": "8729a5756ffffff",
+          "traffic": 271
+        },
+        {
+          "avg_eta": 169.0,
+          "fill_color": [
+            42,
+            117,
+            142,
+            180
+          ],
+          "h3_cell": "8729a5543ffffff",
+          "traffic": 134
+        },
+        {
+          "avg_eta": 155.0,
+          "fill_color": [
+            48,
+            104,
+            141,
+            180
+          ],
+          "h3_cell": "8729a5559ffffff",
+          "traffic": 335
+        },
+        {
+          "avg_eta": 398.0,
+          "fill_color": [
+            253,
+            231,
+            36,
+            180
+          ],
+          "h3_cell": "8729a500dffffff",
+          "traffic": 37
+        },
+        {
+          "avg_eta": 70.0,
+          "fill_color": [
+            70,
+            11,
+            94,
+            180
+          ],
+          "h3_cell": "8729a5712ffffff",
+          "traffic": 750
+        },
+        {
+          "avg_eta": 163.0,
+          "fill_color": [
+            45,
+            111,
+            142,
+            180
+          ],
+          "h3_cell": "8729a5703ffffff",
+          "traffic": 586
+        },
+        {
+          "avg_eta": 275.0,
+          "fill_color": [
+            105,
+            204,
+            91,
+            180
+          ],
+          "h3_cell": "8729a564effffff",
+          "traffic": 896
+        },
+        {
+          "avg_eta": 335.0,
+          "fill_color": [
+            248,
+            230,
+            33,
+            180
+          ],
+          "h3_cell": "8729a5054ffffff",
+          "traffic": 511
+        },
+        {
+          "avg_eta": 96.0,
+          "fill_color": [
+            71,
+            43,
+            122,
+            180
+          ],
+          "h3_cell": "8729a544bffffff",
+          "traffic": 1063
+        },
+        {
+          "avg_eta": 89.0,
+          "fill_color": [
+            72,
+            35,
+            116,
+            180
+          ],
+          "h3_cell": "8729a5716ffffff",
+          "traffic": 818
+        },
+        {
+          "avg_eta": 108.0,
+          "fill_color": [
+            68,
+            57,
+            130,
+            180
+          ],
+          "h3_cell": "8729a544affffff",
+          "traffic": 93
+        },
+        {
+          "avg_eta": 289.0,
+          "fill_color": [
+            136,
+            213,
+            71,
+            180
+          ],
+          "h3_cell": "8729a5073ffffff",
+          "traffic": 149
+        },
+        {
+          "avg_eta": NaN,
+          "fill_color": [
+            68,
+            1,
+            84,
+            180
+          ],
+          "h3_cell": "8729a5740ffffff",
+          "traffic": 234
+        },
+        {
+          "avg_eta": 125.0,
+          "fill_color": [
+            61,
+            75,
+            137,
+            180
+          ],
+          "h3_cell": "8729a5784ffffff",
+          "traffic": 140
+        },
+        {
+          "avg_eta": 91.0,
+          "fill_color": [
+            71,
+            38,
+            118,
+            180
+          ],
+          "h3_cell": "8729a5083ffffff",
+          "traffic": 117
+        },
+        {
+          "avg_eta": 121.0,
+          "fill_color": [
+            63,
+            71,
+            136,
+            180
+          ],
+          "h3_cell": "8729a5080ffffff",
+          "traffic": 55
+        },
+        {
+          "avg_eta": 311.0,
+          "fill_color": [
+            191,
+            223,
+            36,
+            180
+          ],
+          "h3_cell": "8729a57b0ffffff",
+          "traffic": 3460
+        },
+        {
+          "avg_eta": 177.0,
+          "fill_color": [
+            40,
+            123,
+            142,
+            180
+          ],
+          "h3_cell": "8729a5455ffffff",
+          "traffic": 23
+        },
+        {
+          "avg_eta": 384.0,
+          "fill_color": [
+            253,
+            231,
+            36,
+            180
+          ],
+          "h3_cell": "8729a545affffff",
+          "traffic": 2747
+        },
+        {
+          "avg_eta": NaN,
+          "fill_color": [
+            68,
+            1,
+            84,
+            180
+          ],
+          "h3_cell": "8729a5090ffffff",
+          "traffic": 42
+        },
+        {
+          "avg_eta": 176.0,
+          "fill_color": [
+            40,
+            122,
+            142,
+            180
+          ],
+          "h3_cell": "8729a5396ffffff",
+          "traffic": 82
+        },
+        {
+          "avg_eta": 183.0,
+          "fill_color": [
+            38,
+            129,
+            142,
+            180
+          ],
+          "h3_cell": "8729a5722ffffff",
+          "traffic": 193
+        },
+        {
+          "avg_eta": 158.0,
+          "fill_color": [
+            46,
+            107,
+            142,
+            180
+          ],
+          "h3_cell": "8729a5760ffffff",
+          "traffic": 93
+        },
+        {
+          "avg_eta": 148.0,
+          "fill_color": [
+            50,
+            98,
+            141,
+            180
+          ],
+          "h3_cell": "8729a5766ffffff",
+          "traffic": 104
+        },
+        {
+          "avg_eta": 86.0,
+          "fill_color": [
+            72,
+            32,
+            113,
+            180
+          ],
+          "h3_cell": "8729a5773ffffff",
+          "traffic": 211
+        },
+        {
+          "avg_eta": 166.0,
+          "fill_color": [
+            44,
+            114,
+            142,
+            180
+          ],
+          "h3_cell": "8729a566cffffff",
+          "traffic": 39
+        },
+        {
+          "avg_eta": NaN,
+          "fill_color": [
+            68,
+            1,
+            84,
+            180
+          ],
+          "h3_cell": "8729a566affffff",
+          "traffic": 34
+        },
+        {
+          "avg_eta": 237.0,
+          "fill_color": [
+            42,
+            176,
+            126,
+            180
+          ],
+          "h3_cell": "8729a505bffffff",
+          "traffic": 115
+        },
+        {
+          "avg_eta": 164.0,
+          "fill_color": [
+            44,
+            112,
+            142,
+            180
+          ],
+          "h3_cell": "8729a5431ffffff",
+          "traffic": 48
+        },
+        {
+          "avg_eta": NaN,
+          "fill_color": [
+            68,
+            1,
+            84,
+            180
+          ],
+          "h3_cell": "8729a5422ffffff",
+          "traffic": 67
+        },
+        {
+          "avg_eta": 42.0,
+          "fill_color": [
+            68,
+            1,
+            84,
+            180
+          ],
+          "h3_cell": "8729a57b2ffffff",
+          "traffic": 15
+        },
+        {
+          "avg_eta": 64.0,
+          "fill_color": [
+            68,
+            3,
+            87,
+            180
+          ],
+          "h3_cell": "8729a54e9ffffff",
+          "traffic": 14
+        },
+        {
+          "avg_eta": NaN,
+          "fill_color": [
+            68,
+            1,
+            84,
+            180
+          ],
+          "h3_cell": "8729a19adffffff",
+          "traffic": 39
+        },
+        {
+          "avg_eta": NaN,
+          "fill_color": [
+            68,
+            1,
+            84,
+            180
+          ],
+          "h3_cell": "8729a50b0ffffff",
+          "traffic": 91
+        },
+        {
+          "avg_eta": NaN,
+          "fill_color": [
+            68,
+            1,
+            84,
+            180
+          ],
+          "h3_cell": "8729a554bffffff",
+          "traffic": 91
+        },
+        {
+          "avg_eta": 105.0,
+          "fill_color": [
+            69,
+            54,
+            129,
+            180
+          ],
+          "h3_cell": "8729a50a2ffffff",
+          "traffic": 8
+        },
+        {
+          "avg_eta": 139.0,
+          "fill_color": [
+            55,
+            89,
+            140,
+            180
+          ],
+          "h3_cell": "8729a5393ffffff",
+          "traffic": 107
+        },
+        {
+          "avg_eta": 128.0,
+          "fill_color": [
+            60,
+            78,
+            138,
+            180
+          ],
+          "h3_cell": "8729a54e2ffffff",
+          "traffic": 129
+        },
+        {
+          "avg_eta": NaN,
+          "fill_color": [
+            68,
+            1,
+            84,
+            180
+          ],
+          "h3_cell": "8729a541dffffff",
+          "traffic": 10
+        },
+        {
+          "avg_eta": 117.0,
+          "fill_color": [
+            64,
+            67,
+            135,
+            180
+          ],
+          "h3_cell": "8729a541affffff",
+          "traffic": 114
+        },
+        {
+          "avg_eta": NaN,
+          "fill_color": [
+            68,
+            1,
+            84,
+            180
+          ],
+          "h3_cell": "8729a501affffff",
+          "traffic": 15
+        },
+        {
+          "avg_eta": NaN,
+          "fill_color": [
+            68,
+            1,
+            84,
+            180
+          ],
+          "h3_cell": "8729a5419ffffff",
+          "traffic": 52
+        },
+        {
+          "avg_eta": 32.0,
+          "fill_color": [
+            68,
+            1,
+            84,
+            180
+          ],
+          "h3_cell": "8729a50f0ffffff",
+          "traffic": 11
+        },
+        {
+          "avg_eta": 52.0,
+          "fill_color": [
+            68,
+            1,
+            84,
+            180
+          ],
+          "h3_cell": "8729a579dffffff",
+          "traffic": 68
+        },
+        {
+          "avg_eta": 361.0,
+          "fill_color": [
+            253,
+            231,
+            36,
+            180
+          ],
+          "h3_cell": "8729a5284ffffff",
+          "traffic": 14
+        },
+        {
+          "avg_eta": 95.0,
+          "fill_color": [
+            71,
+            42,
+            121,
+            180
+          ],
+          "h3_cell": "8729a54ecffffff",
+          "traffic": 22
+        },
+        {
+          "avg_eta": 182.0,
+          "fill_color": [
+            38,
+            128,
+            142,
+            180
+          ],
+          "h3_cell": "8729a5725ffffff",
+          "traffic": 28
+        },
+        {
+          "avg_eta": 92.0,
+          "fill_color": [
+            71,
+            39,
+            119,
+            180
+          ],
+          "h3_cell": "8729a50c1ffffff",
+          "traffic": 11
+        },
+        {
+          "avg_eta": 153.0,
+          "fill_color": [
+            49,
+            102,
+            141,
+            180
+          ],
+          "h3_cell": "8729a54acffffff",
+          "traffic": 37
+        },
+        {
+          "avg_eta": 106.0,
+          "fill_color": [
+            68,
+            55,
+            129,
+            180
+          ],
+          "h3_cell": "8729a5456ffffff",
+          "traffic": 14
+        },
+        {
+          "avg_eta": NaN,
+          "fill_color": [
+            68,
+            1,
+            84,
+            180
+          ],
+          "h3_cell": "8729a5416ffffff",
+          "traffic": 20
+        },
+        {
+          "avg_eta": 215.0,
+          "fill_color": [
+            30,
+            157,
+            136,
+            180
+          ],
+          "h3_cell": "8729a1936ffffff",
+          "traffic": 24
+        },
+        {
+          "avg_eta": 155.0,
+          "fill_color": [
+            48,
+            104,
+            141,
+            180
+          ],
+          "h3_cell": "8729a5404ffffff",
+          "traffic": 31
+        },
+        {
+          "avg_eta": NaN,
+          "fill_color": [
+            68,
+            1,
+            84,
+            180
+          ],
+          "h3_cell": "8729a5415ffffff",
+          "traffic": 20
+        },
+        {
+          "avg_eta": NaN,
+          "fill_color": [
+            68,
+            1,
+            84,
+            180
+          ],
+          "h3_cell": "8729a540effffff",
+          "traffic": 4
+        },
+        {
+          "avg_eta": NaN,
+          "fill_color": [
+            68,
+            1,
+            84,
+            180
+          ],
+          "h3_cell": "8729a1914ffffff",
+          "traffic": 20
+        },
+        {
+          "avg_eta": NaN,
+          "fill_color": [
+            68,
+            1,
+            84,
+            180
+          ],
+          "h3_cell": "8729a1926ffffff",
+          "traffic": 3
+        },
+        {
+          "avg_eta": 52.0,
+          "fill_color": [
+            68,
+            1,
+            84,
+            180
+          ],
+          "h3_cell": "8729a56c5ffffff",
+          "traffic": 1
+        },
+        {
+          "avg_eta": NaN,
+          "fill_color": [
+            68,
+            1,
+            84,
+            180
+          ],
+          "h3_cell": "8729a1915ffffff",
+          "traffic": 6
+        },
+        {
+          "avg_eta": NaN,
+          "fill_color": [
+            68,
+            1,
+            84,
+            180
+          ],
+          "h3_cell": "8729a1932ffffff",
+          "traffic": 1
+        },
+        {
+          "avg_eta": 203.0,
+          "fill_color": [
+            31,
+            147,
+            139,
+            180
+          ],
+          "h3_cell": "8729a5600ffffff",
+          "traffic": 545
+        },
+        {
+          "avg_eta": 144.0,
+          "fill_color": [
+            52,
+            94,
+            141,
+            180
+          ],
+          "h3_cell": "8729a5781ffffff",
+          "traffic": 26615
+        },
+        {
+          "avg_eta": 80.0,
+          "fill_color": [
+            71,
+            24,
+            106,
+            180
+          ],
+          "h3_cell": "8729a5630ffffff",
+          "traffic": 22154
+        },
+        {
+          "avg_eta": 129.0,
+          "fill_color": [
+            59,
+            80,
+            138,
+            180
+          ],
+          "h3_cell": "8729a5632ffffff",
+          "traffic": 19979
+        },
+        {
+          "avg_eta": 72.0,
+          "fill_color": [
+            70,
+            14,
+            97,
+            180
+          ],
+          "h3_cell": "8729a5782ffffff",
+          "traffic": 40603
+        },
+        {
+          "avg_eta": 96.0,
+          "fill_color": [
+            71,
+            43,
+            122,
+            180
+          ],
+          "h3_cell": "8729a578dffffff",
+          "traffic": 15071
+        },
+        {
+          "avg_eta": 103.0,
+          "fill_color": [
+            69,
+            52,
+            127,
+            180
+          ],
+          "h3_cell": "8729a5625ffffff",
+          "traffic": 232
+        },
+        {
+          "avg_eta": 91.0,
+          "fill_color": [
+            71,
+            38,
+            118,
+            180
+          ],
+          "h3_cell": "8729a5791ffffff",
+          "traffic": 4496
+        },
+        {
+          "avg_eta": 132.0,
+          "fill_color": [
+            58,
+            83,
+            139,
+            180
+          ],
+          "h3_cell": "8729a5099ffffff",
+          "traffic": 150
+        },
+        {
+          "avg_eta": 98.0,
+          "fill_color": [
+            70,
+            45,
+            124,
+            180
+          ],
+          "h3_cell": "8729a5783ffffff",
+          "traffic": 5371
+        },
+        {
+          "avg_eta": 197.0,
+          "fill_color": [
+            33,
+            141,
+            140,
+            180
+          ],
+          "h3_cell": "8729a508affffff",
+          "traffic": 216
+        },
+        {
+          "avg_eta": 332.0,
+          "fill_color": [
+            241,
+            229,
+            28,
+            180
+          ],
+          "h3_cell": "8729a5471ffffff",
+          "traffic": 35
+        },
+        {
+          "avg_eta": 188.0,
+          "fill_color": [
+            36,
+            134,
+            141,
+            180
+          ],
+          "h3_cell": "8729a508effffff",
+          "traffic": 241
+        },
+        {
+          "avg_eta": NaN,
+          "fill_color": [
+            68,
+            1,
+            84,
+            180
+          ],
+          "h3_cell": "8729a19a6ffffff",
+          "traffic": 499
+        },
+        {
+          "avg_eta": 101.0,
+          "fill_color": [
+            70,
+            49,
+            126,
+            180
+          ],
+          "h3_cell": "8729a571affffff",
+          "traffic": 657
+        },
+        {
+          "avg_eta": NaN,
+          "fill_color": [
+            68,
+            1,
+            84,
+            180
+          ],
+          "h3_cell": "8729a5659ffffff",
+          "traffic": 183
+        },
+        {
+          "avg_eta": NaN,
+          "fill_color": [
+            68,
+            1,
+            84,
+            180
+          ],
+          "h3_cell": "8729a54f4ffffff",
+          "traffic": 185
+        },
+        {
+          "avg_eta": 112.0,
+          "fill_color": [
+            66,
+            61,
+            132,
+            180
+          ],
+          "h3_cell": "8729a570dffffff",
+          "traffic": 489
+        },
+        {
+          "avg_eta": 143.0,
+          "fill_color": [
+            53,
+            93,
+            140,
+            180
+          ],
+          "h3_cell": "8729a5719ffffff",
+          "traffic": 625
+        },
+        {
+          "avg_eta": NaN,
+          "fill_color": [
+            68,
+            1,
+            84,
+            180
+          ],
+          "h3_cell": "8729a565dffffff",
+          "traffic": 277
+        },
+        {
+          "avg_eta": 121.0,
+          "fill_color": [
+            63,
+            71,
+            136,
+            180
+          ],
+          "h3_cell": "8729a570affffff",
+          "traffic": 346
+        },
+        {
+          "avg_eta": NaN,
+          "fill_color": [
+            68,
+            1,
+            84,
+            180
+          ],
+          "h3_cell": "8729a1913ffffff",
+          "traffic": 142
+        },
+        {
+          "avg_eta": 149.0,
+          "fill_color": [
+            50,
+            98,
+            141,
+            180
+          ],
+          "h3_cell": "8729a5464ffffff",
+          "traffic": 290
+        },
+        {
+          "avg_eta": 139.0,
+          "fill_color": [
+            55,
+            89,
+            140,
+            180
+          ],
+          "h3_cell": "8729a5460ffffff",
+          "traffic": 367
+        },
+        {
+          "avg_eta": 215.0,
+          "fill_color": [
+            30,
+            157,
+            136,
+            180
+          ],
+          "h3_cell": "8729a5641ffffff",
+          "traffic": 197
+        },
+        {
+          "avg_eta": 141.0,
+          "fill_color": [
+            54,
+            91,
+            140,
+            180
+          ],
+          "h3_cell": "8729a570effffff",
+          "traffic": 417
+        },
+        {
+          "avg_eta": 214.0,
+          "fill_color": [
+            30,
+            156,
+            137,
+            180
+          ],
+          "h3_cell": "8729a50ccffffff",
+          "traffic": 46
+        },
+        {
+          "avg_eta": 365.0,
+          "fill_color": [
+            253,
+            231,
+            36,
+            180
+          ],
+          "h3_cell": "8729a5648ffffff",
+          "traffic": 1142
+        },
+        {
+          "avg_eta": NaN,
+          "fill_color": [
+            68,
+            1,
+            84,
+            180
+          ],
+          "h3_cell": "8729a5745ffffff",
+          "traffic": 71
+        },
+        {
+          "avg_eta": 283.0,
+          "fill_color": [
+            124,
+            210,
+            79,
+            180
+          ],
+          "h3_cell": "8729a5040ffffff",
+          "traffic": 117
+        },
+        {
+          "avg_eta": NaN,
+          "fill_color": [
+            68,
+            1,
+            84,
+            180
+          ],
+          "h3_cell": "8729a576bffffff",
+          "traffic": 34
+        },
+        {
+          "avg_eta": 181.0,
+          "fill_color": [
+            38,
+            127,
+            142,
+            180
+          ],
+          "h3_cell": "8729a50cdffffff",
+          "traffic": 133
+        },
+        {
+          "avg_eta": NaN,
+          "fill_color": [
+            68,
+            1,
+            84,
+            180
+          ],
+          "h3_cell": "8729a546dffffff",
+          "traffic": 323
+        },
+        {
+          "avg_eta": 192.0,
+          "fill_color": [
+            35,
+            137,
+            141,
+            180
+          ],
+          "h3_cell": "8729a509affffff",
+          "traffic": 46
+        },
+        {
+          "avg_eta": 127.0,
+          "fill_color": [
+            60,
+            77,
+            138,
+            180
+          ],
+          "h3_cell": "8729a5714ffffff",
+          "traffic": 186
+        },
+        {
+          "avg_eta": 342.0,
+          "fill_color": [
+            253,
+            231,
+            36,
+            180
+          ],
+          "h3_cell": "8729a545bffffff",
+          "traffic": 1488
+        },
+        {
+          "avg_eta": 213.0,
+          "fill_color": [
+            30,
+            155,
+            137,
+            180
+          ],
+          "h3_cell": "8729a53b4ffffff",
+          "traffic": 105
+        },
+        {
+          "avg_eta": 121.0,
+          "fill_color": [
+            63,
+            71,
+            136,
+            180
+          ],
+          "h3_cell": "8729a5013ffffff",
+          "traffic": 68
+        },
+        {
+          "avg_eta": 216.0,
+          "fill_color": [
+            30,
+            158,
+            136,
+            180
+          ],
+          "h3_cell": "8729a52b1ffffff",
+          "traffic": 14
+        },
+        {
+          "avg_eta": NaN,
+          "fill_color": [
+            68,
+            1,
+            84,
+            180
+          ],
+          "h3_cell": "8729a5552ffffff",
+          "traffic": 50
+        },
+        {
+          "avg_eta": 34.0,
+          "fill_color": [
+            68,
+            1,
+            84,
+            180
+          ],
+          "h3_cell": "8729a54cdffffff",
+          "traffic": 5
+        },
+        {
+          "avg_eta": NaN,
+          "fill_color": [
+            68,
+            1,
+            84,
+            180
+          ],
+          "h3_cell": "8729a5426ffffff",
+          "traffic": 2
+        },
+        {
+          "avg_eta": NaN,
+          "fill_color": [
+            68,
+            1,
+            84,
+            180
+          ],
+          "h3_cell": "8729a50b5ffffff",
+          "traffic": 14
+        },
+        {
+          "avg_eta": NaN,
+          "fill_color": [
+            68,
+            1,
+            84,
+            180
+          ],
+          "h3_cell": "8729a5444ffffff",
+          "traffic": 11
+        },
+        {
+          "avg_eta": 128.0,
+          "fill_color": [
+            60,
+            78,
+            138,
+            180
+          ],
+          "h3_cell": "8729a5451ffffff",
+          "traffic": 24
+        },
+        {
+          "avg_eta": 157.0,
+          "fill_color": [
+            47,
+            106,
+            141,
+            180
+          ],
+          "h3_cell": "8729a50aaffffff",
+          "traffic": 107
+        },
+        {
+          "avg_eta": NaN,
+          "fill_color": [
+            68,
+            1,
+            84,
+            180
+          ],
+          "h3_cell": "8729a5468ffffff",
+          "traffic": 16
+        },
+        {
+          "avg_eta": NaN,
+          "fill_color": [
+            68,
+            1,
+            84,
+            180
+          ],
+          "h3_cell": "8729a53a6ffffff",
+          "traffic": 26
+        },
+        {
+          "avg_eta": 591.0,
+          "fill_color": [
+            253,
+            231,
+            36,
+            180
+          ],
+          "h3_cell": "8729a50e6ffffff",
+          "traffic": 26
+        },
+        {
+          "avg_eta": 221.0,
+          "fill_color": [
+            31,
+            162,
+            134,
+            180
+          ],
+          "h3_cell": "8729a572cffffff",
+          "traffic": 63
+        },
+        {
+          "avg_eta": NaN,
+          "fill_color": [
+            68,
+            1,
+            84,
+            180
+          ],
+          "h3_cell": "8729a5670ffffff",
+          "traffic": 3
+        },
+        {
+          "avg_eta": 127.0,
+          "fill_color": [
+            60,
+            77,
+            138,
+            180
+          ],
+          "h3_cell": "8729a5721ffffff",
+          "traffic": 41
+        },
+        {
+          "avg_eta": NaN,
+          "fill_color": [
+            68,
+            1,
+            84,
+            180
+          ],
+          "h3_cell": "8729a5433ffffff",
+          "traffic": 2
+        },
+        {
+          "avg_eta": NaN,
+          "fill_color": [
+            68,
+            1,
+            84,
+            180
+          ],
+          "h3_cell": "8729a542dffffff",
+          "traffic": 44
+        },
+        {
+          "avg_eta": NaN,
+          "fill_color": [
+            68,
+            1,
+            84,
+            180
+          ],
+          "h3_cell": "8729a0b68ffffff",
+          "traffic": 13
+        },
+        {
+          "avg_eta": NaN,
+          "fill_color": [
+            68,
+            1,
+            84,
+            180
+          ],
+          "h3_cell": "8729a56b4ffffff",
+          "traffic": 3
+        },
+        {
+          "avg_eta": NaN,
+          "fill_color": [
+            68,
+            1,
+            84,
+            180
+          ],
+          "h3_cell": "8729a56b0ffffff",
+          "traffic": 5
+        },
+        {
+          "avg_eta": 457.0,
+          "fill_color": [
+            253,
+            231,
+            36,
+            180
+          ],
+          "h3_cell": "8729a50f3ffffff",
+          "traffic": 11
+        },
+        {
+          "avg_eta": 277.0,
+          "fill_color": [
+            109,
+            206,
+            88,
+            180
+          ],
+          "h3_cell": "8729a529dffffff",
+          "traffic": 29
+        },
+        {
+          "avg_eta": NaN,
+          "fill_color": [
+            68,
+            1,
+            84,
+            180
+          ],
+          "h3_cell": "8729a5086ffffff",
+          "traffic": 31
+        },
+        {
+          "avg_eta": 140.0,
+          "fill_color": [
+            54,
+            90,
+            140,
+            180
+          ],
+          "h3_cell": "8729a5392ffffff",
+          "traffic": 47
+        },
+        {
+          "avg_eta": 241.0,
+          "fill_color": [
+            47,
+            179,
+            123,
+            180
+          ],
+          "h3_cell": "8729a50dcffffff",
+          "traffic": 64
+        },
+        {
+          "avg_eta": 203.0,
+          "fill_color": [
+            31,
+            147,
+            139,
+            180
+          ],
+          "h3_cell": "8729a5765ffffff",
+          "traffic": 53
+        },
+        {
+          "avg_eta": 144.0,
+          "fill_color": [
+            52,
+            94,
+            141,
+            180
+          ],
+          "h3_cell": "8729a574effffff",
+          "traffic": 99
+        },
+        {
+          "avg_eta": 114.0,
+          "fill_color": [
+            66,
+            64,
+            133,
+            180
+          ],
+          "h3_cell": "8729a5665ffffff",
+          "traffic": 16
+        },
+        {
+          "avg_eta": NaN,
+          "fill_color": [
+            68,
+            1,
+            84,
+            180
+          ],
+          "h3_cell": "8729a5051ffffff",
+          "traffic": 9
+        },
+        {
+          "avg_eta": NaN,
+          "fill_color": [
+            68,
+            1,
+            84,
+            180
+          ],
+          "h3_cell": "8729a5405ffffff",
+          "traffic": 24
+        },
+        {
+          "avg_eta": NaN,
+          "fill_color": [
+            68,
+            1,
+            84,
+            180
+          ],
+          "h3_cell": "8729a5402ffffff",
+          "traffic": 24
+        },
+        {
+          "avg_eta": NaN,
+          "fill_color": [
+            68,
+            1,
+            84,
+            180
+          ],
+          "h3_cell": "8729a565cffffff",
+          "traffic": 16
+        },
+        {
+          "avg_eta": 80.0,
+          "fill_color": [
+            71,
+            24,
+            106,
+            180
+          ],
+          "h3_cell": "8729a50b6ffffff",
+          "traffic": 6
+        },
+        {
+          "avg_eta": NaN,
+          "fill_color": [
+            68,
+            1,
+            84,
+            180
+          ],
+          "h3_cell": "8729a53b5ffffff",
+          "traffic": 4
+        },
+        {
+          "avg_eta": 180.0,
+          "fill_color": [
+            39,
+            126,
+            142,
+            180
+          ],
+          "h3_cell": "8729a508dffffff",
+          "traffic": 18
+        },
+        {
+          "avg_eta": 465.0,
+          "fill_color": [
+            253,
+            231,
+            36,
+            180
+          ],
+          "h3_cell": "8729a50f1ffffff",
+          "traffic": 7
+        },
+        {
+          "avg_eta": NaN,
+          "fill_color": [
+            68,
+            1,
+            84,
+            180
+          ],
+          "h3_cell": "8729a5410ffffff",
+          "traffic": 15
+        },
+        {
+          "avg_eta": 159.0,
+          "fill_color": [
+            46,
+            108,
+            142,
+            180
+          ],
+          "h3_cell": "8729a19a0ffffff",
+          "traffic": 11650
+        },
+        {
+          "avg_eta": 208.0,
+          "fill_color": [
+            30,
+            151,
+            138,
+            180
+          ],
+          "h3_cell": "8729a5769ffffff",
+          "traffic": 345
+        },
+        {
+          "avg_eta": 250.0,
+          "fill_color": [
+            59,
+            186,
+            117,
+            180
+          ],
+          "h3_cell": "8729a1984ffffff",
+          "traffic": 30280
+        },
+        {
+          "avg_eta": 101.0,
+          "fill_color": [
+            70,
+            49,
+            126,
+            180
+          ],
+          "h3_cell": "8729a509dffffff",
+          "traffic": 171
+        },
+        {
+          "avg_eta": 92.0,
+          "fill_color": [
+            71,
+            39,
+            119,
+            180
+          ],
+          "h3_cell": "8729a54f1ffffff",
+          "traffic": 2811
+        },
+        {
+          "avg_eta": 68.0,
+          "fill_color": [
+            69,
+            8,
+            91,
+            180
+          ],
+          "h3_cell": "8729a578effffff",
+          "traffic": 2363
+        },
+        {
+          "avg_eta": 86.0,
+          "fill_color": [
+            72,
+            32,
+            113,
+            180
+          ],
+          "h3_cell": "8729a5635ffffff",
+          "traffic": 9132
+        },
+        {
+          "avg_eta": NaN,
+          "fill_color": [
+            68,
+            1,
+            84,
+            180
+          ],
+          "h3_cell": "8729a574dffffff",
+          "traffic": 288
+        },
+        {
+          "avg_eta": 89.0,
+          "fill_color": [
+            72,
+            35,
+            116,
+            180
+          ],
+          "h3_cell": "8729a555affffff",
+          "traffic": 35
+        },
+        {
+          "avg_eta": 190.0,
+          "fill_color": [
+            35,
+            135,
+            141,
+            180
+          ],
+          "h3_cell": "8729a576effffff",
+          "traffic": 315
+        },
+        {
+          "avg_eta": 170.0,
+          "fill_color": [
+            42,
+            118,
+            142,
+            180
+          ],
+          "h3_cell": "8729a57b3ffffff",
+          "traffic": 202
+        },
+        {
+          "avg_eta": 155.0,
+          "fill_color": [
+            48,
+            104,
+            141,
+            180
+          ],
+          "h3_cell": "8729a5775ffffff",
+          "traffic": 366
+        },
+        {
+          "avg_eta": 57.0,
+          "fill_color": [
+            68,
+            1,
+            84,
+            180
+          ],
+          "h3_cell": "8729a57a5ffffff",
+          "traffic": 226
+        },
+        {
+          "avg_eta": 114.0,
+          "fill_color": [
+            66,
+            64,
+            133,
+            180
+          ],
+          "h3_cell": "8729a5715ffffff",
+          "traffic": 667
+        },
+        {
+          "avg_eta": 75.0,
+          "fill_color": [
+            71,
+            18,
+            101,
+            180
+          ],
+          "h3_cell": "8729a570bffffff",
+          "traffic": 287
+        },
+        {
+          "avg_eta": NaN,
+          "fill_color": [
+            68,
+            1,
+            84,
+            180
+          ],
+          "h3_cell": "8729a5642ffffff",
+          "traffic": 266
+        },
+        {
+          "avg_eta": 133.0,
+          "fill_color": [
+            57,
+            84,
+            139,
+            180
+          ],
+          "h3_cell": "8729a5700ffffff",
+          "traffic": 571
+        },
+        {
+          "avg_eta": 108.0,
+          "fill_color": [
+            68,
+            57,
+            130,
+            180
+          ],
+          "h3_cell": "8729a5644ffffff",
+          "traffic": 127
+        },
+        {
+          "avg_eta": 143.0,
+          "fill_color": [
+            53,
+            93,
+            140,
+            180
+          ],
+          "h3_cell": "8729a50d9ffffff",
+          "traffic": 250
+        },
+        {
+          "avg_eta": 99.0,
+          "fill_color": [
+            70,
+            47,
+            124,
+            180
+          ],
+          "h3_cell": "8729a571cffffff",
+          "traffic": 478
+        },
+        {
+          "avg_eta": 107.0,
+          "fill_color": [
+            68,
+            57,
+            130,
+            180
+          ],
+          "h3_cell": "8729a5640ffffff",
+          "traffic": 120
+        },
+        {
+          "avg_eta": 142.0,
+          "fill_color": [
+            53,
+            92,
+            140,
+            180
+          ],
+          "h3_cell": "8729a570cffffff",
+          "traffic": 555
+        },
+        {
+          "avg_eta": 324.0,
+          "fill_color": [
+            223,
+            227,
+            24,
+            180
+          ],
+          "h3_cell": "8729a50ebffffff",
+          "traffic": 72
+        },
+        {
+          "avg_eta": 54.0,
+          "fill_color": [
+            68,
+            1,
+            84,
+            180
+          ],
+          "h3_cell": "8729a5771ffffff",
+          "traffic": 134
+        },
+        {
+          "avg_eta": 77.0,
+          "fill_color": [
+            71,
+            21,
+            103,
+            180
+          ],
+          "h3_cell": "8729a57aeffffff",
+          "traffic": 2305
+        },
+        {
+          "avg_eta": 81.0,
+          "fill_color": [
+            72,
+            25,
+            107,
+            180
+          ],
+          "h3_cell": "8729a5772ffffff",
+          "traffic": 229
+        },
+        {
+          "avg_eta": NaN,
+          "fill_color": [
+            68,
+            1,
+            84,
+            180
+          ],
+          "h3_cell": "8729a191affffff",
+          "traffic": 59
+        },
+        {
+          "avg_eta": 248.0,
+          "fill_color": [
+            56,
+            185,
+            118,
+            180
+          ],
+          "h3_cell": "8729a505affffff",
+          "traffic": 107
+        },
+        {
+          "avg_eta": 162.0,
+          "fill_color": [
+            45,
+            111,
+            142,
+            180
+          ],
+          "h3_cell": "8729a57b1ffffff",
+          "traffic": 548
+        },
+        {
+          "avg_eta": 271.0,
+          "fill_color": [
+            98,
+            202,
+            95,
+            180
+          ],
+          "h3_cell": "8729a5043ffffff",
+          "traffic": 52
+        },
+        {
+          "avg_eta": 143.0,
+          "fill_color": [
+            53,
+            93,
+            140,
+            180
+          ],
+          "h3_cell": "8729a5473ffffff",
+          "traffic": 88
+        },
+        {
+          "avg_eta": 53.0,
+          "fill_color": [
+            68,
+            1,
+            84,
+            180
+          ],
+          "h3_cell": "8729a57a0ffffff",
+          "traffic": 235
+        },
+        {
+          "avg_eta": NaN,
+          "fill_color": [
+            68,
+            1,
+            84,
+            180
+          ],
+          "h3_cell": "8729a505cffffff",
+          "traffic": 17
+        },
+        {
+          "avg_eta": NaN,
+          "fill_color": [
+            68,
+            1,
+            84,
+            180
+          ],
+          "h3_cell": "8729a505effffff",
+          "traffic": 115
+        },
+        {
+          "avg_eta": 113.0,
+          "fill_color": [
+            66,
+            62,
+            133,
+            180
+          ],
+          "h3_cell": "8729a5734ffffff",
+          "traffic": 258
+        },
+        {
+          "avg_eta": 166.0,
+          "fill_color": [
+            44,
+            114,
+            142,
+            180
+          ],
+          "h3_cell": "8729a572dffffff",
+          "traffic": 182
+        },
+        {
+          "avg_eta": 156.0,
+          "fill_color": [
+            47,
+            105,
+            141,
+            180
+          ],
+          "h3_cell": "8729a5290ffffff",
+          "traffic": 67
+        },
+        {
+          "avg_eta": 297.0,
+          "fill_color": [
+            157,
+            217,
+            58,
+            180
+          ],
+          "h3_cell": "8729a566dffffff",
+          "traffic": 89
+        },
+        {
+          "avg_eta": 225.0,
+          "fill_color": [
+            33,
+            166,
+            133,
+            180
+          ],
+          "h3_cell": "8729a5070ffffff",
+          "traffic": 10
+        },
+        {
+          "avg_eta": 127.0,
+          "fill_color": [
+            60,
+            77,
+            138,
+            180
+          ],
+          "h3_cell": "8729a572bffffff",
+          "traffic": 134
+        },
+        {
+          "avg_eta": 257.0,
+          "fill_color": [
+            71,
+            192,
+            110,
+            180
+          ],
+          "h3_cell": "8729a5059ffffff",
+          "traffic": 43
+        },
+        {
+          "avg_eta": NaN,
+          "fill_color": [
+            68,
+            1,
+            84,
+            180
+          ],
+          "h3_cell": "8729a5588ffffff",
+          "traffic": 45
+        },
+        {
+          "avg_eta": NaN,
+          "fill_color": [
+            68,
+            1,
+            84,
+            180
+          ],
+          "h3_cell": "8729a5589ffffff",
+          "traffic": 57
+        },
+        {
+          "avg_eta": 104.0,
+          "fill_color": [
+            69,
+            53,
+            128,
+            180
+          ],
+          "h3_cell": "8729a54c5ffffff",
+          "traffic": 47
+        },
+        {
+          "avg_eta": 298.0,
+          "fill_color": [
+            159,
+            217,
+            56,
+            180
+          ],
+          "h3_cell": "8729a5052ffffff",
+          "traffic": 189
+        },
+        {
+          "avg_eta": 87.0,
+          "fill_color": [
+            72,
+            33,
+            114,
+            180
+          ],
+          "h3_cell": "8729a54ebffffff",
+          "traffic": 41
+        },
+        {
+          "avg_eta": 90.0,
+          "fill_color": [
+            71,
+            37,
+            117,
+            180
+          ],
+          "h3_cell": "8729a57b6ffffff",
+          "traffic": 35
+        },
+        {
+          "avg_eta": 91.0,
+          "fill_color": [
+            71,
+            38,
+            118,
+            180
+          ],
+          "h3_cell": "8729a54e3ffffff",
+          "traffic": 60
+        },
+        {
+          "avg_eta": 238.0,
+          "fill_color": [
+            43,
+            177,
+            125,
+            180
+          ],
+          "h3_cell": "8729a5282ffffff",
+          "traffic": 93
+        },
+        {
+          "avg_eta": 210.0,
+          "fill_color": [
+            30,
+            153,
+            138,
+            180
+          ],
+          "h3_cell": "8729a5295ffffff",
+          "traffic": 75
+        },
+        {
+          "avg_eta": 135.0,
+          "fill_color": [
+            57,
+            85,
+            139,
+            180
+          ],
+          "h3_cell": "8729a5743ffffff",
+          "traffic": 111
+        },
+        {
+          "avg_eta": NaN,
+          "fill_color": [
+            68,
+            1,
+            84,
+            180
+          ],
+          "h3_cell": "8729a540bffffff",
+          "traffic": 86
+        },
+        {
+          "avg_eta": NaN,
+          "fill_color": [
+            68,
+            1,
+            84,
+            180
+          ],
+          "h3_cell": "8729a5425ffffff",
+          "traffic": 3
+        },
+        {
+          "avg_eta": NaN,
+          "fill_color": [
+            68,
+            1,
+            84,
+            180
+          ],
+          "h3_cell": "8729a539cffffff",
+          "traffic": 55
+        },
+        {
+          "avg_eta": 172.0,
+          "fill_color": [
+            41,
+            120,
+            142,
+            180
+          ],
+          "h3_cell": "8729a5661ffffff",
+          "traffic": 34
+        },
+        {
+          "avg_eta": NaN,
+          "fill_color": [
+            68,
+            1,
+            84,
+            180
+          ],
+          "h3_cell": "8729a566effffff",
+          "traffic": 14
+        },
+        {
+          "avg_eta": 77.0,
+          "fill_color": [
+            71,
+            21,
+            103,
+            180
+          ],
+          "h3_cell": "8729a57a6ffffff",
+          "traffic": 134
+        },
+        {
+          "avg_eta": 348.0,
+          "fill_color": [
+            253,
+            231,
+            36,
+            180
+          ],
+          "h3_cell": "8729a57b4ffffff",
+          "traffic": 558
+        },
+        {
+          "avg_eta": 130.0,
+          "fill_color": [
+            59,
+            81,
+            138,
+            180
+          ],
+          "h3_cell": "8729a509effffff",
+          "traffic": 17
+        },
+        {
+          "avg_eta": 72.0,
+          "fill_color": [
+            70,
+            14,
+            97,
+            180
+          ],
+          "h3_cell": "8729a5094ffffff",
+          "traffic": 17
+        },
+        {
+          "avg_eta": 196.0,
+          "fill_color": [
+            33,
+            140,
+            141,
+            180
+          ],
+          "h3_cell": "8729a50c9ffffff",
+          "traffic": 44
+        },
+        {
+          "avg_eta": 25.0,
+          "fill_color": [
+            68,
+            1,
+            84,
+            180
+          ],
+          "h3_cell": "8729a50d2ffffff",
+          "traffic": 10
+        },
+        {
+          "avg_eta": 167.0,
+          "fill_color": [
+            43,
+            115,
+            142,
+            180
+          ],
+          "h3_cell": "8729a5748ffffff",
+          "traffic": 86
+        },
+        {
+          "avg_eta": 167.0,
+          "fill_color": [
+            43,
+            115,
+            142,
+            180
+          ],
+          "h3_cell": "8729a5429ffffff",
+          "traffic": 37
+        },
+        {
+          "avg_eta": NaN,
+          "fill_color": [
+            68,
+            1,
+            84,
+            180
+          ],
+          "h3_cell": "8729a5736ffffff",
+          "traffic": 19
+        },
+        {
+          "avg_eta": 259.0,
+          "fill_color": [
+            73,
+            193,
+            109,
+            180
+          ],
+          "h3_cell": "8729a5382ffffff",
+          "traffic": 36
+        },
+        {
+          "avg_eta": 149.0,
+          "fill_color": [
+            50,
+            98,
+            141,
+            180
+          ],
+          "h3_cell": "8729a5671ffffff",
+          "traffic": 71
+        },
+        {
+          "avg_eta": 124.0,
+          "fill_color": [
+            61,
+            74,
+            137,
+            180
+          ],
+          "h3_cell": "8729a5292ffffff",
+          "traffic": 119
+        },
+        {
+          "avg_eta": 208.0,
+          "fill_color": [
+            30,
+            151,
+            138,
+            180
+          ],
+          "h3_cell": "8729a5071ffffff",
+          "traffic": 4
+        },
+        {
+          "avg_eta": 213.0,
+          "fill_color": [
+            30,
+            155,
+            137,
+            180
+          ],
+          "h3_cell": "8729a5384ffffff",
+          "traffic": 10
+        },
+        {
+          "avg_eta": 86.0,
+          "fill_color": [
+            72,
+            32,
+            113,
+            180
+          ],
+          "h3_cell": "8729a54aaffffff",
+          "traffic": 17
+        },
+        {
+          "avg_eta": 280.0,
+          "fill_color": [
+            116,
+            208,
+            84,
+            180
+          ],
+          "h3_cell": "8729a529affffff",
+          "traffic": 17
+        },
+        {
+          "avg_eta": 86.0,
+          "fill_color": [
+            72,
+            32,
+            113,
+            180
+          ],
+          "h3_cell": "8729a5095ffffff",
+          "traffic": 18
+        },
+        {
+          "avg_eta": 356.0,
+          "fill_color": [
+            253,
+            231,
+            36,
+            180
+          ],
+          "h3_cell": "8729a50e2ffffff",
+          "traffic": 32
+        },
+        {
+          "avg_eta": NaN,
+          "fill_color": [
+            68,
+            1,
+            84,
+            180
+          ],
+          "h3_cell": "8729a1935ffffff",
+          "traffic": 4
+        },
+        {
+          "avg_eta": 177.0,
+          "fill_color": [
+            40,
+            123,
+            142,
+            180
+          ],
+          "h3_cell": "8729a5434ffffff",
+          "traffic": 3
+        },
+        {
+          "avg_eta": 28.0,
+          "fill_color": [
+            68,
+            1,
+            84,
+            180
+          ],
+          "h3_cell": "8729a5614ffffff",
+          "traffic": 63130
+        },
+        {
+          "avg_eta": 164.0,
+          "fill_color": [
+            44,
+            112,
+            142,
+            180
+          ],
+          "h3_cell": "8729a19a3ffffff",
+          "traffic": 177442
+        },
+        {
+          "avg_eta": 99.0,
+          "fill_color": [
+            70,
+            47,
+            124,
+            180
+          ],
+          "h3_cell": "8729a54c6ffffff",
+          "traffic": 79425
+        },
+        {
+          "avg_eta": 218.0,
+          "fill_color": [
+            30,
+            159,
+            136,
+            180
+          ],
+          "h3_cell": "8729a52b4ffffff",
+          "traffic": 323
+        },
+        {
+          "avg_eta": 121.0,
+          "fill_color": [
+            63,
+            71,
+            136,
+            180
+          ],
+          "h3_cell": "8729a5634ffffff",
+          "traffic": 3457
+        },
+        {
+          "avg_eta": 230.0,
+          "fill_color": [
+            36,
+            170,
+            130,
+            180
+          ],
+          "h3_cell": "8729a52b5ffffff",
+          "traffic": 320
+        },
+        {
+          "avg_eta": 64.0,
+          "fill_color": [
+            68,
+            3,
+            87,
+            180
+          ],
+          "h3_cell": "8729a5626ffffff",
+          "traffic": 6212
+        },
+        {
+          "avg_eta": 119.0,
+          "fill_color": [
+            63,
+            69,
+            135,
+            180
+          ],
+          "h3_cell": "8729a571effffff",
+          "traffic": 1135
+        },
+        {
+          "avg_eta": 90.0,
+          "fill_color": [
+            71,
+            37,
+            117,
+            180
+          ],
+          "h3_cell": "8729a5710ffffff",
+          "traffic": 633
+        },
+        {
+          "avg_eta": 139.0,
+          "fill_color": [
+            55,
+            89,
+            140,
+            180
+          ],
+          "h3_cell": "8729a5729ffffff",
+          "traffic": 426
+        },
+        {
+          "avg_eta": 154.0,
+          "fill_color": [
+            48,
+            103,
+            141,
+            180
+          ],
+          "h3_cell": "8729a50a3ffffff",
+          "traffic": 153
+        },
+        {
+          "avg_eta": 130.0,
+          "fill_color": [
+            59,
+            81,
+            138,
+            180
+          ],
+          "h3_cell": "8729a5728ffffff",
+          "traffic": 577
+        },
+        {
+          "avg_eta": 100.0,
+          "fill_color": [
+            70,
+            48,
+            125,
+            180
+          ],
+          "h3_cell": "8729a5708ffffff",
+          "traffic": 213
+        },
+        {
+          "avg_eta": 150.0,
+          "fill_color": [
+            50,
+            99,
+            141,
+            180
+          ],
+          "h3_cell": "8729a5759ffffff",
+          "traffic": 117
+        },
+        {
+          "avg_eta": NaN,
+          "fill_color": [
+            68,
+            1,
+            84,
+            180
+          ],
+          "h3_cell": "8729a19a1ffffff",
+          "traffic": 683
+        },
+        {
+          "avg_eta": 98.0,
+          "fill_color": [
+            70,
+            45,
+            124,
+            180
+          ],
+          "h3_cell": "8729a5706ffffff",
+          "traffic": 509
+        },
+        {
+          "avg_eta": 163.0,
+          "fill_color": [
+            45,
+            111,
+            142,
+            180
+          ],
+          "h3_cell": "8729a555dffffff",
+          "traffic": 366
+        },
+        {
+          "avg_eta": NaN,
+          "fill_color": [
+            68,
+            1,
+            84,
+            180
+          ],
+          "h3_cell": "8729a1911ffffff",
+          "traffic": 117
+        },
+        {
+          "avg_eta": 123.0,
+          "fill_color": [
+            62,
+            73,
+            137,
+            180
+          ],
+          "h3_cell": "8729a546effffff",
+          "traffic": 216
+        },
+        {
+          "avg_eta": 272.0,
+          "fill_color": [
+            100,
+            203,
+            93,
+            180
+          ],
+          "h3_cell": "8729a50e9ffffff",
+          "traffic": 83
+        },
+        {
+          "avg_eta": NaN,
+          "fill_color": [
+            68,
+            1,
+            84,
+            180
+          ],
+          "h3_cell": "8729a574cffffff",
+          "traffic": 285
+        },
+        {
+          "avg_eta": 152.0,
+          "fill_color": [
+            49,
+            101,
+            141,
+            180
+          ],
+          "h3_cell": "8729a5472ffffff",
+          "traffic": 138
+        },
+        {
+          "avg_eta": NaN,
+          "fill_color": [
+            68,
+            1,
+            84,
+            180
+          ],
+          "h3_cell": "8729a5092ffffff",
+          "traffic": 206
+        },
+        {
+          "avg_eta": NaN,
+          "fill_color": [
+            68,
+            1,
+            84,
+            180
+          ],
+          "h3_cell": "8729a554cffffff",
+          "traffic": 94
+        },
+        {
+          "avg_eta": 175.0,
+          "fill_color": [
+            40,
+            122,
+            142,
+            180
+          ],
+          "h3_cell": "8729a571dffffff",
+          "traffic": 474
+        },
+        {
+          "avg_eta": 182.0,
+          "fill_color": [
+            38,
+            128,
+            142,
+            180
+          ],
+          "h3_cell": "8729a5428ffffff",
+          "traffic": 59
+        },
+        {
+          "avg_eta": 230.0,
+          "fill_color": [
+            36,
+            170,
+            130,
+            180
+          ],
+          "h3_cell": "8729a5664ffffff",
+          "traffic": 94
+        },
+        {
+          "avg_eta": NaN,
+          "fill_color": [
+            68,
+            1,
+            84,
+            180
+          ],
+          "h3_cell": "8729a52b6ffffff",
+          "traffic": 42
+        },
+        {
+          "avg_eta": 185.0,
+          "fill_color": [
+            37,
+            131,
+            141,
+            180
+          ],
+          "h3_cell": "8729a50e1ffffff",
+          "traffic": 109
+        },
+        {
+          "avg_eta": 153.0,
+          "fill_color": [
+            49,
+            102,
+            141,
+            180
+          ],
+          "h3_cell": "8729a50e3ffffff",
+          "traffic": 136
+        },
+        {
+          "avg_eta": 165.0,
+          "fill_color": [
+            44,
+            113,
+            142,
+            180
+          ],
+          "h3_cell": "8729a50deffffff",
+          "traffic": 121
+        },
+        {
+          "avg_eta": 101.0,
+          "fill_color": [
+            70,
+            49,
+            126,
+            180
+          ],
+          "h3_cell": "8729a50c5ffffff",
+          "traffic": 20
+        },
+        {
+          "avg_eta": 84.0,
+          "fill_color": [
+            72,
+            29,
+            111,
+            180
+          ],
+          "h3_cell": "8729a54eeffffff",
+          "traffic": 120
+        },
+        {
+          "avg_eta": 206.0,
+          "fill_color": [
+            31,
+            149,
+            139,
+            180
+          ],
+          "h3_cell": "8729a5291ffffff",
+          "traffic": 87
+        },
+        {
+          "avg_eta": NaN,
+          "fill_color": [
+            68,
+            1,
+            84,
+            180
+          ],
+          "h3_cell": "8729a19a9ffffff",
+          "traffic": 5
+        },
+        {
+          "avg_eta": 118.0,
+          "fill_color": [
+            64,
+            68,
+            135,
+            180
+          ],
+          "h3_cell": "8729a5755ffffff",
+          "traffic": 83
+        },
+        {
+          "avg_eta": NaN,
+          "fill_color": [
+            68,
+            1,
+            84,
+            180
+          ],
+          "h3_cell": "8729a54e4ffffff",
+          "traffic": 122
+        },
+        {
+          "avg_eta": NaN,
+          "fill_color": [
+            68,
+            1,
+            84,
+            180
+          ],
+          "h3_cell": "8729a539dffffff",
+          "traffic": 36
+        },
+        {
+          "avg_eta": 117.0,
+          "fill_color": [
+            64,
+            67,
+            135,
+            180
+          ],
+          "h3_cell": "8729a5445ffffff",
+          "traffic": 65
+        },
+        {
+          "avg_eta": NaN,
+          "fill_color": [
+            68,
+            1,
+            84,
+            180
+          ],
+          "h3_cell": "8729a0b55ffffff",
+          "traffic": 1
+        },
+        {
+          "avg_eta": 125.0,
+          "fill_color": [
+            61,
+            75,
+            137,
+            180
+          ],
+          "h3_cell": "8729a545effffff",
+          "traffic": 55
+        },
+        {
+          "avg_eta": 139.0,
+          "fill_color": [
+            55,
+            89,
+            140,
+            180
+          ],
+          "h3_cell": "8729a508cffffff",
+          "traffic": 81
+        },
+        {
+          "avg_eta": 104.0,
+          "fill_color": [
+            69,
+            53,
+            128,
+            180
+          ],
+          "h3_cell": "8729a54e1ffffff",
+          "traffic": 37
+        },
+        {
+          "avg_eta": 111.0,
+          "fill_color": [
+            67,
+            60,
+            132,
+            180
+          ],
+          "h3_cell": "8729a54e0ffffff",
+          "traffic": 82
+        },
+        {
+          "avg_eta": 109.0,
+          "fill_color": [
+            67,
+            58,
+            131,
+            180
+          ],
+          "h3_cell": "8729a50ecffffff",
+          "traffic": 37
+        },
+        {
+          "avg_eta": NaN,
+          "fill_color": [
+            68,
+            1,
+            84,
+            180
+          ],
+          "h3_cell": "8729a5418ffffff",
+          "traffic": 65
+        },
+        {
+          "avg_eta": NaN,
+          "fill_color": [
+            68,
+            1,
+            84,
+            180
+          ],
+          "h3_cell": "8729a50b3ffffff",
+          "traffic": 24
+        },
+        {
+          "avg_eta": 182.0,
+          "fill_color": [
+            38,
+            128,
+            142,
+            180
+          ],
+          "h3_cell": "8729a5723ffffff",
+          "traffic": 116
+        },
+        {
+          "avg_eta": 195.0,
+          "fill_color": [
+            34,
+            139,
+            141,
+            180
+          ],
+          "h3_cell": "8729a53b3ffffff",
+          "traffic": 37
+        },
+        {
+          "avg_eta": 185.0,
+          "fill_color": [
+            37,
+            131,
+            141,
+            180
+          ],
+          "h3_cell": "8729a542cffffff",
+          "traffic": 24
+        },
+        {
+          "avg_eta": 149.0,
+          "fill_color": [
+            50,
+            98,
+            141,
+            180
+          ],
+          "h3_cell": "8729a5413ffffff",
+          "traffic": 47
+        },
+        {
+          "avg_eta": NaN,
+          "fill_color": [
+            68,
+            1,
+            84,
+            180
+          ],
+          "h3_cell": "8729a56b1ffffff",
+          "traffic": 1
+        },
+        {
+          "avg_eta": 314.0,
+          "fill_color": [
+            197,
+            223,
+            33,
+            180
+          ],
+          "h3_cell": "8729a50f5ffffff",
+          "traffic": 4
+        },
+        {
+          "avg_eta": 155.0,
+          "fill_color": [
+            48,
+            104,
+            141,
+            180
+          ],
+          "h3_cell": "8729a5398ffffff",
+          "traffic": 36
+        },
+        {
+          "avg_eta": 252.0,
+          "fill_color": [
+            62,
+            188,
+            115,
+            180
+          ],
+          "h3_cell": "8729a5391ffffff",
+          "traffic": 52
+        },
+        {
+          "avg_eta": NaN,
+          "fill_color": [
+            68,
+            1,
+            84,
+            180
+          ],
+          "h3_cell": "8729a546cffffff",
+          "traffic": 21
+        },
+        {
+          "avg_eta": 100.0,
+          "fill_color": [
+            70,
+            48,
+            125,
+            180
+          ],
+          "h3_cell": "8729a5551ffffff",
+          "traffic": 26
+        },
+        {
+          "avg_eta": 269.0,
+          "fill_color": [
+            94,
+            201,
+            97,
+            180
+          ],
+          "h3_cell": "8729a1903ffffff",
+          "traffic": 6
+        },
+        {
+          "avg_eta": 122.0,
+          "fill_color": [
+            62,
+            72,
+            136,
+            180
+          ],
+          "h3_cell": "8729a5408ffffff",
+          "traffic": 17
+        },
+        {
+          "avg_eta": 130.0,
+          "fill_color": [
+            59,
+            81,
+            138,
+            180
+          ],
+          "h3_cell": "8729a540cffffff",
+          "traffic": 20
+        },
+        {
+          "avg_eta": NaN,
+          "fill_color": [
+            68,
+            1,
+            84,
+            180
+          ],
+          "h3_cell": "8729a50f4ffffff",
+          "traffic": 8
+        },
+        {
+          "avg_eta": NaN,
+          "fill_color": [
+            68,
+            1,
+            84,
+            180
+          ],
+          "h3_cell": "8729a191dffffff",
+          "traffic": 6
+        },
+        {
+          "avg_eta": 63.0,
+          "fill_color": [
+            68,
+            2,
+            85,
+            180
+          ],
+          "h3_cell": "8729a5091ffffff",
+          "traffic": 5
+        },
+        {
+          "avg_eta": NaN,
+          "fill_color": [
+            68,
+            1,
+            84,
+            180
+          ],
+          "h3_cell": "8729a53b0ffffff",
+          "traffic": 9
+        },
+        {
+          "avg_eta": NaN,
+          "fill_color": [
+            68,
+            1,
+            84,
+            180
+          ],
+          "h3_cell": "8729a558cffffff",
+          "traffic": 2
+        },
+        {
+          "avg_eta": NaN,
+          "fill_color": [
+            68,
+            1,
+            84,
+            180
+          ],
+          "h3_cell": "8729a5488ffffff",
+          "traffic": 4
+        },
+        {
+          "avg_eta": NaN,
+          "fill_color": [
+            68,
+            1,
+            84,
+            180
+          ],
+          "h3_cell": "8729a548dffffff",
+          "traffic": 2
+        }
+      ],
+      "elevationScale": 0.016906932969646418,
+      "extruded": true,
+      "getElevation": "@@=traffic",
+      "getFillColor": "@@=fill_color",
+      "getHexagon": "@@=h3_cell",
+      "id": "a94295bb-f309-496c-87c4-931f32dd1019",
+      "opacity": 0.55,
+      "pickable": true
+    },
+    {
+      "@@type": "GeoJsonLayer",
+      "data": {
+        "crs": {
+          "properties": {
+            "name": "urn:ogc:def:crs:OGC:1.3:CRS84"
+          },
+          "type": "name"
+        },
+        "features": [
+          {
+            "geometry": {
+              "coordinates": [
+                [
+                  [
+                    [
+                      -118.28921605625236,
+                      33.72722638710378
+                    ],
+                    [
+                      -118.28467261620672,
+                      33.730699670475346
+                    ],
+                    [
+                      -118.28591714853954,
+                      33.73563793351219
+                    ],
+                    [
+                      -118.28137319452556,
+                      33.73911105370595
+                    ],
+                    [
+                      -118.28261769432979,
+                      33.74404913620135
+                    ],
+                    [
+                      -118.27807322626963,
+                      33.74752209298733
+                    ],
+                    [
+                      -118.27931769350919,
+                      33.75245999474474
+                    ],
+                    [
+                      -118.27477271132504,
+                      33.755932787893045
+                    ],
+                    [
+                      -118.27601714596375,
+                      33.76087050871594
+                    ],
+                    [
+                      -118.2714716495778,
+                      33.764343137996704
+                    ],
+                    [
+                      -118.26568160923634,
+                      33.762877899632144
+                    ],
+                    [
+                      -118.26113548935135,
+                      33.766350218038426
+                    ],
+                    [
+                      -118.25534519800466,
+                      33.76488450487872
+                    ],
+                    [
+                      -118.25079845482728,
+                      33.76835651220353
+                    ],
+                    [
+                      -118.2520421119489,
+                      33.773294379463216
+                    ],
+                    [
+                      -118.24749485445112,
+                      33.77676622229723
+                    ],
+                    [
+                      -118.24170383102664,
+                      33.77530005106175
+                    ],
+                    [
+                      -118.2404605465677,
+                      33.77036202019797
+                    ],
+                    [
+                      -118.24500791283059,
+                      33.76689032416156
+                    ],
+                    [
+                      -118.24376459543751,
+                      33.76195211196705
+                    ],
+                    [
+                      -118.24831144743757,
+                      33.758480251473
+                    ],
+                    [
+                      -118.254101508048,
+                      33.75994645635492
+                    ],
+                    [
+                      -118.25864773698278,
+                      33.75647428476915
+                    ],
+                    [
+                      -118.25740401422725,
+                      33.751536055177645
+                    ],
+                    [
+                      -118.2619497289972,
+                      33.748063719560825
+                    ],
+                    [
+                      -118.26773905745546,
+                      33.74952946669399
+                    ],
+                    [
+                      -118.2722841489738,
+                      33.746056820389086
+                    ],
+                    [
+                      -118.27104002123836,
+                      33.741118573850144
+                    ],
+                    [
+                      -118.26525117416185,
+                      33.7396528096802
+                    ],
+                    [
+                      -118.26400738591713,
+                      33.734714218542955
+                    ],
+                    [
+                      -118.2582187692161,
+                      33.733247962941036
+                    ],
+                    [
+                      -118.2536734595382,
+                      33.73672031542858
+                    ],
+                    [
+                      -118.24788459222738,
+                      33.735253585377755
+                    ],
+                    [
+                      -118.24664151577575,
+                      33.73031448600833
+                    ],
+                    [
+                      -118.25118693427912,
+                      33.726842280494694
+                    ],
+                    [
+                      -118.25697532044859,
+                      33.72830902738876
+                    ],
+                    [
+                      -118.26152011617457,
+                      33.72483651136326
+                    ],
+                    [
+                      -118.26730825165558,
+                      33.72630278393853
+                    ],
+                    [
+                      -118.27185242439758,
+                      33.722829957608084
+                    ],
+                    [
+                      -118.27060857080824,
+                      33.71789100571152
+                    ],
+                    [
+                      -118.27515222969639,
+                      33.714418016269796
+                    ],
+                    [
+                      -118.28093963287735,
+                      33.71588383175007
+                    ],
+                    [
+                      -118.28548266859563,
+                      33.71241053240704
+                    ],
+                    [
+                      -118.2912698203004,
+                      33.71387587387285
+                    ],
+                    [
+                      -118.29251441758214,
+                      33.71881449740267
+                    ],
+                    [
+                      -118.28797149142703,
+                      33.72228794372211
+                    ],
+                    [
+                      -118.28921605625236,
+                      33.72722638710378
+                    ]
+                  ]
+                ],
+                [
+                  [
+                    [
+                      -118.23424565812,
+                      33.74566923582253
+                    ],
+                    [
+                      -118.2400352567897,
+                      33.74713642372941
+                    ],
+                    [
+                      -118.24127826742851,
+                      33.7520751616799
+                    ],
+                    [
+                      -118.23673130677547,
+                      33.755546875299764
+                    ],
+                    [
+                      -118.2309412269603,
+                      33.75407970403937
+                    ],
+                    [
+                      -118.22639364367619,
+                      33.75755110635046
+                    ],
+                    [
+                      -118.22060331411929,
+                      33.756083460207115
+                    ],
+                    [
+                      -118.21605510841134,
+                      33.7595545510026
+                    ],
+                    [
+                      -118.21026452946826,
+                      33.75808642988954
+                    ],
+                    [
+                      -118.20902263726046,
+                      33.753147201606915
+                    ],
+                    [
+                      -118.20323229019503,
+                      33.751678589181225
+                    ],
+                    [
+                      -118.20199073777317,
+                      33.74673901662047
+                    ],
+                    [
+                      -118.19620062274127,
+                      33.74526991302236
+                    ],
+                    [
+                      -118.19165157938355,
+                      33.74874039815674
+                    ],
+                    [
+                      -118.18586121587401,
+                      33.74727081958928
+                    ],
+                    [
+                      -118.18462037642902,
+                      33.742330739836966
+                    ],
+                    [
+                      -118.18916952724905,
+                      33.738860401736815
+                    ],
+                    [
+                      -118.19495941009163,
+                      33.740329996367
+                    ],
+                    [
+                      -118.19950793937737,
+                      33.73685934651455
+                    ],
+                    [
+                      -118.20529757366296,
+                      33.73832846630544
+                    ],
+                    [
+                      -118.20653915936926,
+                      33.74326821974374
+                    ],
+                    [
+                      -118.2123290255678,
+                      33.74473684845898
+                    ],
+                    [
+                      -118.21687682519462,
+                      33.74126574004658
+                    ],
+                    [
+                      -118.21563486657979,
+                      33.736326149945455
+                    ],
+                    [
+                      -118.22018215217429,
+                      33.73285487720834
+                    ],
+                    [
+                      -118.21894016041034,
+                      33.72791510649295
+                    ],
+                    [
+                      -118.22348693205002,
+                      33.72444366966111
+                    ],
+                    [
+                      -118.22927558729167,
+                      33.725911856519346
+                    ],
+                    [
+                      -118.23051795171703,
+                      33.73085146371091
+                    ],
+                    [
+                      -118.22597128827921,
+                      33.734323047580304
+                    ],
+                    [
+                      -118.22721361965449,
+                      33.739262474224184
+                    ],
+                    [
+                      -118.23300298711976,
+                      33.74073015343364
+                    ],
+                    [
+                      -118.23424565812,
+                      33.74566923582253
+                    ]
+                  ]
+                ],
+                [
+                  [
+                    [
+                      -118.22763624859309,
+                      33.76248982679407
+                    ],
+                    [
+                      -118.23342680959522,
+                      33.76395698144135
+                    ],
+                    [
+                      -118.23466975427634,
+                      33.768895357186665
+                    ],
+                    [
+                      -118.23012176513501,
+                      33.77236674172777
+                    ],
+                    [
+                      -118.22433072290448,
+                      33.77089960366019
+                    ],
+                    [
+                      -118.21978211109197,
+                      33.774370676499146
+                    ],
+                    [
+                      -118.22102464978053,
+                      33.77930903421141
+                    ],
+                    [
+                      -118.21647552358726,
+                      33.78277994196949
+                    ],
+                    [
+                      -118.21068375058252,
+                      33.78131234517497
+                    ],
+                    [
+                      -118.20944158500158,
+                      33.77637382421841
+                    ],
+                    [
+                      -118.20365004395973,
+                      33.774905735777786
+                    ],
+                    [
+                      -118.20240821830411,
+                      33.76996687009989
+                    ],
+                    [
+                      -118.19661690938109,
+                      33.768498290153246
+                    ],
+                    [
+                      -118.19537542363702,
+                      33.76355907993734
+                    ],
+                    [
+                      -118.18958434698875,
+                      33.76209000862483
+                    ],
+                    [
+                      -118.18503427525442,
+                      33.765560163633246
+                    ],
+                    [
+                      -118.17924295028739,
+                      33.76409061709123
+                    ],
+                    [
+                      -118.17800217784394,
+                      33.759150899557
+                    ],
+                    [
+                      -118.18255235692476,
+                      33.75568089151628
+                    ],
+                    [
+                      -118.18834320114244,
+                      33.75715045405435
+                    ],
+                    [
+                      -118.1928927586497,
+                      33.75368013386798
+                    ],
+                    [
+                      -118.19868335446917,
+                      33.75514922130661
+                    ],
+                    [
+                      -118.1999248735703,
+                      33.76008861279321
+                    ],
+                    [
+                      -118.20571570154388,
+                      33.76155720896271
+                    ],
+                    [
+                      -118.20695756049373,
+                      33.76649625604123
+                    ],
+                    [
+                      -118.21274862046553,
+                      33.76796436080137
+                    ],
+                    [
+                      -118.21729734041881,
+                      33.76449343482369
+                    ],
+                    [
+                      -118.22308815108362,
+                      33.76596106448402
+                    ],
+                    [
+                      -118.22763624859309,
+                      33.76248982679407
+                    ]
+                  ]
+                ],
+                [
+                  [
+                    [
+                      -118.11266282863642,
+                      33.714783927358084
+                    ],
+                    [
+                      -118.11845253334113,
+                      33.71625787438092
+                    ],
+                    [
+                      -118.11969055265614,
+                      33.72120015934637
+                    ],
+                    [
+                      -118.1151384932669,
+                      33.72466865964827
+                    ],
+                    [
+                      -118.10934830881855,
+                      33.72319472768402
+                    ],
+                    [
+                      -118.10811066354286,
+                      33.71825228037159
+                    ],
+                    [
+                      -118.10232071344291,
+                      33.71677785829935
+                    ],
+                    [
+                      -118.101083408099,
+                      33.71183506826419
+                    ],
+                    [
+                      -118.1056356787275,
+                      33.708366862582004
+                    ],
+                    [
+                      -118.11142514920475,
+                      33.70984129961597
+                    ],
+                    [
+                      -118.11266282863642,
+                      33.714783927358084
+                    ]
+                  ]
+                ],
+                [
+                  [
+                    [
+                      -118.12588217862232,
+                      33.745908965562805
+                    ],
+                    [
+                      -118.12712080977381,
+                      33.75085020258524
+                    ],
+                    [
+                      -118.12256793411879,
+                      33.75431866583552
+                    ],
+                    [
+                      -118.12380653122929,
+                      33.75925972164419
+                    ],
+                    [
+                      -118.11925314136681,
+                      33.76272801879971
+                    ],
+                    [
+                      -118.12049170439977,
+                      33.76766889319795
+                    ],
+                    [
+                      -118.11593780025247,
+                      33.77113702402876
+                    ],
+                    [
+                      -118.11014522722253,
+                      33.76966413337982
+                    ],
+                    [
+                      -118.10890703852856,
+                      33.76472309679339
+                    ],
+                    [
+                      -118.11346104848573,
+                      33.761255113031766
+                    ],
+                    [
+                      -118.11222282561504,
+                      33.756313894968294
+                    ],
+                    [
+                      -118.10643096713491,
+                      33.754840498519805
+                    ],
+                    [
+                      -118.1051930844123,
+                      33.74989893697499
+                    ],
+                    [
+                      -118.10974668584176,
+                      33.7464309340673
+                    ],
+                    [
+                      -118.11553806433488,
+                      33.747904345571385
+                    ],
+                    [
+                      -118.12009104591658,
+                      33.74443602945689
+                    ],
+                    [
+                      -118.12588217862232,
+                      33.745908965562805
+                    ]
+                  ]
+                ]
+              ],
+              "type": "MultiPolygon"
+            },
+            "properties": {},
+            "type": "Feature"
+          }
+        ],
+        "name": "port_laxlb",
+        "type": "FeatureCollection"
+      },
+      "filled": false,
+      "getLineColor": [
+        255,
+        90,
+        90
+      ],
+      "id": "8c29bfc6-4f2f-467e-b63e-db5f1979c224",
+      "lineWidthMinPixels": 2,
+      "stroked": true
+    }
+  ],
+  "mapProvider": "carto",
+  "mapStyle": "https://basemaps.cartocdn.com/gl/dark-matter-gl-style/style.json",
+  "views": [
+    {
+      "@@type": "MapView",
+      "controller": true
+    }
+  ]
+};
+    const tooltip = {'text': 'trafico: {traffic} pings\nETA medio: {avg_eta} min'};
+    const customLibraries = null;
+    const configuration = null;
+
+    const deckInstance = createDeck({
+                  container,
+      jsonInput,
+      tooltip,
+      customLibraries,
+      configuration,
+          });
+
+  </script>
+</html>

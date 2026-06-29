@@ -13,7 +13,7 @@ el resto del pipeline espera al cierre de esas decisiones.
 | 3 | Features → Gold (geopandas + H3) | indexado hexagonal H3, target ETA | **completado** ✅ |
 | 4 | Modelo ETA (LSTM) | redes sobre secuencias (regresión) | **completado** ✅ |
 | 5 | Buques oscuros (gaps + IsolationForest) | detección de anomalías; validación sintética | **completado** ✅ |
-| 6 | Visualización (Streamlit + mapa H3) | app offline para la demo | pendiente |
+| 6 | Visualización (pydeck/deck.gl HTML) | mapa H3 3D offline para la demo | **completado** ✅ |
 | 7 | Orquestación (Airflow/Astro, LocalExecutor) | DAG que solo invoca run() | pendiente |
 
 ## Por qué este orden
@@ -84,3 +84,11 @@ Mejoras: mas datos (1 mes), feature de distancia-al-borde del poligono, mas buqu
 
 **Resultado:** 169.897 gaps candidatos -> 5.971 buques oscuros (regla|iso); recall sintetico **74%**.
 **Pendiente (bonus):** validacion con GFW (token + congelar en S3; ground truth puede salir ralo).
+
+## Sprint 6 — Definition of Done
+- [x] Decision de stack revisada: Streamlit -> **pydeck/deck.gl** (kepler.gl no instala en 3.14).
+- [x] `viz.py` (`run()`): genera HTML autocontenidos con datos embebidos (deck.gl por CDN).
+- [x] `app/port_map.html`: hexagonos H3 (altura=trafico, color=ETA medio) + poligono del puerto.
+- [x] `app/dark_map.html`: mapa nacional de apagones (tamano/color = duracion del silencio).
+
+**Nota:** kepler.gl descartado por wheels (build fija pyarrow viejo). pydeck = mismo motor deck.gl.

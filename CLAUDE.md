@@ -32,7 +32,7 @@ Columna izquierda = cómputo en laptop; columna derecha = capas S3.
 - Limpieza (DuckDB + Polars lazy)            → Silver (limpio)
 - Features (geopandas + H3)                  → Gold (features / ETA-ready)
 - Modelado (LSTM ETA + detección de gaps)
-- Visualización (Streamlit + mapa H3, lee Gold, offline)
+- Visualización (pydeck/deck.gl → HTML, mapa H3, lee Gold, offline)
 
 ## Decisiones de stack VALIDADAS
 - **Motor principal:** DuckDB (SQL out-of-core sobre Parquet, lee S3 vía httpfs) +
@@ -94,10 +94,11 @@ navicast-cl/
 │   ├── features.py          # run()
 │   ├── model_eta.py         # LSTM
 │   ├── detect_dark.py       # gaps + IsolationForest
+│   ├── viz.py               # mapas deck.gl -> HTML (pydeck)
 │   └── common/              # io_s3.py, h3utils.py, schema.py
 ├── dags/navicast_dag.py     # invoca src/navicast/*.run()
 ├── notebooks/               # iteración del LSTM
-├── app/streamlit_app.py
+├── app/                     # mapas HTML deck.gl (los genera src/navicast/viz.py)
 └── docs/                    # architecture.md, sprints.md (cuando se definan)
 ```
 
