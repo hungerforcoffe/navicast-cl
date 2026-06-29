@@ -25,7 +25,9 @@ dags/ notebooks/ app/ docs/
 ```powershell
 python -m venv .venv
 .venv\Scripts\python -m pip install -U pip
-.venv\Scripts\python -m pip install -e .
+.venv\Scripts\python -m pip install -e ".[bigdata,geo,ml,detect,app]"
+# PyTorch CPU (rueda dedicada, sin CUDA):
+.venv\Scripts\python -m pip install torch --index-url https://download.pytorch.org/whl/cpu
 ```
 
 ### 2. Credenciales AWS
@@ -48,6 +50,16 @@ Edita `config/snapshots.yml` → `aws.bucket` (nombre **global-único**) y `aws.
 # Probar sin AWS (solo local):
 .venv\Scripts\python -m navicast.ingest --snapshot snap_2024-01-15_noaa_national_v1 --no-upload
 ```
+
+### 5. Pipeline completo y mapas
+```powershell
+# todo el pipeline: Bronze -> Silver -> Gold -> ETA -> buques oscuros -> mapas
+.venv\Scripts\python scripts/run_pipeline.py --skip-ingest   # reusa el Bronze ya descargado
+```
+Etapas sueltas: `navicast.clean` / `.features` / `.model_eta` / `.detect_dark` / `.viz`.
+Los mapas quedan en `app/port_map.html` y `app/dark_map.html` (abrir en el navegador).
+Orquestación Airflow: `dags/navicast_dag.py` (vía Astro CLI `astro dev start` cuando tengas Docker).
+Benchmark Big Data: `navicast.benchmark`. Mapas y reportes en `docs/`.
 
 ## Regla de oro
 Reproducibilidad por **snapshots congelados**: todo lee un snapshot ID inmutable desde
