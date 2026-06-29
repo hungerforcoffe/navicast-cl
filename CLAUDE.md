@@ -105,10 +105,10 @@ navicast-cl/
 ## DECISIONES ABIERTAS (no asumir)
 1. **Geografía — RESUELTA (2026-06-28):** NOAA-primario + Chile-stretch. Modelado sobre
    LA/Long Beach (bbox lon[-118.6, -117.8] × lat[33.4, 34.0]); Chile = nice to have.
-2. **Puntos 3–5 del plan aún sin definir** (NO empezar el pipeline completo sin ellos):
-   (3) plan priorizado de limpieza AIS (gaps, saltos GPS, MMSI duplicados/spoofed, interpolación);
-   (4) cronograma por sprints con entregables verificables y definition of done;
-   (5) riesgos y plan B (versión reducida que aún aprueba con nota alta).
+2. **Puntos 3–5 — RESUELTOS (2026-06-29):**
+   (3) plan de limpieza AIS P0–P2 implementado en `clean.py`;
+   (4) cronograma por sprints + definition of done en `docs/sprints.md` (Sprints 0–7 hechos);
+   (5) riesgos y plan B en `docs/sprints.md` (sección "Plan B y trabajo futuro").
 
 ## Reglas de trabajo
 - Validar decisiones de arquitectura con Pablo ANTES de escribir código.
