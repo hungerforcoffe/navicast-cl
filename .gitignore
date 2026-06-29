@@ -9,7 +9,8 @@ __pycache__/
 data/
 *.zip
 *.csv
-app/*.html   # mapas generados (datos embebidos); regenerar con: python -m navicast.viz
+# mapas generados (datos embebidos); regenerar con: python -m navicast.viz
+app/*.html
 
 # Secretos / credenciales (NUNCA versionar)
 .env
