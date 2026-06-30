@@ -13,7 +13,6 @@ import os
 from pathlib import Path
 from typing import Any
 
-import gfwapiclient as gfw
 import h3
 import pandas as pd
 
@@ -48,6 +47,7 @@ def _polygon() -> dict:
 
 
 async def _fetch_async(token: str, start: str, end: str) -> dict[str, pd.DataFrame]:
+    import gfwapiclient as gfw  # import perezoso: testear cross() no requiere esta dep
     client = gfw.Client(access_token=token, timeout=180.0)  # AIS HIGH-res es query pesada (>60s)
     poly = _polygon()
     out: dict[str, pd.DataFrame] = {}

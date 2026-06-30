@@ -5,6 +5,7 @@
 > fully reproducible from frozen snapshots.
 
 [![Live demo](https://img.shields.io/badge/demo-live-2ea44f)](https://navicast-cl.streamlit.app/)
+[![CI](https://github.com/hungerforcoffe/navicast-cl/actions/workflows/ci.yml/badge.svg)](https://github.com/hungerforcoffe/navicast-cl/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue)](LICENSE)
 ![Python](https://img.shields.io/badge/python-3.14-3776ab)
 
