@@ -6,11 +6,15 @@ __pycache__/
 .ipynb_checkpoints/
 
 # Datos locales (staging de Bronze). Lo pesado vive en S3, no en git.
-data/
+/data/
 *.zip
 *.csv
 # mapas generados (datos embebidos); regenerar con: python -m navicast.viz
 app/*.html
+
+# Snapshot slim PUBLICO para la app (SI versionar, ~180 KB) -> anula *.csv aqui
+!app/data/
+!app/data/**
 
 # Secretos / credenciales (NUNCA versionar)
 .env

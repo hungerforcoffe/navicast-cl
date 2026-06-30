@@ -1,0 +1,7 @@
+# Dependencias MINIMAS solo para el dashboard publico (Streamlit Community Cloud).
+# La app lee el snapshot slim de app/data/ y renderiza; NO corre el pipeline,
+# asi que no necesita torch/duckdb/geopandas/h3/matplotlib.
+streamlit>=1.30
+pydeck>=0.9
+pandas>=2.0
+pyarrow>=15

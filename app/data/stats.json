@@ -1,0 +1,10 @@
+{
+  "rows_national": 50272290,
+  "vessels_laxlb": 966,
+  "eta_labeled": 111727,
+  "eta_mae_lstm": 93.9,
+  "dark_us": 5971,
+  "dark_recall": 0.74,
+  "chile_sar": 512,
+  "chile_dark": 8
+}

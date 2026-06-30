@@ -1,0 +1,4 @@
+modelo,mae_min
+naive (dist/SOG),136.4
+HistGradientBoosting,96.0
+LSTM,93.9

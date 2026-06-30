@@ -1,0 +1,7 @@
+escenario,motor,wall_s,peak_mb
+1 dia (7.3M filas),pandas,4.24,1416
+1 dia (7.3M filas),Polars,1.63,786
+1 dia (7.3M filas),DuckDB,1.36,408
+"1 semana (50.3M, tope 6GB)",pandas,OOM,>6000
+"1 semana (50.3M, tope 6GB)",Polars,9.5,4200
+"1 semana (50.3M, tope 6GB)",DuckDB,7.5,2293
