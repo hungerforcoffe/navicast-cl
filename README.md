@@ -1,5 +1,7 @@
 # NaviCast-CL
 
+**🟢 Demo en vivo: https://navicast-cl.streamlit.app/**
+
 Pipeline geoespacial AIS sobre arquitectura **medallion** en S3: ingesta → limpieza
 (DuckDB/Polars) → features (geopandas/H3) → ETA con LSTM + detección de buques oscuros
 → visualización Streamlit. Ver [`CLAUDE.md`](CLAUDE.md) (constitución del proyecto) y

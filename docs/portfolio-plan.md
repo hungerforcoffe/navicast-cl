@@ -2,7 +2,10 @@
 
 > Fase NO técnica: convertir un pipeline que "corre en la laptop" en una pieza que un
 > reclutador entiende en 5 minutos. Roles objetivo: data/BI en Chile, mediano plazo en
-> **credit risk**, y remotos en inglés. **Validar este plan antes de ejecutar.**
+> **credit risk**, y remotos en inglés.
+>
+> **Progreso:** #0 ✅ repo público (github.com/hungerforcoffe/navicast-cl) ·
+> #1 ✅ demo en vivo (**navicast-cl.streamlit.app**). Siguiente: **#2 README-producto**.
 
 ## Encuadre (no negociable)
 - Es un **proyecto de curso** sobre datos de referencia (NOAA) a escala laptop. Se enmarca
