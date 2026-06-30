@@ -68,43 +68,40 @@ if (DOCS / "eta_model_eval.png").exists():
     e2.image(str(DOCS / "eta_model_eval.png"))
 
 st.header("Mapas")
-t1, t2, t3 = st.tabs(["Tráfico H3 — LA/Long Beach", "Buques oscuros — US", "Chile (SAR↔AIS)"])
 
-with t1:
-    st.caption("Hexágonos H3 (res 7): altura = tráfico, color = ETA medio. Gira y haz zoom.")
-    st.pydeck_chart(pdk.Deck(
-        layers=[pdk.Layer("H3HexagonLayer", port, get_hexagon="h3_cell",
-                          get_fill_color="fill_color", get_elevation="elev",
-                          elevation_scale=1, extruded=True, opacity=0.7, pickable=True)],
-        initial_view_state=pdk.ViewState(latitude=33.70, longitude=-118.20, zoom=8.4,
-                                         pitch=40, bearing=10),
-        map_provider="carto", map_style="dark",
-        tooltip={"text": "tráfico: {traffic} pings\nETA medio: {avg_eta} min"}))
+st.subheader("Tráfico H3 — LA/Long Beach")
+st.caption("Hexágonos H3 (res 7): altura = tráfico, color = ETA medio. Gira y haz zoom.")
+st.pydeck_chart(pdk.Deck(
+    layers=[pdk.Layer("H3HexagonLayer", port, get_hexagon="h3_cell",
+                      get_fill_color="[r, g, b, a]", get_elevation="elev",
+                      elevation_scale=1, extruded=True, opacity=0.7, pickable=True)],
+    initial_view_state=pdk.ViewState(latitude=33.70, longitude=-118.20, zoom=8.4, pitch=40, bearing=10),
+    map_provider="carto", map_style="dark",
+    tooltip={"text": "tráfico: {traffic} pings\nETA medio: {avg_eta} min"}))
 
-with t2:
-    st.caption("Apagones de transpondedor (gaps + IsolationForest). Color/tamaño = duración del silencio.")
-    st.pydeck_chart(pdk.Deck(
-        layers=[pdk.Layer("ScatterplotLayer", dark, get_position="[lon0, lat0]",
-                          get_fill_color="color", get_radius="radius", opacity=0.5, pickable=True)],
-        initial_view_state=pdk.ViewState(latitude=37, longitude=-100, zoom=3.1),
-        map_provider="carto", map_style="dark",
-        tooltip={"text": "apagón: {gap_h} h"}))
+st.subheader("Buques oscuros — US (apagones de AIS)")
+st.caption("Apagones de transpondedor (gaps + IsolationForest). Color/tamaño = duración del silencio.")
+st.pydeck_chart(pdk.Deck(
+    layers=[pdk.Layer("ScatterplotLayer", dark, get_position="[lon0, lat0]",
+                      get_fill_color="[r, g, b, a]", get_radius="radius", opacity=0.6, pickable=True)],
+    initial_view_state=pdk.ViewState(latitude=37, longitude=-100, zoom=3.1),
+    map_provider="carto", map_style="dark", tooltip={"text": "apagón: {gap_h} h"}))
 
-with t3:
-    st.caption("Cruce SAR↔AIS: verde = corroborado por AIS, **rojo = DARK** (radar sin AIS cerca).")
-    st.pydeck_chart(pdk.Deck(
-        layers=[
-            pdk.Layer("ScatterplotLayer", cais, get_position="[lon, lat]",
-                      get_fill_color="[80, 140, 255, 45]", get_radius=500),
-            pdk.Layer("ScatterplotLayer", csar, get_position="[lon, lat]",
-                      get_fill_color="fill", get_radius="radius", pickable=True),
-        ],
-        initial_view_state=pdk.ViewState(latitude=-33.3, longitude=-71.72, zoom=8.3),
-        map_provider="carto", map_style="dark",
-        tooltip={"text": "SAR: {ship_name}\n{flag} · {vessel_type}\n{estado}"}))
-    st.subheader(f"Watchlist — {stats['chile_dark']} candidatos dark")
-    st.dataframe(csar[csar["dark"]][["ship_name", "flag", "vessel_type", "lat", "lon"]],
-                 hide_index=True, use_container_width=True)
+st.subheader("Chile — cruce SAR↔AIS (GFW satelital)")
+st.caption("Verde = corroborado por AIS · **rojo = DARK** (radar sin AIS cerca).")
+st.pydeck_chart(pdk.Deck(
+    layers=[
+        pdk.Layer("ScatterplotLayer", cais, get_position="[lon, lat]",
+                  get_fill_color="[80, 140, 255, 45]", get_radius=500),
+        pdk.Layer("ScatterplotLayer", csar, get_position="[lon, lat]",
+                  get_fill_color="[r, g, b, a]", get_radius="radius", pickable=True),
+    ],
+    initial_view_state=pdk.ViewState(latitude=-33.3, longitude=-71.72, zoom=8.3),
+    map_provider="carto", map_style="dark",
+    tooltip={"text": "SAR: {ship_name}\n{flag} · {vessel_type}\n{estado}"}))
+st.markdown(f"**Watchlist — {stats['chile_dark']} candidatos dark** (radar sin AIS cerca):")
+st.dataframe(csar[csar["dark"]][["ship_name", "flag", "vessel_type", "lat", "lon"]],
+             hide_index=True, use_container_width=True)
 
 st.divider()
 st.caption(f"{GFW_ATTR}  ·  Código: github.com/hungerforcoffe/navicast-cl (MIT)")

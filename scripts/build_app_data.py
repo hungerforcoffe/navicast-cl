@@ -21,11 +21,13 @@ OUT = config.REPO_ROOT / "app" / "data"
 OUT.mkdir(parents=True, exist_ok=True)
 
 
-def _colors(values, cmap_name, vmin, vmax, alpha=190):
+def _rgb(values, cmap_name, vmin, vmax):
+    """Array (N,3) de enteros 0-255. Columnas r,g,b separadas -> robusto en pydeck
+    (las listas [r,g,b,a] no sobreviven el round-trip por Parquet)."""
     cmap = matplotlib.colormaps[cmap_name]
     norm = matplotlib.colors.Normalize(vmin=vmin, vmax=vmax, clip=True)
     rgba = cmap(norm(np.nan_to_num(np.asarray(values, dtype=float), nan=vmin)))
-    return [[int(r * 255), int(g * 255), int(b * 255), alpha] for r, g, b, _ in rgba]
+    return (rgba[:, :3] * 255).astype(int)
 
 
 # --- 1. LA/LB: hexagonos H3 (trafico + ETA medio) ---
@@ -37,8 +39,9 @@ ph = duckdb.connect().execute(f"""
     GROUP BY h3_cell
 """).df()
 ph["avg_eta"] = ph["avg_eta"].astype(float)
-ph["fill_color"] = _colors(ph["avg_eta"], "viridis",
+ph[["r", "g", "b"]] = _rgb(ph["avg_eta"], "viridis",
                            np.nanpercentile(ph["avg_eta"], 5), np.nanpercentile(ph["avg_eta"], 95))
+ph["a"] = 200
 ph["elev"] = (ph["traffic"] / ph["traffic"].max() * 1400).round(0)
 ph.to_parquet(OUT / "port_h3.parquet", index=False)
 
@@ -47,7 +50,8 @@ dk = pd.read_parquet(
     config.REPO_ROOT / "data" / "dark" / "snap_2024-01-w3_noaa_national_v1" / "dark_events.parquet",
     columns=["lon0", "lat0", "gap_h"]).dropna()
 dk["gap_h"] = dk["gap_h"].round(1)
-dk["color"] = _colors(dk["gap_h"], "inferno", 2.0, float(np.nanpercentile(dk["gap_h"], 95)))
+dk[["r", "g", "b"]] = _rgb(dk["gap_h"], "inferno", 2.0, float(np.nanpercentile(dk["gap_h"], 95)))
+dk["a"] = 200
 dk["radius"] = (1500 + dk["gap_h"].clip(0, 72) * 400).astype(int)
 dk.to_parquet(OUT / "dark_us.parquet", index=False)
 
@@ -57,7 +61,10 @@ sar = pd.read_parquet(gdir / "sar_classified.parquet").dropna(subset=["lat", "lo
 for c in ("ship_name", "flag", "vessel_type"):
     sar[c] = sar[c].fillna("?")
 sar = sar[["lat", "lon", "dark", "ship_name", "flag", "vessel_type"]]
-sar["fill"] = sar["dark"].map(lambda d: [255, 40, 40, 245] if d else [90, 170, 110, 150])
+sar["r"] = sar["dark"].map(lambda d: 255 if d else 90)
+sar["g"] = sar["dark"].map(lambda d: 40 if d else 170)
+sar["b"] = sar["dark"].map(lambda d: 40 if d else 110)
+sar["a"] = sar["dark"].map(lambda d: 245 if d else 160)
 sar["radius"] = sar["dark"].map(lambda d: 1800 if d else 650)
 sar["estado"] = sar["dark"].map(lambda d: "DARK (radar sin AIS)" if d else "corroborado por AIS")
 sar.to_parquet(OUT / "chile_sar.parquet", index=False)
