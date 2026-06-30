@@ -4,8 +4,8 @@
 > reclutador entiende en 5 minutos. Roles objetivo: data/BI en Chile, mediano plazo en
 > **credit risk**, y remotos en inglés.
 >
-> **Progreso:** #0 ✅ repo público (github.com/hungerforcoffe/navicast-cl) ·
-> #1 ✅ demo en vivo (**navicast-cl.streamlit.app**). Siguiente: **#2 README-producto**.
+> **Progreso:** #0 ✅ repo · #1 ✅ demo (**navicast-cl.streamlit.app**) · #2 ✅ README-producto ·
+> #3 ✅ CV + guion (`docs/cv-and-interview.md`). Siguiente: **#5 tests+CI** y **#4 writeup**.
 
 ## Encuadre (no negociable)
 - Es un **proyecto de curso** sobre datos de referencia (NOAA) a escala laptop. Se enmarca
