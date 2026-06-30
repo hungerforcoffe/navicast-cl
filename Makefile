@@ -42,3 +42,6 @@ benchmark:    ## benchmark pandas vs Polars vs DuckDB
 
 pipeline:     ## pipeline completo sin Airflow (fallback)
 	$(PY) scripts/run_pipeline.py
+
+monitor-chile: ## vigilancia Chile: fetch GFW + cruce SAR<->AIS + mapa (necesita GFW_API_TOKEN)
+	$(PY) -m navicast.monitor_chile

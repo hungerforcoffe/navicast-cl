@@ -143,3 +143,18 @@ def run(start: str = "2025-01-01", end: str = "2025-06-30",
         from navicast import viz
         viz._chile_map(config.REPO_ROOT / "app")
     return stats
+
+
+def _cli() -> None:
+    import argparse
+    ap = argparse.ArgumentParser(description="Monitoreo de buques oscuros Chile (fetch + cruce + mapa).")
+    ap.add_argument("--start", default="2025-01-01")
+    ap.add_argument("--end", default="2025-06-30")
+    ap.add_argument("--no-upload", action="store_true")
+    ap.add_argument("--no-map", action="store_true")
+    a = ap.parse_args()
+    print(run(a.start, a.end, upload=not a.no_upload, make_map=not a.no_map))
+
+
+if __name__ == "__main__":
+    _cli()
