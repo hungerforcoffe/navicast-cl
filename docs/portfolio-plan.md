@@ -5,7 +5,8 @@
 > **credit risk**, y remotos en inglés.
 >
 > **Progreso:** #0 ✅ repo · #1 ✅ demo (**navicast-cl.streamlit.app**) · #2 ✅ README-producto ·
-> #3 ✅ CV + guion · #5 ✅ tests (10) + CI GitHub Actions. Siguiente: **#4 writeup**.
+> #3 ✅ CV + guion · #5 ✅ tests + CI · #4 ✅ writeup (`docs/writeup-draft.md`).
+> **Plan #0–#5 COMPLETO.** Quedan solo los stretches opcionales (#6: FastAPI, etc.).
 
 ## Encuadre (no negociable)
 - Es un **proyecto de curso** sobre datos de referencia (NOAA) a escala laptop. Se enmarca
