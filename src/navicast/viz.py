@@ -118,11 +118,14 @@ def _chile_map(out_dir: Path) -> tuple[Path, int, int]:
     n_ais = 0
     ais_path = gdir / "ais_presence.parquet"
     if ais_path.exists():
-        ais = pd.read_parquet(ais_path)[["lat", "lon"]].dropna()
-        n_ais = len(ais)
-        ais_plot = ais.sample(min(n_ais, 5000), random_state=42)  # muestra para no saturar el render
-        layers.append(pdk.Layer("ScatterplotLayer", ais_plot, get_position="[lon, lat]",
-                                get_fill_color="[80, 140, 255, 45]", get_radius=500))
+        ais = pd.read_parquet(ais_path)
+        if {"lat", "lon"}.issubset(ais.columns):
+            ais = ais[["lat", "lon"]].dropna()
+            n_ais = len(ais)
+            if n_ais:
+                ais_plot = ais.sample(min(n_ais, 5000), random_state=42)  # muestra, no saturar render
+                layers.append(pdk.Layer("ScatterplotLayer", ais_plot, get_position="[lon, lat]",
+                                        get_fill_color="[80, 140, 255, 45]", get_radius=500))
     layers.append(pdk.Layer("ScatterplotLayer", sar, get_position="[lon, lat]",
                             get_fill_color="fill", get_radius="radius", pickable=True))
     view = pdk.ViewState(latitude=-33.3, longitude=-71.72, zoom=8.4, pitch=0)

@@ -122,4 +122,10 @@ aisstream.io (AIS terrestre) dio **0 pings** para Chile -> sin cobertura; el gra
 26.375 filas de presencia AIS, **0 eventos AIS-off** (GFW no marca apagones en esta zona/ventana).
 Conclusion: GFW satelital SI cubre Chile (a diferencia del AIS terrestre de aisstream).
 
+**Monitoreo de buques oscuros (cruce SAR↔AIS):** `monitor_chile.run()` hace fetch GFW ->
+cruce (cada deteccion SAR: *corroborada* por AIS, o *DARK* si no hay AIS cerca, H3 res 8) ->
+mapa. Resultado: 512 SAR -> 504 corroboradas, **8 DARK**. Agendado en
+`dags/monitor_chile_dag.py` (cada 3 dias, ventana movil de 30 dias). El cliente GFW usa
+timeout 180s + reintentos (la query AIS HIGH-res es pesada y la red puede ser flaky).
+
 **Atribucion:** datos (c) Global Fishing Watch, CC BY-NC 4.0; actividad pesquera "apparent".
